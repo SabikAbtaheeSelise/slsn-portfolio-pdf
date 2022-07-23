@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="sk-SK">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Správa o investíciách FiLiP</title>
+</head>
+<body class="investment">
+    <header class="investment__header">
+        <div class="investment__header__logo">
+            <svg viewBox="0 0 30 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.9783 2.56933C15.026 2.56933 15.0658 2.56933 15.1135 2.56933H15.1612C15.7733 2.58501 17.3791 2.68693 19.2711 3.29843C21.0676 3.9256 22.7291 4.97613 24.0725 6.31672C25.424 7.65731 26.4574 9.31149 27.0775 11.0833C27.3318 11.9064 27.5306 12.7923 27.6578 13.7174C27.7293 14.2113 27.7612 14.7209 27.7612 15.2305C27.7691 17.504 27.0775 19.9343 25.7181 22.4352C24.5813 24.5284 22.9835 26.6686 20.9643 28.8089C18.651 31.2627 16.3059 33.1521 14.9704 34.1556C13.6349 33.1521 11.2898 31.2627 8.97648 28.8089C6.95731 26.6686 5.35947 24.5206 4.22269 22.4352C2.86333 19.9265 2.17172 17.504 2.17961 15.2305C2.17961 14.7209 2.21942 14.2113 2.28302 13.7174C2.41021 12.7923 2.60895 11.8986 2.86333 11.0833C3.56288 9.0763 4.77915 7.25749 6.38495 5.82282C7.64097 4.70174 9.07982 3.84721 10.6697 3.29059C12.5617 2.67909 14.1675 2.57717 14.7796 2.56149H14.8273C14.8909 2.56933 14.9386 2.56933 14.9783 2.56933ZM14.9783 0.601562C14.8988 0.601562 14.8273 0.601562 14.7558 0.601562C14.0959 0.617242 12.2278 0.726998 10.0417 1.43257C8.18153 2.08327 6.49624 3.08675 5.06534 4.36463C3.22106 6.01097 1.80605 8.10418 0.987252 10.4718C0.70107 11.3812 0.478485 12.369 0.327444 13.4509C0.24795 14.0467 0.208202 14.6425 0.200224 15.2305C0.176404 26.7 14.9863 36.6016 14.9863 36.6016C14.9863 36.6016 29.7962 26.7 29.7724 15.2305C29.7724 14.6425 29.7326 14.0467 29.6451 13.4509C29.4941 12.369 29.2715 11.3812 28.9853 10.4718C27.5306 6.26184 24.1759 2.91428 19.9229 1.43257C17.7368 0.726998 15.8766 0.617242 15.2089 0.601562C15.1294 0.601562 15.0578 0.601562 14.9783 0.601562Z" fill="white"/>
+                <path d="M13.0624 11.9379C13.0624 12.8787 12.2913 13.6391 11.3373 13.6391C10.3834 13.6391 9.6123 12.8787 9.6123 11.9379C9.6123 10.9971 10.3834 10.2367 11.3373 10.2367C12.2913 10.2367 13.0624 10.9971 13.0624 11.9379Z" fill="white"/>
+                <path d="M20.0663 11.9379C20.0663 12.8787 19.2952 13.6391 18.3413 13.6391C17.3873 13.6391 16.6162 12.8787 16.6162 11.9379C16.6162 10.9971 17.3873 10.2367 18.3413 10.2367C19.2952 10.2367 20.0663 10.9971 20.0663 11.9379Z" fill="white"/>
+                <path d="M21.974 16.4221C21.7832 16.234 21.5367 16.1321 21.2744 16.1321C21.0121 16.1321 20.7577 16.234 20.5749 16.4221C19.0406 17.9352 17.0055 18.7662 14.8433 18.7662C12.681 18.7662 10.6459 17.9352 9.1117 16.4221C8.92091 16.234 8.67448 16.1321 8.41214 16.1321C8.14981 16.1321 7.89543 16.234 7.71259 16.4221C7.5218 16.6103 7.41846 16.8533 7.41846 17.112C7.41846 17.3708 7.5218 17.6216 7.71259 17.8019C9.61251 19.6756 12.1484 20.7105 14.8433 20.7105C17.5382 20.7105 20.074 19.6756 21.974 17.8019C22.1647 17.6138 22.2681 17.3708 22.2681 17.112C22.2601 16.8455 22.1568 16.6025 21.974 16.4221Z" fill="white"/>
+            </svg>  
+        </div>          
+        <h1 class="investment__header__title header-1">Správa o investíciách FiLiP</h1>
+    </header>
+
+    <section class="investment__user section-header">
+        <div class="investment__user__item">
+            <p class="caption-2">Dátum Čas</p>
+            <p class="subtitle-2">Dátum: {{MetaData.Date}}</p>
+        </div>
+        <div class="investment__user__item">
+            <p class="caption-2">Meno klienta</p>
+            <p class="subtitle-2">{{MetaData.User.Name}}</p>
+        </div>
+        <div class="investment__user__item">
+            <p class="caption-2">Telefónne číslo</p>
+            <p class="subtitle-2">{{MetaData.User.PhoneNumber}}</p>
+        </div>
+        <div class="investment__user__item">
+            <p class="caption-2">Emailová adresa</p>
+            <p class="subtitle-2">{{MetaData.User.Email}}</p>
+        </div>
+    </section>
+
+    <section class="investment__overview">
+        <div class="investment__overview__card">
+            <div class="investment__overview__card__item--1">
+                <div class="investment__overview__card__item__logo">
+                    <svg viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M39.0909 32.7273H0.909091C0.407273 32.7273 0 33.1341 0 33.6364V34.5455C0 35.0473 0.407273 35.4546 0.909091 35.4546H39.0909C39.5927 35.4546 40 35.0473 40 34.5455V33.6364C40 33.1341 39.5927 32.7273 39.0909 32.7273Z" fill="#808080"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9091 29.5455H16.8182C17.32 29.5455 17.7273 29.1382 17.7273 28.6364V13.1818C17.7273 12.6795 17.32 12.2727 16.8182 12.2727H15.9091C15.4073 12.2727 15 12.6795 15 13.1818V28.6364C15 29.1382 15.4073 29.5455 15.9091 29.5455Z" fill="#808080"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.63663 29.5455H9.54572C10.0475 29.5455 10.4548 29.1383 10.4548 28.6364V20.4546C10.4548 19.9524 10.0475 19.5455 9.54572 19.5455H8.63663C8.13481 19.5455 7.72754 19.9524 7.72754 20.4546V28.6364C7.72754 29.1383 8.13481 29.5455 8.63663 29.5455Z" fill="#808080"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M23.182 29.5454H24.0911C24.5934 29.5454 25.0002 29.1381 25.0002 28.6363V7.72721C25.0002 7.22493 24.5934 6.81812 24.0911 6.81812H23.182C22.6802 6.81812 22.2729 7.22493 22.2729 7.72721V28.6363C22.2729 29.1381 22.6802 29.5454 23.182 29.5454Z" fill="#808080"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M30.4545 29.5455H31.3636C31.8654 29.5455 32.2727 29.1382 32.2727 28.6364V0.909091C32.2727 0.406818 31.8654 0 31.3636 0H30.4545C29.9527 0 29.5454 0.406818 29.5454 0.909091V28.6364C29.5454 29.1382 29.9527 29.5455 30.4545 29.5455Z" fill="#808080"/>
+                        </svg>                        
+                </div>
+                <div>
+                    <p class="caption-2">Hodnota portfólia</p>
+                    <h3 class="header-3">{{MetaData.Zostatok}}</h3>
+                </div>
+            </div>
+            <div class="investment__overview__card__item--2">
+                <div>
+                    <p class="body-2">Zisk/Strata</p>
+                    <p class="subtitle-2">{{MetaData.Profit}}</p>
+                </div>
+                <div>
+                    <p class="body-2">Vklady</p>
+                    <p class="subtitle-2">{{MetaData.TotalBuy}}</p>
+                </div>
+                <div>
+                    <p class="body-2">Výbery</p>
+                    <p class="subtitle-2">{{MetaData.TotalSell}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="investment__overview__chart">
+            <canvas id="investmentLineChart" class="line-chart" height="150"></canvas>
+        </div>
+    </section>
+
+    <section class="investment__chart">
+        <div class="investment__chart__header section-header">
+            <h3 class="header-3">Zloženie portfólia</h3>
+        </div>
+        <div class="investment__chart__list">
+            <div class="row">
+                <div class="investment__chart__card col-3">
+                    <div class="investment__chart__card__header">
+                         <div class="investment__chart__card__header__logo">
+                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                             </svg>
+                         </div>
+                         <p class="caption-1">Partner</p>
+                    </div>
+                    <div class="investment__chart__card__body">
+                         <canvas id="partnerPieChart" class="pie-chart" height="230"></canvas>
+                    </div>
+                 </div>
+                 <div class="investment__chart__card col-3">
+                     <div class="investment__chart__card__header">
+                          <div class="investment__chart__card__header__logo">
+                              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                              </svg>
+                          </div>
+                          <p class="caption-1">Aktíva</p>
+                     </div>
+                     <div class="investment__chart__card__body">
+                          <canvas id="assetPieChart" class="pie-chart" height="230"></canvas>
+                     </div>
+                  </div>
+                  <div class="investment__chart__card col-3">
+                     <div class="investment__chart__card__header">
+                          <div class="investment__chart__card__header__logo">
+                              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                              </svg>
+                          </div>
+                          <p class="caption-1">Správca</p>
+                     </div>
+                     <div class="investment__chart__card__body">
+                          <canvas id="fundPieChart" class="pie-chart" height="230"></canvas>
+                     </div>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="investment__chart__card col-3">
+                    <div class="investment__chart__card__header">
+                         <div class="investment__chart__card__header__logo">
+                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                             </svg>
+                         </div>
+                         <p class="caption-1">Región</p>
+                    </div>
+                    <div class="investment__chart__card__body">
+                         <canvas id="regionPieChart" class="pie-chart" height="230"></canvas>
+                    </div>
+                 </div>
+                 <div class="investment__chart__card col-3">
+                    <div class="investment__chart__card__header">
+                         <div class="investment__chart__card__header__logo">
+                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                             </svg>
+                         </div>
+                         <p class="caption-1">Sektor</p>
+                    </div>
+                    <div class="investment__chart__card__body">
+                         <canvas id="sectorPieChart" class="pie-chart" height="230"></canvas>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <header class="investment__header">
+        <div class="investment__header__logo">
+            <svg viewBox="0 0 30 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.9783 2.56933C15.026 2.56933 15.0658 2.56933 15.1135 2.56933H15.1612C15.7733 2.58501 17.3791 2.68693 19.2711 3.29843C21.0676 3.9256 22.7291 4.97613 24.0725 6.31672C25.424 7.65731 26.4574 9.31149 27.0775 11.0833C27.3318 11.9064 27.5306 12.7923 27.6578 13.7174C27.7293 14.2113 27.7612 14.7209 27.7612 15.2305C27.7691 17.504 27.0775 19.9343 25.7181 22.4352C24.5813 24.5284 22.9835 26.6686 20.9643 28.8089C18.651 31.2627 16.3059 33.1521 14.9704 34.1556C13.6349 33.1521 11.2898 31.2627 8.97648 28.8089C6.95731 26.6686 5.35947 24.5206 4.22269 22.4352C2.86333 19.9265 2.17172 17.504 2.17961 15.2305C2.17961 14.7209 2.21942 14.2113 2.28302 13.7174C2.41021 12.7923 2.60895 11.8986 2.86333 11.0833C3.56288 9.0763 4.77915 7.25749 6.38495 5.82282C7.64097 4.70174 9.07982 3.84721 10.6697 3.29059C12.5617 2.67909 14.1675 2.57717 14.7796 2.56149H14.8273C14.8909 2.56933 14.9386 2.56933 14.9783 2.56933ZM14.9783 0.601562C14.8988 0.601562 14.8273 0.601562 14.7558 0.601562C14.0959 0.617242 12.2278 0.726998 10.0417 1.43257C8.18153 2.08327 6.49624 3.08675 5.06534 4.36463C3.22106 6.01097 1.80605 8.10418 0.987252 10.4718C0.70107 11.3812 0.478485 12.369 0.327444 13.4509C0.24795 14.0467 0.208202 14.6425 0.200224 15.2305C0.176404 26.7 14.9863 36.6016 14.9863 36.6016C14.9863 36.6016 29.7962 26.7 29.7724 15.2305C29.7724 14.6425 29.7326 14.0467 29.6451 13.4509C29.4941 12.369 29.2715 11.3812 28.9853 10.4718C27.5306 6.26184 24.1759 2.91428 19.9229 1.43257C17.7368 0.726998 15.8766 0.617242 15.2089 0.601562C15.1294 0.601562 15.0578 0.601562 14.9783 0.601562Z" fill="white"/>
+                <path d="M13.0624 11.9379C13.0624 12.8787 12.2913 13.6391 11.3373 13.6391C10.3834 13.6391 9.6123 12.8787 9.6123 11.9379C9.6123 10.9971 10.3834 10.2367 11.3373 10.2367C12.2913 10.2367 13.0624 10.9971 13.0624 11.9379Z" fill="white"/>
+                <path d="M20.0663 11.9379C20.0663 12.8787 19.2952 13.6391 18.3413 13.6391C17.3873 13.6391 16.6162 12.8787 16.6162 11.9379C16.6162 10.9971 17.3873 10.2367 18.3413 10.2367C19.2952 10.2367 20.0663 10.9971 20.0663 11.9379Z" fill="white"/>
+                <path d="M21.974 16.4221C21.7832 16.234 21.5367 16.1321 21.2744 16.1321C21.0121 16.1321 20.7577 16.234 20.5749 16.4221C19.0406 17.9352 17.0055 18.7662 14.8433 18.7662C12.681 18.7662 10.6459 17.9352 9.1117 16.4221C8.92091 16.234 8.67448 16.1321 8.41214 16.1321C8.14981 16.1321 7.89543 16.234 7.71259 16.4221C7.5218 16.6103 7.41846 16.8533 7.41846 17.112C7.41846 17.3708 7.5218 17.6216 7.71259 17.8019C9.61251 19.6756 12.1484 20.7105 14.8433 20.7105C17.5382 20.7105 20.074 19.6756 21.974 17.8019C22.1647 17.6138 22.2681 17.3708 22.2681 17.112C22.2601 16.8455 22.1568 16.6025 21.974 16.4221Z" fill="white"/>
+            </svg>  
+        </div>          
+        <h1 class="investment__header__title header-1">Správa o investíciách FiLiP</h1>
+    </header>
+
+    <!--Goal Linked Start-->
+    <section class="investment__list">
+        <div class="investment__list__header section-header">
+            <h3 class="header-3">Investície spojené s cieľom</h3>
+        </div>
+        <div class="investment__list__item">
+            <div class="investment__list__item__header">
+                <div class="investment__list__item__header__title">
+                    <div class="investment__list__item__header__logo">
+                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.1964 18.6952H2.4052V10.212C2.4052 9.97166 2.21052 9.77698 1.97017 9.77698H1.53513C1.29499 9.77698 1.1001 9.97166 1.1001 10.212V19.3477C1.1001 19.7079 1.39244 20.0003 1.75265 20.0003H17.8489C18.2093 20.0003 18.5015 19.7079 18.5015 19.3477V10.212C18.5015 9.97166 18.3068 9.77698 18.0664 9.77698H17.6314C17.3913 9.77698 17.1964 9.97166 17.1964 10.212V18.6952Z" fill="#A11C36"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.6286 16.955V12.8222C12.6286 12.4633 12.3349 12.1697 11.976 12.1697H7.6257C7.26549 12.1697 6.97314 12.4618 6.97314 12.8222V16.955C6.97314 17.1952 7.16804 17.3901 7.40818 17.3901H7.84321C8.08357 17.3901 8.27825 17.1952 8.27825 16.955V13.4748H11.3235V16.955C11.3235 17.1952 11.5184 17.3901 11.7585 17.3901H12.1936C12.4339 17.3901 12.6286 17.1952 12.6286 16.955Z" fill="#A11C36"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.207 0.142174C9.9693 -0.0470658 9.63237 -0.0470658 9.39462 0.142174L0.164284 7.48424C-0.023868 7.63389 -0.0549728 7.90753 0.0946789 8.09568L0.365487 8.4361C0.515139 8.62403 0.788776 8.65514 0.976711 8.5057L9.80072 1.48665L18.625 8.5057C18.8129 8.65514 19.0865 8.62403 19.2362 8.4361L19.507 8.09568C19.6564 7.90753 19.6253 7.63389 19.4374 7.48424L10.207 0.142174Z" fill="#A11C36"/>
+                            </svg>
+                    </div>
+                    <h1 class="subtitle-2">Build a duplex house in Prague</h1>
+                </div>
+                <div class="investment__list__item__header__label">
+                    <p class="caption-2">Total Value</p>
+                    <p class="caption-1">65,000 CZK</p>
+                </div>
+                <div class="investment__list__item__header__label">
+                    <p class="caption-2">Current Value</p>
+                    <p class="caption-1">66,039 CZK</p>
+                </div>
+                <div class="investment__list__item__header__label">
+                    <p class="caption-2">Target Date</p>
+                    <p class="caption-1">14 NOV, 2021</p>
+                </div>
+                <div class="investment__list__item__header__label">
+                    <p class="caption-2">Goal Achieved</p>
+                    <div class="investment__list__item__header__label__progress">
+                        <p class="caption-1">80%</p>
+                        <div class="progress-bar__container">
+                           <span class="progress-bar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="investment__list__item__sub-item">
+                <div class="investment__list__item__sub-item__header">
+                    <div class="investment__list__item__sub-item__header__title">
+                        <div class="investment__list__item__sub-item__header__title__image">
+                            <img src="./assets/images/partner.png" alt="investment">
+                        </div>
+                        <div class="investment__list__item__sub-item__header__title__text">
+                            <p class="subtitle-2">Retirement Housing</p>
+                            <p class="caption-1">Zmluva č: 2390876</p>
+                        </div>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Zostatok</p>
+                        <p class="caption-1">30,000 CZK</p>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Vklady</p>
+                        <p class="caption-1">29,673 CZK</p>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Výbery</p>
+                        <p class="caption-1">27,399 CZK</p>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Fondy</p>
+                        <p class="caption-1">03</p>
+                    </div>
+                </div>
+                <table class="investment__list__item__sub-item__table investment-table">
+                    <col span="1" class="investment-table-fund">
+                    <thead>
+                        <tr>
+                            <th>Názov fondu</th>
+                            <th>Isin</th>
+                            <th>Podiel</th>
+                            <th>Zostatok</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Franklin Global Growth Invest</td>
+                            <td>LU938904839</td>
+                            <td>18%</td>
+                            <td>23,000 CZK</td>
+                        </tr>
+                        <tr>
+                            <td>Franklin Global Growth Invest</td>
+                            <td>LU938904839</td>
+                            <td>18%</td>
+                            <td>23,000 CZK</td>
+                        </tr>
+                        <tr>
+                            <td>Franklin Global Growth Invest</td>
+                            <td>LU938904839</td>
+                            <td>18%</td>
+                            <td>23,000 CZK</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!--Goal Linked End-->
+
+    <header class="investment__header">
+        <div class="investment__header__logo">
+            <svg viewBox="0 0 30 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.9783 2.56933C15.026 2.56933 15.0658 2.56933 15.1135 2.56933H15.1612C15.7733 2.58501 17.3791 2.68693 19.2711 3.29843C21.0676 3.9256 22.7291 4.97613 24.0725 6.31672C25.424 7.65731 26.4574 9.31149 27.0775 11.0833C27.3318 11.9064 27.5306 12.7923 27.6578 13.7174C27.7293 14.2113 27.7612 14.7209 27.7612 15.2305C27.7691 17.504 27.0775 19.9343 25.7181 22.4352C24.5813 24.5284 22.9835 26.6686 20.9643 28.8089C18.651 31.2627 16.3059 33.1521 14.9704 34.1556C13.6349 33.1521 11.2898 31.2627 8.97648 28.8089C6.95731 26.6686 5.35947 24.5206 4.22269 22.4352C2.86333 19.9265 2.17172 17.504 2.17961 15.2305C2.17961 14.7209 2.21942 14.2113 2.28302 13.7174C2.41021 12.7923 2.60895 11.8986 2.86333 11.0833C3.56288 9.0763 4.77915 7.25749 6.38495 5.82282C7.64097 4.70174 9.07982 3.84721 10.6697 3.29059C12.5617 2.67909 14.1675 2.57717 14.7796 2.56149H14.8273C14.8909 2.56933 14.9386 2.56933 14.9783 2.56933ZM14.9783 0.601562C14.8988 0.601562 14.8273 0.601562 14.7558 0.601562C14.0959 0.617242 12.2278 0.726998 10.0417 1.43257C8.18153 2.08327 6.49624 3.08675 5.06534 4.36463C3.22106 6.01097 1.80605 8.10418 0.987252 10.4718C0.70107 11.3812 0.478485 12.369 0.327444 13.4509C0.24795 14.0467 0.208202 14.6425 0.200224 15.2305C0.176404 26.7 14.9863 36.6016 14.9863 36.6016C14.9863 36.6016 29.7962 26.7 29.7724 15.2305C29.7724 14.6425 29.7326 14.0467 29.6451 13.4509C29.4941 12.369 29.2715 11.3812 28.9853 10.4718C27.5306 6.26184 24.1759 2.91428 19.9229 1.43257C17.7368 0.726998 15.8766 0.617242 15.2089 0.601562C15.1294 0.601562 15.0578 0.601562 14.9783 0.601562Z" fill="white"/>
+                <path d="M13.0624 11.9379C13.0624 12.8787 12.2913 13.6391 11.3373 13.6391C10.3834 13.6391 9.6123 12.8787 9.6123 11.9379C9.6123 10.9971 10.3834 10.2367 11.3373 10.2367C12.2913 10.2367 13.0624 10.9971 13.0624 11.9379Z" fill="white"/>
+                <path d="M20.0663 11.9379C20.0663 12.8787 19.2952 13.6391 18.3413 13.6391C17.3873 13.6391 16.6162 12.8787 16.6162 11.9379C16.6162 10.9971 17.3873 10.2367 18.3413 10.2367C19.2952 10.2367 20.0663 10.9971 20.0663 11.9379Z" fill="white"/>
+                <path d="M21.974 16.4221C21.7832 16.234 21.5367 16.1321 21.2744 16.1321C21.0121 16.1321 20.7577 16.234 20.5749 16.4221C19.0406 17.9352 17.0055 18.7662 14.8433 18.7662C12.681 18.7662 10.6459 17.9352 9.1117 16.4221C8.92091 16.234 8.67448 16.1321 8.41214 16.1321C8.14981 16.1321 7.89543 16.234 7.71259 16.4221C7.5218 16.6103 7.41846 16.8533 7.41846 17.112C7.41846 17.3708 7.5218 17.6216 7.71259 17.8019C9.61251 19.6756 12.1484 20.7105 14.8433 20.7105C17.5382 20.7105 20.074 19.6756 21.974 17.8019C22.1647 17.6138 22.2681 17.3708 22.2681 17.112C22.2601 16.8455 22.1568 16.6025 21.974 16.4221Z" fill="white"/>
+            </svg>  
+        </div>          
+        <h1 class="investment__header__title header-1">Správa o investíciách FiLiP</h1>
+    </header>
+
+    <!--Goal Unlinked Start-->
+    <section class="investment__list">
+        <div class="investment__list__header section-header">
+            <h3 class="header-3">Investície</h3>
+        </div>
+        <div class="investment__list__item">
+            <div class="investment__list__item__sub-item">
+                <div class="investment__list__item__sub-item__header">
+                    <div class="investment__list__item__sub-item__header__title">
+                        <div class="investment__list__item__sub-item__header__title__image">
+                            <img src="./assets/images/partner.png" alt="investment">
+                        </div>
+                        <div class="investment__list__item__sub-item__header__title__text">
+                            <p class="subtitle-2">Personal Loan</p>
+                            <p class="caption-1">Zmluva č: 2390876</p>
+                        </div>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Zostatok</p>
+                        <p class="caption-1">30,000 CZK</p>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Vklady</p>
+                        <p class="caption-1">29,673 CZK</p>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Výbery</p>
+                        <p class="caption-1">27,399 CZK</p>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Fondy</p>
+                        <p class="caption-1">03</p>
+                    </div>
+                </div>
+                <table class="investment__list__item__sub-item__table investment-table">
+                    <col span="1" class="investment-table-fund">
+                    <thead>
+                        <tr>
+                            <th>Názov fondu</th>
+                            <th>Isin</th>
+                            <th>Podiel</th>
+                            <th>Zostatok</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Franklin Global Growth Invest</td>
+                            <td>LU938904839</td>
+                            <td>18%</td>
+                            <td>23,000 CZK</td>
+                        </tr>
+                        <tr>
+                            <td>Franklin Global Growth Invest</td>
+                            <td>LU938904839</td>
+                            <td>18%</td>
+                            <td>23,000 CZK</td>
+                        </tr>
+                        <tr>
+                            <td>Franklin Global Growth Invest</td>
+                            <td>LU938904839</td>
+                            <td>18%</td>
+                            <td>23,000 CZK</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!--Goal Unlinked End-->
+
+    <footer class="investment__footer">
+        <p class="caption-2">Kontakt na poradcu</p>
+        <div class="investment__footer__contact">
+            <p class="subtitle-2">Jozef Beständig</p>
+            <p class="caption-2">Exclusive Consultant</p>
+            <p class="caption-2">jozef.beständig@swisslifeselect.sk</p>
+            <p class="caption-2">+4219055504040</p>
+        </div>
+        <p class="investment__footer__text">Sekcia „Investície“ v aplikácii Filip by mala obsahovať klientom zvolené investičné nástroje, prípadne konkrétne investičné nástroje alebo produkty (napr. investičné fondy, dlhopisy a pod.) a ďalšie údaje a informácie s nimi spojené majú len informatívny charakter. Pri poskytovaní služieb investičného poradenstva a/alebo sprostredkovaní konkrétneho investičného príkazu klientovi Swiss Life Select Slovakia, a. s., alebo jej spoločníci, sú povinní postupovať podľa osobitných interných predpisov a postupov, v súlade so Swiss Life Select Slovakia, a. s., ďalej upozorňuje, že vplyvom trhového rizika môže dôjsť k zvýšeniu alebo zníženiu hodnoty investícií do investičných nástrojov a nie je zaručená návratnosť investovanej sumy. Minulá výkonnosť nie je zárukou budúcej výkonnosti.</p>
+    </footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0/dist/chartjs-adapter-moment.js"></script>
+<script src="index.js"></script>
+</html>

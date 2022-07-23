@@ -1,0 +1,368 @@
+{
+  "Subject": "Aktualizovali sme prehľad vašich investícií vo FiLiPovi",
+  "Note": "dsadsadascxczaqsedasdasdas",
+  "Language": "sk-SK",
+  "PdfReport": {
+      "Overview": {
+          "Balance": 15775.68,
+          "Profit": 1075.68,
+          "TotalBuy": 14700,
+          "TotalSell": 0,
+          "Date": "1y"
+      },
+      "PortfolioCompositionChart": {
+          "Asset": {
+              "Labels": [
+                  "Ostatné fondy",
+                  "Akciové fondy",
+                  "N/A",
+                  "Hotovosť"
+              ],
+              "Data": [
+                  74,
+                  13,
+                  12,
+                  1
+              ],
+              "Colors": [
+                  "#15847B",
+                  "#5BA9A3",
+                  "#B9DAD7",
+                  "#808080"
+              ]
+          },
+          "Partner": {
+              "Labels": [
+                  "EIC"
+              ],
+              "Data": [
+                  100
+              ],
+              "Colors": [
+                  "#15847B"
+              ]
+          },
+          "Sector": {
+              "Labels": [
+                  "Všetky sektory"
+              ],
+              "Data": [
+                  100
+              ],
+              "Colors": [
+                  "#15847B"
+              ]
+          },
+          "Region": {
+              "Labels": [
+                  "Celý svet",
+                  "USA",
+                  "Eúrópa"
+              ],
+              "Data": [
+                  87,
+                  9,
+                  5
+              ],
+              "Colors": [
+                  "#15847B",
+                  "#5BA9A3",
+                  "#B9DAD7"
+              ]
+          },
+          "Fund": {
+              "Labels": [
+                  "C-Quadrat",
+                  "Fidelity Funds",
+                  "MINT rezidenční fond SICAV, a.s."
+              ],
+              "Data": [
+                  75,
+                  13,
+                  12
+              ],
+              "Colors": [
+                  "#15847B",
+                  "#5BA9A3",
+                  "#B9DAD7"
+              ]
+          }
+      },
+      "PortfolioPerformanceChart": [
+          {
+              "Data": [
+                  {
+                      "X": "2021-06-18T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2021-07-20T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2021-08-20T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2021-09-20T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2021-10-20T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2021-11-19T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2021-12-20T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2022-01-20T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2022-02-18T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2022-03-18T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2022-04-20T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2022-05-20T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2022-05-25T00:00:00",
+                      "Y": 1556496
+                  },
+                  {
+                      "X": "2022-05-26T00:00:00",
+                      "Y": 1561767
+                  },
+                  {
+                      "X": "2022-06-01T00:00:00",
+                      "Y": 15775.68
+                  }
+              ]
+          },
+          {
+              "Data": [
+                  {
+                      "X": "2021-06-18T00:00:00",
+                      "Y": 13050
+                  },
+                  {
+                      "X": "2021-07-20T00:00:00",
+                      "Y": 13200
+                  },
+                  {
+                      "X": "2021-08-20T00:00:00",
+                      "Y": 13350
+                  },
+                  {
+                      "X": "2021-09-20T00:00:00",
+                      "Y": 13500
+                  },
+                  {
+                      "X": "2021-10-20T00:00:00",
+                      "Y": 13650
+                  },
+                  {
+                      "X": "2021-11-19T00:00:00",
+                      "Y": 13800
+                  },
+                  {
+                      "X": "2021-12-20T00:00:00",
+                      "Y": 13950
+                  },
+                  {
+                      "X": "2022-01-20T00:00:00",
+                      "Y": 14100
+                  },
+                  {
+                      "X": "2022-02-18T00:00:00",
+                      "Y": 14250
+                  },
+                  {
+                      "X": "2022-03-18T00:00:00",
+                      "Y": 14400
+                  },
+                  {
+                      "X": "2022-04-20T00:00:00",
+                      "Y": 14550
+                  },
+                  {
+                      "X": "2022-05-20T00:00:00",
+                      "Y": 14700
+                  },
+                  {
+                      "X": "2022-05-25T00:00:00",
+                      "Y": 14700
+                  },
+                  {
+                      "X": "2022-05-26T00:00:00",
+                      "Y": 14700
+                  },
+                  {
+                      "X": "2022-06-01T00:00:00",
+                      "Y": 14700
+                  }
+              ]
+          }
+      ],
+      "LinkedInvestments": [
+          {
+              "Title": "linked 1",
+              "GoalValue": 1000000,
+              "GoalAchieved": 0.5258560000000001,
+              "GoalAchievedColor": "#d82034",
+              "Year": 2024,
+              "AccumulatedValue": 5258.56,
+              "GoalsCategory": "Spare Time",
+              "GoalIconUrl": "https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/assets/life.svg",
+              "SnInvestments": [
+                  {
+                      "TotalBuy": 4900,
+                      "TotalSell": 0,
+                      "Balance": 5258.56,
+                      "Title": "2897522103",
+                      "ContractNo": "2897522103",
+                      "PartnerImageUrl": "https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/assets/default-image-placeholder.png",
+                      "ItemId": "5b842cc8-47c3-4fc5-a344-7d75cb97a658",
+                      "Funds": [
+                          {
+                              "FundBalance": 3886.41,
+                              "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                              "IsIn": "DE000A0F5G98",
+                              "FundShare": 29.89
+                          },
+                          {
+                              "FundBalance": 640.13,
+                              "FundName": "iShares Core MSCI World UCITS ETF",
+                              "IsIn": "IE00B4L5Y983",
+                              "FundShare": 8.72
+                          },
+                          {
+                              "FundBalance": 444.13,
+                              "FundName": "Fidelity - America Fund A-ACC-EUR",
+                              "IsIn": "LU0251127410",
+                              "FundShare": 11.7
+                          },
+                          {
+                              "FundBalance": 238.05,
+                              "FundName": "Fidelity - European Growth Fund A-ACC-EUR",
+                              "IsIn": "LU0296857971",
+                              "FundShare": 16.44
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "Title": "linked 2",
+              "GoalValue": 20000,
+              "GoalAchieved": 26.2928,
+              "GoalAchievedColor": "#fcc52d",
+              "Year": 2024,
+              "AccumulatedValue": 5258.56,
+              "GoalsCategory": "Education",
+              "GoalIconUrl": "https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/assets/education.svg",
+              "SnInvestments": [
+                  {
+                      "TotalBuy": 4900,
+                      "TotalSell": 0,
+                      "Balance": 5258.56,
+                      "Title": "2897522305",
+                      "ContractNo": "2897522305",
+                      "PartnerImageUrl": "https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/assets/default-image-placeholder.png",
+                      "ItemId": "36de034a-fba8-44e7-b22f-b9435700a29b",
+                      "Funds": [
+                          {
+                              "FundBalance": 3886.41,
+                              "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                              "IsIn": "DE000A0F5G98",
+                              "FundShare": 29.89
+                          },
+                          {
+                              "FundBalance": 640.13,
+                              "FundName": "iShares Core MSCI World UCITS ETF",
+                              "IsIn": "IE00B4L5Y983",
+                              "FundShare": 8.72
+                          },
+                          {
+                              "FundBalance": 444.13,
+                              "FundName": "Fidelity - America Fund A-ACC-EUR",
+                              "IsIn": "LU0251127410",
+                              "FundShare": 11.7
+                          },
+                          {
+                              "FundBalance": 238.05,
+                              "FundName": "Fidelity - European Growth Fund A-ACC-EUR",
+                              "IsIn": "LU0296857971",
+                              "FundShare": 16.44
+                          }
+                      ]
+                  }
+              ]
+          }
+      ],
+      "UnLinkedInvestments": [
+          {
+              "TotalBuy": 4900,
+              "TotalSell": 0,
+              "Balance": 5258.56,
+              "Title": "2897522204",
+              "ContractNo": "2897522204",
+              "PartnerImageUrl": "https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/assets/default-image-placeholder.png",
+              "ItemId": "55345609-eab2-4abc-ba7c-5242c929ca66",
+              "Funds": [
+                  {
+                      "FundBalance": 3886.41,
+                      "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                      "IsIn": "DE000A0F5G98",
+                      "FundShare": 29.89
+                  },
+                  {
+                      "FundBalance": 640.13,
+                      "FundName": "iShares Core MSCI World UCITS ETF",
+                      "IsIn": "IE00B4L5Y983",
+                      "FundShare": 8.72
+                  },
+                  {
+                      "FundBalance": 444.13,
+                      "FundName": "Fidelity - America Fund A-ACC-EUR",
+                      "IsIn": "LU0251127410",
+                      "FundShare": 11.7
+                  },
+                  {
+                      "FundBalance": 238.05,
+                      "FundName": "Fidelity - European Growth Fund A-ACC-EUR",
+                      "IsIn": "LU0296857971",
+                      "FundShare": 16.44
+                  }
+              ]
+          }
+      ],
+      "User": {
+          "Name": "Maria Davis",
+          "PersonId": "000da340-500c-46d6-ac69-b80788525242",
+          "PhoneNumber": "00000000000",
+          "Email": "202112742@yopmail.com"
+      },
+      "Advisor": {
+          "Name": "Maria Davis",
+          "PersonId": "000da340-500c-46d6-ac69-b80788525242",
+          "PhoneNumber": "00000000000",
+          "Email": "202112742@yopmail.com",
+          "Designation": "ekonóm"
+      }
+  }
+}

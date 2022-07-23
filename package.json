@@ -1,0 +1,34 @@
+{
+  "name": "pdf-report",
+  "version": "1.0.0",
+  "description": "pdf report html template",
+  "main": "index.js",
+  "scripts": {
+    "start": "node-sass ./src/styles/index.scss ./src//index.css -w",
+    "build": "node-sass ./src/styles/index.scss ./src/index.css",
+    "dist": "del -rf dist && mkdir -p dist && cp src/index.html dist/330afe5f-8b9c-40a5-8312-9c4ea752b503.html",
+    "dist:sk": "rm -rf dist && mkdir -p dist && cp src/index-sk.html dist/012b9f4c-4fcf-4b16-ba1a-3a21b8223a32.html",
+    "build:prod": "webpack --config webpack.config.js --progress",
+    "prettier:lint": "prettier --config ./.prettierrc --list-different \"src/**/*{.js,.scss}\"",
+    "prettier:fix": "prettier --config ./.prettierrc --write \"src/**/*{.js,.scss}\""
+  },
+  "author": "Kazi Md. Zubair",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "node-sass": "^7.0.1",
+    "prettier": "^2.6.2",
+    "source-map-loader": "^3.0.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "chart.js": "^3.8.0",
+    "chartjs-adapter-date-fns": "^2.0.0",
+    "date-fns": "^2.28.0"
+  }
+}

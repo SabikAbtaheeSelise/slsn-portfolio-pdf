@@ -1,0 +1,294 @@
+.investment {
+    width: 100%;
+    height: 100%;
+    max-width: 1290px;
+    margin: auto;
+    padding: 80px;
+    &__header {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 80px;
+        padding: 16px;
+        background: $primary-color;
+        &__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+        }
+        &__title {
+            padding-left: 10px;
+            color: $white-color;
+        }
+        &__margin {
+            margin-top: 80px;
+        }
+        &__margin__bottom {
+            margin-bottom: 40px;
+        }
+    }
+
+    &__user {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .caption-2 {
+            color: $gray-font-color;
+            text-transform: uppercase;
+        }
+        &__item {
+            &:last-child {
+                padding-right: 36px;
+            }
+        }
+    }
+
+    &__overview {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 412px;
+        margin-top: 20px;
+        &__card {
+            border: 1px solid $gray-border-color;
+            height: 100%;
+            width: 36%;
+            margin-right: 20px;
+            padding: 20px;
+            &__item{
+                &--1 {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 20px;
+                    background: $gray-color-25;
+                    border: 1px solid $gray-color-50;
+                    .caption-2 {
+                        text-transform: uppercase;
+                        color: $gray-color-500;
+                    }
+                    .header-3 {
+                        color: $secondary-font-color;
+                    }
+                }
+                &--2 {
+                    margin-top: 20px;
+                    border: 1px solid $gray-color-50;
+                    padding: 25px 15px;
+                    & > * {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .body-2 {
+                            font-weight: 300;
+                            color: $gray-color-500;
+                        }
+                        &:first-child {
+                            .subtitle-2 {
+                                color: $secondary-font-color;
+                            }
+                        }
+                        &:not(:first-child) {
+                            padding-top: 25px;
+                        }
+                    }
+                }
+                &__logo {
+                    margin-right: 12px;
+                    width: 48px;
+                    height: 48px;
+                }
+            }
+        }
+        &__chart {
+            height: 100%;
+            width: 64%;
+            border: 1px solid $gray-border-color;
+        }
+    }
+
+    &__chart {
+        margin-top: 20px;
+        height: 100%;
+        background-color: $white-color;
+        margin-bottom: 20px;
+        &__header {
+            background-color: $white-color;
+            margin-bottom: 15px;
+        }
+        &__list {
+            width: 100%;
+            // --gutter: 20px;
+            // display: inline-flex;
+            // justify-content: flex-start;
+            // flex-direction: row;
+            // flex-wrap: wrap;
+            // align-items: center;
+            // margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
+            // width: calc(100% + var(--gutter));
+            // & > * {
+            //     margin: var(--gutter) 0 0 var(--gutter);
+            // }
+            //gap: 20px;
+        }
+        &__card {
+            min-height: 395px;
+            min-width: 340px;
+            border: 1px solid $gray-border-color;
+            &__header {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 18px 25px;
+                &__logo {
+                    width: 24px;
+                    height: 24px;
+                    img,svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                p {
+                    padding-left: 12px;
+                }
+                background: $gray-color-25;
+                color: $gray-color-500;
+            }
+            &__body {
+                padding-top: 20px;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+
+    &__list {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        &__item__sub-item__table {
+            width: 100%;
+        }
+        &__item {
+            box-shadow: 0px 2px 0px $box-shadow-red;
+            &__header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 14px 15px;
+                box-shadow: 0px 1px 0px $gray-color-50;
+                &__logo {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 48px;
+                    height: 48px;
+                    border: 1px solid $gray-color-50;
+                    img,svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                &__title {
+                    flex: 0 0 30%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    h1 {
+                        padding-left: 20px;
+                    }
+                }
+                &__label {
+                    .caption-2 {
+                        color: $gray-font-color;
+                        text-transform: uppercase;
+                    }
+                    &__progress {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        .caption-1 {
+                            padding-right: 5px;
+                        }
+                    }
+                    &:last-child {
+                        flex: 0 0 12%;
+                    }
+                }
+            }
+            &__sub-item__header {
+                padding: 14px 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: $gray-color-75;
+                margin-top: 2px;
+                &__title {
+                    flex: 0 0 40%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    &__text {
+                        padding-left: 25px;
+                    }
+                    &__image {
+                        background-color: $white-color;
+                        border: 0.5px solid rgba(0, 0, 0, 0.1);
+                        height: 48px;
+                        min-width: 72px;
+                        width: 72px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        img {
+                            height: 48px;
+                            min-width: 72px;
+                            width: 72px;
+                            object-fit: cover;
+                        }
+                    }
+                }
+                &__label {
+                    .caption-2 {
+                        color: $gray-font-color;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+    }
+
+    &__footer {
+        background-color: $gray-color-75;
+        padding: 24px 20px;
+        .caption-2 {
+            color: $gray-color-500;
+            font-weight: 400;
+            &:first-child {
+                color: $primary-color;
+                text-transform: uppercase;
+            }
+        }
+        &__contact {
+            padding: 12px 0 20px 0;
+            & > * {
+                &:not(:first-child) {
+                    padding-top: 4px;
+                }
+            }
+        }
+        &__text {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+            color: $gray-color-500;
+        }
+    }
+}

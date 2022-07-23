@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>FiLiP Investment Report</title>
+</head>
+<body class="investment">
+    {% assign OVERVIEW = MetaData.Overview[0] %}
+    {% assign USER = MetaData.User[0] %}
+    {% assign ADVISOR = MetaData.Advisor[0] %}
+    <header class="investment__header">
+        <div class="investment__header__logo">
+            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+        </div>          
+        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+    </header>
+
+    <section class="investment__user section-header">
+        <div class="investment__user__item">
+            <p class="caption-2">Date / Time</p>
+            <p class="subtitle-2">Date: <span id="setDateTime"></span></p>
+        </div>
+        <div class="investment__user__item">
+            <p class="caption-2">Client Name</p>
+            <p class="subtitle-2">{{USER.Name}}</p>
+        </div>
+        <div class="investment__user__item">
+            <p class="caption-2">Phone Number</p>
+            <p class="subtitle-2">{{USER.PhoneNumber}}</p>
+        </div>
+        <div class="investment__user__item">
+            <p class="caption-2">Email Address</p>
+            <p class="subtitle-2">{{USER.Email}}</p>
+        </div>
+    </section>
+
+    <section class="investment__overview">
+        <div class="investment__overview__card">
+            <div class="investment__overview__card__item--1">
+                <div class="investment__overview__card__item__logo">
+                    <svg viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M39.0909 32.7273H0.909091C0.407273 32.7273 0 33.1341 0 33.6364V34.5455C0 35.0473 0.407273 35.4546 0.909091 35.4546H39.0909C39.5927 35.4546 40 35.0473 40 34.5455V33.6364C40 33.1341 39.5927 32.7273 39.0909 32.7273Z" fill="#808080"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9091 29.5455H16.8182C17.32 29.5455 17.7273 29.1382 17.7273 28.6364V13.1818C17.7273 12.6795 17.32 12.2727 16.8182 12.2727H15.9091C15.4073 12.2727 15 12.6795 15 13.1818V28.6364C15 29.1382 15.4073 29.5455 15.9091 29.5455Z" fill="#808080"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.63663 29.5455H9.54572C10.0475 29.5455 10.4548 29.1383 10.4548 28.6364V20.4546C10.4548 19.9524 10.0475 19.5455 9.54572 19.5455H8.63663C8.13481 19.5455 7.72754 19.9524 7.72754 20.4546V28.6364C7.72754 29.1383 8.13481 29.5455 8.63663 29.5455Z" fill="#808080"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M23.182 29.5454H24.0911C24.5934 29.5454 25.0002 29.1381 25.0002 28.6363V7.72721C25.0002 7.22493 24.5934 6.81812 24.0911 6.81812H23.182C22.6802 6.81812 22.2729 7.22493 22.2729 7.72721V28.6363C22.2729 29.1381 22.6802 29.5454 23.182 29.5454Z" fill="#808080"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M30.4545 29.5455H31.3636C31.8654 29.5455 32.2727 29.1382 32.2727 28.6364V0.909091C32.2727 0.406818 31.8654 0 31.3636 0H30.4545C29.9527 0 29.5454 0.406818 29.5454 0.909091V28.6364C29.5454 29.1382 29.9527 29.5455 30.4545 29.5455Z" fill="#808080"/>
+                        </svg>                        
+                </div>
+                <div>
+                    <p class="caption-2">Balance</p>
+                    <h3 class="header-3">{{OVERVIEW.Balance}} EUR</h3>
+                </div>
+            </div>
+            <div class="investment__overview__card__item--2">
+                <div>
+                    <p class="body-2">Profit</p>
+                    <p class="subtitle-2" 
+                    {% if OVERVIEW.Profit < 0 %}
+                        style="color: #d82034;"
+                    {% else %}
+                        style="color: #15847b;"
+                    {% endif %}
+                    >{{OVERVIEW.Profit}} EUR</p>
+                </div>
+                <div>
+                    <p class="body-2">Total Buy</p>
+                    <p class="subtitle-2">{{OVERVIEW.TotalBuy}} EUR</p>
+                </div>
+                <div>
+                    <p class="body-2">Total Sell</p>
+                    <p class="subtitle-2">{{OVERVIEW.TotalSell}} EUR</p>
+                </div>
+            </div>
+        </div>
+        <div class="investment__overview__chart">
+            <canvas id="investmentLineChart" class="line-chart" height="150"></canvas>
+        </div>
+    </section>
+
+    <section class="investment__chart">
+        <div class="investment__chart__header section-header">
+            <h3 class="header-3">Investment Portfolio Composition</h3>
+        </div>
+        <div class="investment__chart__list">
+            <div class="row">
+                <div class="investment__chart__card col-3">
+                    <div class="investment__chart__card__header">
+                         <div class="investment__chart__card__header__logo">
+                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                             </svg>
+                         </div>
+                         <p class="caption-1">Partners</p>
+                    </div>
+                    <div class="investment__chart__card__body">
+                         <canvas id="partnerPieChart" class="pie-chart" height="230"></canvas>
+                    </div>
+                 </div>
+                 <div class="investment__chart__card col-3">
+                     <div class="investment__chart__card__header">
+                          <div class="investment__chart__card__header__logo">
+                              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                              </svg>
+                          </div>
+                          <p class="caption-1">Assets</p>
+                     </div>
+                     <div class="investment__chart__card__body">
+                          <canvas id="assetPieChart" class="pie-chart" height="230"></canvas>
+                     </div>
+                  </div>
+                  <div class="investment__chart__card col-3">
+                     <div class="investment__chart__card__header">
+                          <div class="investment__chart__card__header__logo">
+                              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                              </svg>
+                          </div>
+                          <p class="caption-1">Funds</p>
+                     </div>
+                     <div class="investment__chart__card__body">
+                          <canvas id="fundPieChart" class="pie-chart" height="230"></canvas>
+                     </div>
+                  </div>
+            </div>
+             <div class="row">
+                <div class="investment__chart__card col-3">
+                    <div class="investment__chart__card__header">
+                         <div class="investment__chart__card__header__logo">
+                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                             </svg>
+                         </div>
+                         <p class="caption-1">Region</p>
+                    </div>
+                    <div class="investment__chart__card__body">
+                         <canvas id="regionPieChart" class="pie-chart" height="230"></canvas>
+                    </div>
+                 </div>
+                 <div class="investment__chart__card col-3">
+                    <div class="investment__chart__card__header">
+                         <div class="investment__chart__card__header__logo">
+                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z" fill="#808080"/>
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
+                             </svg>
+                         </div>
+                         <p class="caption-1">Sector</p>
+                    </div>
+                    <div class="investment__chart__card__body">
+                         <canvas id="sectorPieChart" class="pie-chart" height="230"></canvas>
+                    </div>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <div style="page-break-after: always;"></div>
+
+    {% assign currentPageNo = 2 %}
+    {% assign currentPageHeight = 1348 %}
+    {% assign linkedInvestments = MetaData.LinkedInvestments %}
+
+    <header class="investment__header investment__header__margin">
+        <div class="investment__header__logo">
+            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+        </div>          
+        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+    </header>
+
+    <!--Goal Linked Start-->
+    <section class="investment__list">
+        <div class="investment__list__header section-header">
+            <h3 class="header-3">Goal Linked Investments</h3>
+        </div>
+        {% for linkedInvestment in linkedInvestments %}
+            {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
+            {% if currentPageHeight <= 0 %}
+                {% assign currentPageNo = currentPageNo | Plus: 1 %}
+                {% assign currentPageHeight = 1424 %}
+                <div style="page-break-after: always;"></div>
+
+                <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                    <div class="investment__header__logo">
+                        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                    </div>          
+                    <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                </header>
+            {% endif %}
+        <div class="investment__list__item">
+            <div class="investment__list__item__header">
+                <div class="investment__list__item__header__title">
+                    <div class="investment__list__item__header__logo">
+                        <img src="{{linkedInvestment.GoalIconUrl}}">
+                    </div>
+                    <h1 class="subtitle-2">{{linkedInvestment.Title}}</h1>
+                </div>
+                <div class="investment__list__item__header__label">
+                    <p class="caption-2">Total Value</p>
+                    <p class="caption-1">{{linkedInvestment.GoalValue}} EUR</p>
+                </div>
+                <div class="investment__list__item__header__label">
+                    <p class="caption-2">Current Value</p>
+                    <p class="caption-1">{{linkedInvestment.AccumulatedValue}} EUR</p>
+                </div>
+                <div class="investment__list__item__header__label">
+                    <p class="caption-2">Target Date</p>
+                    <p class="caption-1">{{linkedInvestment.Year}}</p>
+                </div>
+                <div class="investment__list__item__header__label">
+                    <p class="caption-2">Goal Achieved</p>
+                    <div class="investment__list__item__header__label__progress">
+                        <p class="caption-1">{{linkedInvestment.GoalAchieved}}%</p>
+                        <div class="progress-bar__container">
+                           <span class="progress-bar" 
+                           style="width: {{linkedInvestment.GoalAchieved}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
+                           ></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% for snInvestment in linkedInvestment.SnInvestments %}
+                {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
+                {% if currentPageHeight <= 0 %}
+                    {% assign currentPageNo = currentPageNo | Plus: 1 %}
+                    {% assign currentPageHeight = 1424 %}
+                    <div style="page-break-after: always;"></div>
+
+                    <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                        <div class="investment__header__logo">
+                            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                        </div>          
+                        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                    </header>
+                {% endif %}
+            <div class="investment__list__item__sub-item">
+                <div class="investment__list__item__sub-item__header">
+                    <div class="investment__list__item__sub-item__header__title">
+                        <div class="investment__list__item__sub-item__header__title__image">
+                            <img src="{{snInvestment.PartnerImageUrl}}" alt="{{snInvestment.Title}}">
+                        </div>
+                        <div class="investment__list__item__sub-item__header__title__text">
+                            <p class="subtitle-2">{{snInvestment.Title}}</p>
+                            <p class="caption-1">ID: {{snInvestment.ContractNo}}</p>
+                        </div>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Balance</p>
+                        <p class="caption-1">{{snInvestment.Balance}} EUR</p>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Total Buy</p>
+                        <p class="caption-1">{{snInvestment.TotalBuy}} EUR</p>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Total Sell</p>
+                        <p class="caption-1">{{snInvestment.TotalSell}} EUR</p>
+                    </div>
+                    <div class="investment__list__item__sub-item__header__label">
+                        <p class="caption-2">Funds</p>
+                        {% if snInvestment.Funds.size > 9 %}
+                        <p class="caption-1">{{snInvestment.Funds.size}}</p>
+                        {% else %}
+                        <p class="caption-1">0{{snInvestment.Funds.size}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% assign currentPageHeight = currentPageHeight | Minus: 36 %}
+                {% if currentPageHeight <= 0 %}
+                    {% assign currentPageNo = currentPageNo | Plus: 1 %}
+                    {% assign currentPageHeight = 1424 %}
+                    <div style="page-break-after: always;"></div>
+
+                    <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                        <div class="investment__header__logo">
+                            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                        </div>          
+                        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                    </header>
+                {% endif %}
+                <table class="investment__list__item__sub-item__table investment-table">
+                    <col span="1" class="investment-table-fund">
+                    <thead>
+                        <tr>
+                            <th>Fund Name</th>
+                            <th>Isin</th>
+                            <th>Share</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for assetFund in snInvestment.Funds %}
+                            {% assign currentPageHeight = currentPageHeight | Minus: 56 %}
+                            {% if currentPageHeight <= 0 %}
+                                {% assign currentPageNo = currentPageNo | Plus: 1 %}
+                                {% assign currentPageHeight = 1424 %}
+                                <div style="page-break-after: always;"></div>
+
+                                <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                                    <div class="investment__header__logo">
+                                        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                                    </div>          
+                                    <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                                </header>
+                            {% endif %}
+                        <tr>
+                            <td>{{assetFund.FundName}}</td>
+                            <td>{{assetFund.IsIn}}</td>
+                            <td>{{assetFund.FundShare}}%</td>
+                            <td>{{assetFund.FundBalance}} EUR</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </section>
+    <!--Goal Linked End-->
+
+    {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
+    {% if currentPageHeight <= 0 %}
+        {% assign currentPageNo = currentPageNo | Plus: 1 %}
+        {% assign currentPageHeight = 1348 %}
+        <div style="page-break-after: always;"></div>
+
+        <header class="investment__header investment__header__margin">
+            <div class="investment__header__logo">
+                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+            </div>          
+            <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+        </header>
+    {% endif %}
+
+    <!--Goal Unlinked Start-->
+    <section class="investment__list">
+        <div class="investment__list__header section-header">
+            <h3 class="header-3">Goal Unlikned Investments</h3>
+        </div>
+        {% for unLinkedInvestment in MetaData.UnLinkedInvestments %}
+            {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
+            {% if currentPageHeight <= 0 %}
+                {% assign currentPageNo = currentPageNo | Plus: 1 %}
+                {% assign currentPageHeight = 1424 %}
+                <div style="page-break-after: always;"></div>
+
+                <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                    <div class="investment__header__logo">
+                        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                    </div>          
+                    <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                </header>
+            {% endif %}
+        <div class="investment__list__item__sub-item">
+            <div class="investment__list__item__sub-item__header">
+                <div class="investment__list__item__sub-item__header__title">
+                    <div class="investment__list__item__sub-item__header__title__image">
+                        <img src="{{unLinkedInvestment.PartnerImageUrl}}" alt="{{unLinkedInvestment.Title}}">
+                    </div>
+                    <div class="investment__list__item__sub-item__header__title__text">
+                        <p class="subtitle-2">{{unLinkedInvestment.Title}}</p>
+                        <p class="caption-1">ID: {{unLinkedInvestment.ContractNo}}</p>
+                    </div>
+                </div>
+                <div class="investment__list__item__sub-item__header__label">
+                    <p class="caption-2">Balance</p>
+                    <p class="caption-1">{{unLinkedInvestment.Balance}} EUR</p>
+                </div>
+                <div class="investment__list__item__sub-item__header__label">
+                    <p class="caption-2">Total Buy</p>
+                    <p class="caption-1">{{unLinkedInvestment.TotalBuy}} EUR</p>
+                </div>
+                <div class="investment__list__item__sub-item__header__label">
+                    <p class="caption-2">Total Sell</p>
+                    <p class="caption-1">{{unLinkedInvestment.TotalSell}} EUR</p>
+                </div>
+                <div class="investment__list__item__sub-item__header__label">
+                    <p class="caption-2">Funds</p>
+                    {% if unLinkedInvestment.Funds.size > 9 %}
+                    <p class="caption-1">{{unLinkedInvestment.Funds.size}}</p>
+                    {% else %}
+                    <p class="caption-1">0{{unLinkedInvestment.Funds.size}}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% assign currentPageHeight = currentPageHeight | Minus: 36 %}
+            {% if currentPageHeight <= 0 %}
+                {% assign currentPageNo = currentPageNo | Plus: 1 %}
+                {% assign currentPageHeight = 1424 %}
+                <div style="page-break-after: always;"></div>
+
+                <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                    <div class="investment__header__logo">
+                        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                    </div>          
+                    <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                </header>
+            {% endif %}
+            <table class="investment__list__item__sub-item__table investment-table">
+                <col span="1" class="investment-table-fund">
+                <thead>
+                    <tr>
+                        <th>Fund Name</th>
+                        <th>Isin</th>
+                        <th>Share</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for assetFund in unLinkedInvestment.Funds %}
+                        {% assign currentPageHeight = currentPageHeight | Minus: 56 %}
+                        {% if currentPageHeight <= 0 %}
+                            {% assign currentPageNo = currentPageNo | Plus: 1 %}
+                            {% assign currentPageHeight = 1424 %}
+                            <div style="page-break-after: always;"></div>
+
+                            <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                                <div class="investment__header__logo">
+                                    <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                                </div>          
+                                <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                            </header>
+                        {% endif %}
+                    <tr>
+                        <td>{{assetFund.FundName}}</td>
+                        <td>{{assetFund.IsIn}}</td>
+                        <td>{{assetFund.FundShare}}%</td>
+                        <td>{{assetFund.FundBalance}} EUR</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </section>
+    <!--Goal Unlinked End-->
+
+    {% assign currentPageHeight = currentPageHeight | Minus: 240 %}
+    {% if currentPageHeight <= 0 %}
+        {% assign currentPageNo = currentPageNo | Plus: 1 %}
+        {% assign currentPageHeight = 1424 %}
+        <div style="page-break-after: always;"></div>
+
+        <footer class="investment__footer" style="margin-top: 80px;">
+            <p class="caption-2">Advisor Contact</p>
+            <div class="investment__footer__contact">
+                <p class="subtitle-2">{{ADVISOR.Name}}</p>
+                <p class="caption-2">{{ADVISOR.Designation}}</p>
+                <p class="caption-2">{{ADVISOR.Email}}</p>
+                <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+            </div>
+            <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
+        </footer>
+    {% else %}
+        <footer class="investment__footer">
+            <p class="caption-2">Advisor Contact</p>
+            <div class="investment__footer__contact">
+                <p class="subtitle-2">{{ADVISOR.Name}}</p>
+                <p class="caption-2">{{ADVISOR.Designation}}</p>
+                <p class="caption-2">{{ADVISOR.Email}}</p>
+                <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+            </div>
+            <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
+        </footer>
+    {% endif %}
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0/dist/chartjs-adapter-moment.js"></script>
+<script src="index.js"></script>
+</html>

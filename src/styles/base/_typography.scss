@@ -1,0 +1,184 @@
+@import '../abstracts/variables';
+
+@font-face {
+	font-family: 'LegacySerifITC W02 Bk';
+	src: url('#{$assetPath}itclegacyserif-lt-book/97c2c577-bf8e-4708-baff-001fd32f4d08.eot?#iefix');
+	src: url('#{$assetPath}itclegacyserif-lt-book/97c2c577-bf8e-4708-baff-001fd32f4d08.eot?#iefix')
+			format('eot'),
+		url('#{$assetPath}itclegacyserif-lt-book/1aa4f478-0211-4879-a4e6-a0be4a43e71e.woff2')
+			format('woff2'),
+		url('#{$assetPath}itclegacyserif-lt-book/54a75543-b5b3-45e1-81aa-b1ad5b50a901.woff') format('woff'),
+		url('#{$assetPath}itclegacyserif-lt-book/dfbf3526-722f-44ca-8fc1-5b07cb575fd0.ttf')
+			format('truetype'),
+		url('#{$assetPath}itclegacyserif-lt-book/4b98962c-8d65-43ea-a240-c89d3b801521.svg#4b98962c-8d65-43ea-a240-c89d3b801521')
+			format('svg');
+}
+
+@font-face {
+	font-family: 'LegacySerifITC W02 Bk It';
+	src: url('#{$assetPath}itclegacyserif-lt-book/b5f110df-dc07-4adc-866a-ec62f641ac54.eot?#iefix');
+	src: url('#{$assetPath}itclegacyserif-lt-book/b5f110df-dc07-4adc-866a-ec62f641ac54.eot?#iefix')
+			format('eot'),
+		url('#{$assetPath}itclegacyserif-lt-book/legacyserifitcw02-bkit.woff2') format('woff2'),
+		url('#{$assetPath}itclegacyserif-lt-book/legacyserifitcw02-bkit.woff') format('woff'),
+		url('#{$assetPath}itclegacyserif-lt-book/6103ef63-5116-480b-b304-6b5bb947cfee.ttf')
+			format('truetype'),
+		url('#{$assetPath}itclegacyserif-lt-book/18a4456b-29a7-49ae-85d5-60b89bbdf95d.svg#18a4456b-29a7-49ae-85d5-60b89bbdf95d')
+			format('svg');
+}
+
+@font-face {
+	font-family: 'LegacySerifITC W02 Bk Bold';
+	src: url('#{$assetPath}itclegacyserif-lt-book/lte52472-webfont.eot');
+	src: url('#{$assetPath}itclegacyserif-lt-book/lte52472-webfont.eot?#iefix')
+			format('embedded-opentype'),
+		url('#{$assetPath}itclegacyserif-lt-book/lte52472-webfont.woff2') format('woff2'),
+		url('#{$assetPath}itclegacyserif-lt-book/lte52472-webfont.woff') format('woff'),
+		url('#{$assetPath}itclegacyserif-lt-book/lte52472-webfont.ttf') format('truetype'),
+		url('#{$assetPath}itclegacyserif-lt-book/lte52472-webfont.svg#itclegacyserif_lt_boldregular')
+			format('svg');
+}
+
+@font-face {
+	font-family: 'Calibri';
+	src: url('#{$assetPath}calibri/calibri-italic.eot');
+	src: url('#{$assetPath}calibri/calibri-italic.eot?#iefix') format('embedded-opentype'),
+		url('#{$assetPath}calibri/calibri-italic.woff2') format('woff2'),
+		url('#{$assetPath}calibri/calibri-italic.woff') format('woff'),
+		url('#{$assetPath}calibri/calibri-italic.ttf') format('truetype'),
+		url('#{$assetPath}calibri/calibri-italic.svg#calibri-italic') format('svg');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Calibri';
+	src: url('#{$assetPath}calibri/calibri-bolditalic.eot');
+	src: url('#{$assetPath}calibri/calibri-bolditalic.eot?#iefix') format('embedded-opentype'),
+		url('#{$assetPath}calibri/calibri-bolditalic.woff2') format('woff2'),
+		url('#{$assetPath}calibri/calibri-bolditalic.woff') format('woff'),
+		url('#{$assetPath}calibri/calibri-bolditalic.ttf') format('truetype'),
+		url('#{$assetPath}calibri/calibri-bolditalic.svg#calibri-bolditalic') format('svg');
+	font-weight: 700;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Calibri';
+	src: url('#{$assetPath}calibri/calibri-bold.eot');
+	src: url('#{$assetPath}calibri/calibri-bold.eot?#iefix') format('embedded-opentype'),
+		url('#{$assetPath}calibri/calibri-bold.woff2') format('woff2'),
+		url('#{$assetPath}calibri/calibri-bold.woff') format('woff'),
+		url('#{$assetPath}calibri/calibri-bold.ttf') format('truetype'),
+		url('#{$assetPath}calibri/calibri-bold.svg#calibri-bold') format('svg');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Calibri';
+	src: url('#{$assetPath}calibri/calibri-light.eot');
+	src: url('#{$assetPath}calibri/calibri-light.eot?#iefix') format('embedded-opentype'),
+		url('#{$assetPath}calibri/calibri-light.woff2') format('woff2'),
+		url('#{$assetPath}calibri/calibri-light.woff') format('woff'),
+		url('#{$assetPath}calibri/calibri-light.ttf') format('truetype'),
+		url('#{$assetPath}calibri/calibri-light.svg#calibri') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Calibri';
+	src: url('#{$assetPath}calibri/calibri-regular.eot');
+	src: url('#{$assetPath}calibri/calibri-regular.eot?#iefix') format('embedded-opentype'),
+		url('#{$assetPath}calibri/calibri-regular.woff') format('woff'),
+		url('#{$assetPath}calibri/calibri.woff2') format('woff2'),
+		url('#{$assetPath}calibri/calibri-regular.ttf') format('truetype'),
+		url('#{$assetPath}calibri/calibri-regular.svg#calibri') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+body {
+    font-family: $primary-font-family;
+    font-weight: 400;
+    color: $primary-font-color;
+}
+
+h1 {
+	font-family: $primary-font-family;
+	font-size: 3.6rem;
+	letter-spacing: 0.025rem;
+	line-height: 3rem;
+}
+
+h2 {
+	font-family: $primary-font-family;
+	font-size: 2.4rem;
+	letter-spacing: 0.025rem;
+}
+
+h3 {
+    font-family: $primary-font-family;
+	font-size: 2rem;
+	letter-spacing: 0;
+}
+
+.header-1 {
+	font-family: $primary-font-family;
+	font-size: 2.8rem;
+	line-height: 4.8rem;
+	letter-spacing: 0.025rem;
+}
+
+.header-3 {
+	font-family: $primary-font-family;
+	font-size: 2rem;
+	line-height: 2.8rem;
+	letter-spacing: 0;
+}
+
+.subtitle-1 {
+	font-family: $primary-font-family;
+	font-size: 1.8rem;
+	letter-spacing: 0.025rem;
+}
+
+.subtitle-2 {
+	font-family: $primary-font-family;
+	font-size: 1.6rem;
+	letter-spacing: 0.01rem;
+	line-height: 2rem;
+}
+
+.subtitle-3 {
+	font-family: $primary-font-family;
+	font-size: 1.6rem;
+	letter-spacing: 0.01rem;
+}
+
+.body-1 {
+	font-family: $primary-font-family;
+	font-size: 1.8rem;
+	letter-spacing: 0.05rem;
+}
+
+.body-2 {
+	font-family: $primary-font-family;
+	font-size: 1.6rem;
+	letter-spacing: 0.01rem;
+}
+
+.caption-1 {
+	font-family: $primary-font-family;
+	font-size: 1.4rem;
+	letter-spacing: 0.04rem;
+	line-height: 1.6rem;
+}
+
+.caption-2 {
+	font-family: $primary-font-family;
+	font-size: 1.2rem;
+	letter-spacing: 0.04rem;
+	line-height: 1.6rem;
+}

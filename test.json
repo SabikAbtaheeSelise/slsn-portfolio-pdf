@@ -1,0 +1,249 @@
+{
+    "Subject": "Email Subject",
+    "Note": "Text Goes Email Body",
+    "Language": "sk-SK",
+    "PdfReport": {
+        "Overview": {
+            "Balance": 15775.68,
+            "Profit": 1075.68,
+            "TotalBuy": 14700,
+            "TotalSell": 0,
+            "Date": "2022-06-15T12:56:39.653Z"
+        },
+        "PortfolioCompositionChart": {
+            "Asset": {
+                "Labels": [
+                    "Ostatné fondy",
+                    "Akciové fondy",
+                    "N/A",
+                    "Hotovosť"
+                ],
+                "Data": [
+                    74,
+                    13,
+                    12,
+                    1
+                ],
+                "Colors": [
+                    "#15847B",
+                    "#5BA9A3",
+                    "#B9DAD7",
+                    "#808080"
+                ]
+            },
+            "Partner": {
+                "Labels": [
+                    "EIC"
+                ],
+                "Data": [
+                    100
+                ],
+                "Colors": [
+                    "#15847B"
+                ]
+            },
+            "Sector": {
+                "Labels": [
+                    "Všetky sektory"
+                ],
+                "Data": [
+                    100
+                ],
+                "Colors": [
+                    "#15847B"
+                ]
+            },
+            "Region": {
+                "Labels": [
+                    "Celý svet",
+                    "USA",
+                    "Eúrópa"
+                ],
+                "Data": [
+                    87,
+                    9,
+                    5
+                ],
+                "Colors": [
+                    "#15847B",
+                    "#5BA9A3",
+                    "#B9DAD7"
+                ]
+            },
+            "Fund": {
+                "Labels": [
+                    "C-Quadrat",
+                    "Fidelity Funds",
+                    "MINT rezidenční fond SICAV, a.s."
+                ],
+                "Data": [
+                    75,
+                    13,
+                    12
+                ],
+                "Colors": [
+                    "#15847B",
+                    "#5BA9A3",
+                    "#B9DAD7"
+                ]
+            }
+        },
+        "PortfolioPerformanceChart": [
+            {
+                "Data": [
+                    {
+                        "X": "2022-03-18T00:00:00",
+                        "Y": 1556496
+                    },
+                    {
+                        "X": "2022-04-20T00:00:00",
+                        "Y": 1556496
+                    },
+                    {
+                        "X": "2022-05-20T00:00:00",
+                        "Y": 1556496
+                    },
+                    {
+                        "X": "2022-05-25T00:00:00",
+                        "Y": 1556496
+                    },
+                    {
+                        "X": "2022-05-26T00:00:00",
+                        "Y": 1561767
+                    },
+                    {
+                        "X": "2022-06-01T00:00:00",
+                        "Y": 15775.68
+                    }
+                ]
+            },
+            {
+                "Data": [
+                    {
+                        "X": "2022-03-18T00:00:00",
+                        "Y": 14400
+                    },
+                    {
+                        "X": "2022-04-20T00:00:00",
+                        "Y": 14550
+                    },
+                    {
+                        "X": "2022-05-20T00:00:00",
+                        "Y": 14700
+                    },
+                    {
+                        "X": "2022-05-25T00:00:00",
+                        "Y": 14700
+                    },
+                    {
+                        "X": "2022-05-26T00:00:00",
+                        "Y": 14700
+                    },
+                    {
+                        "X": "2022-06-01T00:00:00",
+                        "Y": 14700
+                    }
+                ]
+            }
+        ],
+        "LinkedInvestments": [
+            {
+                "Title": "linked 2",
+                "GoalAchieved": 80,
+                "GoalAchievedColor": "#ffff",
+                "Year": 2024,
+                "GoalIconUrl": "url",
+                "GoalValue": 20000,
+                "GoalsCategory": "Education",
+                "AccumulatedValue": 5258.56,
+                "SnInvestments": [
+                    {
+                        "PartnerImageUrl": "url",
+                        "ItemId": "5fc0db2b-deef-4f7e-9747-5740219a4732",
+                        "ContractNo": "2897522305",
+                        "Balance": 5258.56,
+                        "TotalBuy": 4900,
+                        "TotalSell": 0,
+                        "Title": "2897522305",
+                        "Funds": [
+                            {
+                                "IsIn": "DE000A0F5G98",
+                                "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                                "FundBalance": 3886.41,
+                                "FundShare": 29.89
+                            },
+                            {
+                                "IsIn": "DE000A0F5G98",
+                                "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                                "FundBalance": 3886.41,
+                                "FundShare": 29.89
+                            },
+                            {
+                                "IsIn": "DE000A0F5G98",
+                                "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                                "FundBalance": 3886.41,
+                                "FundShare": 29.89
+                            },
+                            {
+                                "IsIn": "DE000A0F5G98",
+                                "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                                "FundBalance": 3886.41,
+                                "FundShare": 29.89
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "UnLinkedInvestments": [
+            {
+                "PartnerImageUrl": "url",
+                "ItemId": "5fc0db2b-deef-4f7e-9747-5740219a4732",
+                "ContractNo": "2897522305",
+                "Balance": 5258.56,
+                "TotalBuy": 4900,
+                "TotalSell": 0,
+                "Title": "2897522305",
+                "Funds": [
+                    {
+                        "IsIn": "DE000A0F5G98",
+                        "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                        "FundBalance": 3886.41,
+                        "FundShare": 29.89
+                    },
+                    {
+                        "IsIn": "DE000A0F5G98",
+                        "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                        "FundBalance": 3886.41,
+                        "FundShare": 29.89
+                    },
+                    {
+                        "IsIn": "DE000A0F5G98",
+                        "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                        "FundBalance": 3886.41,
+                        "FundShare": 29.89
+                    },
+                    {
+                        "IsIn": "DE000A0F5G98",
+                        "FundName": "C-QUADRAT ARTS Total Return Global-AMI",
+                        "FundBalance": 3886.41,
+                        "FundShare": 29.89
+                    }
+                ]
+            }
+        ],
+        "User": {
+            "Name": "Maria Davis",
+            "PhoneNumber": "00000000000",
+            "Email": "202112742@yopmail.com",
+            "PersonId": "000da340-500c-46d6-ac69-b80788525242"
+        },
+        "Advisor": {
+            "Name": "Elizabeth Martinez",
+            "PhoneNumber": "+8800000101010000",
+            "Email": "400006109@yopmail.com",
+            "Designation": "admin",
+            "PersonId": "bb0df861-88b3-437e-b084-4e26bdef05ef"
+        }
+    }
+}
