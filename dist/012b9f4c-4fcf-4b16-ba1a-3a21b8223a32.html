@@ -338,8 +338,6 @@ h3 {
     margin-bottom: 20px; }
     .investment__list__item__sub-item__table {
       width: 100%; }
-    .investment__list__item {
-      box-shadow: 0px 2px 0px #b4495e; }
       .investment__list__item__header {
         display: flex;
         justify-content: space-between;
@@ -808,10 +806,8 @@ h3 {
     </section>
     <!--Goal Linked End-->
 
-    {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
-    {% if currentPageHeight <= 0 %}
-        {% assign currentPageNo = currentPageNo | Plus: 1 %}
-        {% assign currentPageHeight = 1348 %}
+    {% assign currentPageNo = currentPageNo | Plus:1 %}
+    {% assign currentPageHeight = 1348 %}
         <div style="page-break-after: always;"></div>
 
         <header class="investment__header investment__header__margin">
@@ -820,7 +816,6 @@ h3 {
             </div>          
             <h1 class="investment__header__title header-1">Správa o investíciách FiLiP</h1>
         </header>
-    {% endif %}
 
     <!--Goal Unlinked Start-->
     <section class="investment__list">
@@ -957,7 +952,7 @@ h3 {
 <script>
 
 const dateTimeSpan = document.querySelector('#setDateTime');
-const dateNow = moment(new Date(Date.now())).format('d.m.yyyy');
+const dateNow = moment(new Date(Date.now())).format('D.M.YYYY');
 dateTimeSpan.innerHTML = dateNow;
 
 
