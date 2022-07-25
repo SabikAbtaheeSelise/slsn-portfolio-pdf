@@ -526,7 +526,7 @@ h3 {
                 </div>
                 <div>
                     <p class="caption-2">Hodnota portfólia</p>
-                    <h3 class="header-3"><span id="overview-Balance"></span> EUR</h3>
+                    <h3 class="header-3">{{MetaData.Overview[0].Balance}} EUR</h3>
                 </div>
             </div>
             <div class="investment__overview__card__item--2">
@@ -538,15 +538,15 @@ h3 {
                     {% else %}
                         style="color: #15847b;"
                     {% endif %}
-                    ><span id="overview-Profit"></span> EUR</p>
+                    >{{MetaData.Overview[0].Profit}} EUR</p>
                 </div>
                 <div>
                     <p class="body-2">Vklady</p>
-                    <p class="subtitle-2"><span id="overview-TotalBuy"></span> EUR</p>
+                    <p class="subtitle-2">{{MetaData.Overview[0].TotalBuy}} EUR</p>
                 </div>
                 <div>
                     <p class="body-2">Výberyl</p>
-                    <p class="subtitle-2"><span id="overview-TotalSell"></span> EUR</p>
+                    <p class="subtitle-2">{{MetaData.Overview[0].TotalSell}} EUR</p>
                 </div>
             </div>
         </div>
@@ -954,23 +954,6 @@ h3 {
 const dateTimeSpan = document.querySelector('#setDateTime');
 const dateNow = moment(new Date(Date.now())).format('D.M.YYYY');
 dateTimeSpan.innerHTML = dateNow;
-
-
-const Balance = '{{MetaData.Overview[0].Balance}}';
-const overviewBalance = document.querySelector('#overview-Balance');
-overviewBalance.innerHTML = currencyFormatter(Balance);
-
-const TotalBuy = '{{MetaData.Overview[0].TotalBuy}}';
-const overviewTotalBuy = document.querySelector('#overview-TotalBuy');
-overviewTotalBuy.innerHTML = currencyFormatter(TotalBuy);
-
-const TotalSell = '{{MetaData.Overview[0].TotalSell}}';
-const overviewTotalSell = document.querySelector('#overview-TotalSell');
-overviewTotalSell.innerHTML = currencyFormatter(TotalSell);
-
-const Profit = '{{MetaData.Overview[0].Profit}}';
-const overviewProfit = document.querySelector('#overview-Profit');
-overviewProfit.innerHTML = currencyFormatter(Profit);
 
 
     {% assign compositionChartDataPartner = MetaData.PortfolioCompositionChart[0].Partner %}

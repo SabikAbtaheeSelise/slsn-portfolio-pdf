@@ -337,8 +337,7 @@ h3 {
     margin-bottom: 20px; }
     .investment__list__item__sub-item__table {
       width: 100%; }
-    .investment__list__item {
-      box-shadow: 0px 2px 0px #b4495e; }
+    
       .investment__list__item__header {
         display: flex;
         justify-content: space-between;
@@ -527,7 +526,7 @@ h3 {
                 </div>
                 <div>
                     <p class="caption-2">Balance</p>
-                    <h3 class="header-3"><span id="overview-Balance"></span> EUR</h3>
+                    <h3 class="header-3">{{MetaData.Overview[0].Balance}} EUR</h3>
                 </div>
             </div>
             <div class="investment__overview__card__item--2">
@@ -539,15 +538,15 @@ h3 {
                     {% else %}
                         style="color: #15847b;"
                     {% endif %}
-                    ><span id="overview-Profit"></span> EUR</p>
+                    >{{MetaData.Overview[0].Profit}} EUR</p>
                 </div>
                 <div>
                     <p class="body-2">Total Buy</p>
-                    <p class="subtitle-2"><span id="overview-TotalBuy"></span> EUR</p>
+                    <p class="subtitle-2">{{MetaData.Overview[0].TotalBuy}} EUR</p>
                 </div>
                 <div>
                     <p class="body-2">Total Sell</p>
-                    <p class="subtitle-2"><span id="overview-TotalSell"></span> EUR</p>
+                    <p class="subtitle-2">{{MetaData.Overview[0].TotalSell}} EUR</p>
                 </div>
             </div>
         </div>
@@ -807,8 +806,6 @@ h3 {
     </section>
     <!--Goal Linked End-->
 
-    {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
-    {% if currentPageHeight <= 0 %}
         {% assign currentPageNo = currentPageNo | Plus: 1 %}
         {% assign currentPageHeight = 1348 %}
         <div style="page-break-after: always;"></div>
@@ -819,7 +816,6 @@ h3 {
             </div>          
             <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
         </header>
-    {% endif %}
 
     <!--Goal Unlinked Start-->
     <section class="investment__list">
@@ -1339,26 +1335,11 @@ const investmentLineChartConfig = {
 const investmentLineChartCanvas = document.querySelector('#investmentLineChart');
 const investmentLineChart = new Chart(investmentLineChartCanvas, investmentLineChartConfig);
 const dateTimeSpan = document.querySelector('#setDateTime');
-const dateNow = moment(new Date(Date.now())).format('d.m.yyyy');
+const dateNow = moment(new Date(Date.now())).format('D.M.YYYY');
 dateTimeSpan.innerHTML = dateNow;
 
 
 
-const Balance = '{{MetaData.Overview[0].Balance}}';
-const overviewBalance = document.querySelector('#overview-Balance');
-overviewBalance.innerHTML = currencyFormatter(Balance);
-
-const TotalBuy = '{{MetaData.Overview[0].TotalBuy}}';
-const overviewTotalBuy = document.querySelector('#overview-TotalBuy');
-overviewTotalBuy.innerHTML = currencyFormatter(TotalBuy);
-
-const TotalSell = '{{MetaData.Overview[0].TotalSell}}';
-const overviewTotalSell = document.querySelector('#overview-TotalSell');
-overviewTotalSell.innerHTML = currencyFormatter(TotalSell);
-
-const Profit = '{{MetaData.Overview[0].Profit}}';
-const overviewProfit = document.querySelector('#overview-Profit');
-overviewProfit.innerHTML = currencyFormatter(Profit);
 
 </script>
 </html>
