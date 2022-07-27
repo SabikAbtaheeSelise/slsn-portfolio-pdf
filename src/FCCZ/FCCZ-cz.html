@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0/dist/chartjs-adapter-moment.js"></script>
+    <style>
+        /***
+    The new CSS reset - version 1.6.0 (last updated 29.4.2022)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+        /*
+            Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+            - The "symbol *" part is to solve Firefox SVG sprite bug
+         */
+        *:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
+            all: unset;
+            display: revert;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        /* Reapply the pointer cursor for anchor tags */
+        a, button {
+            cursor: revert;
+        }
+
+        /* Remove list styles (bullets/numbers) */
+        ol, ul, menu {
+            list-style: none;
+        }
+
+        /* For images to not be able to exceed their container */
+        img {
+            max-width: 100%;
+        }
+
+        /* removes spacing between cells in tables */
+        table {
+            border-collapse: collapse;
+        }
+
+        /* revert the 'white-space' property for textarea elements on Safari */
+        textarea {
+            white-space: revert;
+        }
+
+        /* minimum style to allow to style meter element */
+        meter {
+            -webkit-appearance: revert;
+            appearance: revert;
+        }
+
+        /* reset default text opacity of input placeholder */
+        ::placeholder {
+            color: unset;
+        }
+
+        /* fix the feature of 'hidden' attribute.
+           display:revert; revert to element instead of attribute */
+        :where([hidden]) {
+            display: none;
+        }
+
+        /* revert for bug in Chromium browsers
+           - fix for the content editable attribute will work properly. */
+        :where([contenteditable]) {
+            -moz-user-modify: read-write;
+            -webkit-user-modify: read-write;
+            overflow-wrap: break-word;
+            -webkit-line-break: after-white-space;
+        }
+
+        /* apply back the draggable feature - exist only in Chromium and Safari */
+        :where([draggable="true"]) {
+            -webkit-user-drag: element;
+        }
+
+        @font-face {
+            font-family: 'Frutiger Light';
+            src: url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce45light.eot");
+            /* IE9 Compat Modes */
+            src: url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce45light.eot?#iefix") format("embedded-opentype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce45light.otf") format("opentype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce45light.svg") format("svg"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce45light.ttf") format("truetype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce45light.woff") format("woff"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce45light.woff2") format("woff2");
+            /* Modern Browsers */
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Frutiger Roman';
+            src: url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce55roman.eot");
+            /* IE9 Compat Modes */
+            src: url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce55roman.eot?#iefix") format("embedded-opentype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce55roman.otf") format("opentype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce55roman.svg") format("svg"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce55roman.ttf") format("truetype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce55roman.woff") format("woff"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce55roman.woff2") format("woff2");
+            /* Modern Browsers */
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Frutiger Bold';
+            src: url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce65bold.eot");
+            /* IE9 Compat Modes */
+            src: url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce65bold.eot?#iefix") format("embedded-opentype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce65bold.otf") format("opentype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce65bold.svg") format("svg"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce65bold.ttf") format("truetype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce65bold.woff") format("woff"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerce65bold.woff2") format("woff2");
+            /* Modern Browsers */
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Frutiger Black';
+            src: url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerCE75black.eot");
+            /* IE9 Compat Modes */
+            src: url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerCE75black.eot?#iefix") format("embedded-opentype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerCE75black.otf") format("opentype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerCE75black.svg") format("svg"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerCE75black.ttf") format("truetype"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerCE75black.woff") format("woff"), url("https://az-cdn.selise.biz/selisecdn/cdn/slnetwork/fonts/fccz/frutiger/frutigerCE75black.woff2") format("woff2");
+            /* Modern Browsers */
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: "Frutiger Light", sans-serif;
+            font-weight: 400;
+            color: #333333;
+        }
+
+        h1 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 3.6rem;
+            letter-spacing: 0.025rem;
+            line-height: 3rem;
+        }
+
+        h2 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 2.4rem;
+            letter-spacing: 0.025rem;
+        }
+
+        h3 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 2rem;
+            letter-spacing: 0;
+        }
+
+        .header-1 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 2.8rem;
+            line-height: 4.8rem;
+            letter-spacing: 0.025rem;
+        }
+
+        .header-3 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 2rem;
+            line-height: 2.8rem;
+            letter-spacing: 0;
+        }
+
+        .subtitle-1 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.025rem;
+        }
+
+        .subtitle-2 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.01rem;
+            line-height: 2rem;
+        }
+
+        .subtitle-3 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.01rem;
+        }
+
+        .body-1 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .body-2 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.01rem;
+        }
+
+        .caption-1 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.04rem;
+            line-height: 1.6rem;
+        }
+
+        .caption-2 {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.04rem;
+            line-height: 1.6rem;
+        }
+
+        .row {
+            max-width: 1070px;
+            margin: 0 auto;
+        }
+
+        .row:not(:last-child) {
+            margin-bottom: 30px;
+        }
+
+        .row::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .row .col-3 {
+            width: calc((100% - 2 * 20px) / 3);
+            float: left;
+        }
+
+        .row .col-3:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        .investment {
+            width: 100%;
+            height: 100%;
+            max-width: 1290px;
+            margin: auto;
+            padding: 80px;
+        }
+
+        .investment__header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 80px;
+            padding: 16px;
+            background: #971214;
+        }
+
+        .investment__header__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+        }
+
+        .investment__header__title {
+            padding-left: 10px;
+            color: #ffffff;
+        }
+
+        .investment__header__margin {
+            margin-top: 80px;
+        }
+
+        .investment__header__margin__bottom {
+            margin-bottom: 40px;
+        }
+
+        .investment__user {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .investment__user .caption-2 {
+            color: #808080;
+            text-transform: uppercase;
+        }
+
+        .investment__user__item:last-child {
+            padding-right: 36px;
+        }
+
+        .investment__overview {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: 412px;
+            margin-top: 20px;
+        }
+
+        .investment__overview__card {
+            border: 1px solid #cccccc;
+            height: 100%;
+            width: 36%;
+            margin-right: 20px;
+            padding: 20px;
+        }
+
+        .investment__overview__card__item--1 {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            background: #fbfbfb;
+            border: 1px solid #e5e5e5;
+        }
+
+        .investment__overview__card__item--1 .caption-2 {
+            text-transform: uppercase;
+            color: #666666;
+        }
+
+        .investment__overview__card__item--1 .header-3 {
+            color: #15847b;
+        }
+
+        .investment__overview__card__item--2 {
+            margin-top: 20px;
+            border: 1px solid #e5e5e5;
+            padding: 25px 15px;
+        }
+
+        .investment__overview__card__item--2 > * {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .investment__overview__card__item--2 > * .body-2 {
+            font-weight: 300;
+            color: #666666;
+        }
+
+        .investment__overview__card__item--2 > *:first-child .subtitle-2 {
+            color: #15847b;
+        }
+
+        .investment__overview__card__item--2 > *:not(:first-child) {
+            padding-top: 25px;
+        }
+
+        .investment__overview__card__item__logo {
+            margin-right: 12px;
+            width: 48px;
+            height: 48px;
+        }
+
+        .investment__overview__chart {
+            height: 100%;
+            width: 64%;
+            border: 1px solid #cccccc;
+        }
+
+        .investment__chart {
+            margin-top: 20px;
+            height: 100%;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .investment__chart__header {
+            background-color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .investment__chart__list {
+            width: 100%;
+        }
+
+        .investment__chart__card {
+            min-height: 395px;
+            min-width: 340px;
+            border: 1px solid #cccccc;
+        }
+
+        .investment__chart__card__header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 18px 25px;
+            background: #fbfbfb;
+            color: #666666;
+        }
+
+        .investment__chart__card__header__logo {
+            width: 24px;
+            height: 24px;
+        }
+
+        .investment__chart__card__header__logo img, .investment__chart__card__header__logo svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .investment__chart__card__header p {
+            padding-left: 12px;
+        }
+
+        .investment__chart__card__body {
+            padding-top: 20px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .investment__list {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .investment__list__item__sub-item__table {
+            width: 100%;
+        }
+
+        .investment__list__item__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 15px;
+            box-shadow: 0px 1px 0px #e5e5e5;
+        }
+
+        .investment__list__item__header__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            border: 1px solid #e5e5e5;
+        }
+
+        .investment__list__item__header__logo img, .investment__list__item__header__logo svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .investment__list__item__header__title {
+            flex: 0 0 30%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .investment__list__item__header__title h1 {
+            padding-left: 20px;
+        }
+
+        .investment__list__item__header__label .caption-2 {
+            color: #808080;
+            text-transform: uppercase;
+        }
+
+        .investment__list__item__header__label__progress {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .investment__list__item__header__label__progress .caption-1 {
+            padding-right: 5px;
+        }
+
+        .investment__list__item__header__label:last-child {
+            flex: 0 0 12%;
+        }
+
+        .investment__list__item__sub-item__header {
+            padding: 14px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f5f5f5;
+            margin-top: 2px;
+        }
+
+        .investment__list__item__sub-item__header__title {
+            flex: 0 0 40%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .investment__list__item__sub-item__header__title__text {
+            padding-left: 25px;
+        }
+
+        .investment__list__item__sub-item__header__title__image {
+            background-color: #ffffff;
+            border: 0.5px solid rgba(0, 0, 0, 0.1);
+            height: 48px;
+            min-width: 72px;
+            width: 72px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .investment__list__item__sub-item__header__title__image img {
+            height: 48px;
+            min-width: 72px;
+            width: 72px;
+            object-fit: cover;
+        }
+
+        .investment__list__item__sub-item__header__label .caption-2 {
+            color: #808080;
+            text-transform: uppercase;
+        }
+
+        .investment__footer {
+            background-color: #f5f5f5;
+            padding: 24px 20px;
+        }
+
+        .investment__footer .caption-2 {
+            color: #666666;
+            font-weight: 400;
+        }
+
+        .investment__footer .caption-2:first-child {
+            color: #971214;
+            text-transform: uppercase;
+        }
+
+        .investment__footer__contact {
+            padding: 12px 0 20px 0;
+        }
+
+        .investment__footer__contact > *:not(:first-child) {
+            padding-top: 4px;
+        }
+
+        .investment__footer__text {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+            color: #666666;
+        }
+
+        .section-header {
+            padding: 24px 0;
+            box-shadow: 0px -2px 0px #CCCCCC, 0px 2px 0px #CCCCCC;
+        }
+
+        .investment-table {
+            border-collapse: collapse;
+            font-family: "Frutiger Light", sans-serif;
+            table-layout: fixed;
+            font-size: 1.2rem;
+            width: 100%;
+        }
+
+        .investment-table-fund {
+            width: 60%;
+        }
+
+        .investment-table thead {
+            background-color: #fbfbfb;
+        }
+
+        .investment-table thead tr {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.04rem;
+            line-height: 1.6rem;
+            text-transform: uppercase;
+            color: #808080;
+            text-align: left;
+        }
+
+        .investment-table thead tr th {
+            padding: 10px 15px;
+        }
+
+        .investment-table tbody tr {
+            font-family: "Frutiger Light", sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.01rem;
+            line-height: 2rem;
+            font-weight: 300;
+        }
+
+        .investment-table tbody tr td {
+            padding: 18px 15px;
+        }
+
+        .investment-table tbody tr:nth-of-type(even) {
+            background-color: #fbfbfb;
+        }
+
+        .investment-table td, .investment-table th {
+            box-shadow: 0px 1px 0px #E5E5E5, 0px -1px 0px #E5E5E5;
+        }
+
+        .progress-bar__container {
+            width: 80%;
+            height: 10px;
+            border-radius: 100px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+            will-change: transform;
+            background: #f5f5f5;
+        }
+
+        .progress-bar {
+            position: absolute;
+            height: 100%;
+            width: 70%;
+            background-color: #91c045;
+            top: 0;
+            bottom: 0;
+            border-radius: inherit;
+            display: block;
+        }
+
+    </style>
+    <title>Zpráva o investicích FiLiP</title>
+</head>
+<body class="investment">
+{% assign OVERVIEW = MetaData.Overview[0] %}
+{% assign USER = MetaData.User[0] %}
+{% assign ADVISOR = MetaData.Advisor[0] %}
+<header class="investment__header">
+    <div class="investment__header__logo">
+        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+    </div>
+    <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+</header>
+
+<section class="investment__user section-header">
+    <div class="investment__user__item">
+        <p class="caption-2">Čas schůzky</p>
+        <p class="subtitle-2">Date: <span id="setDateTime"></span></p>
+    </div>
+    <div class="investment__user__item">
+        <p class="caption-2">jméno klienta</p>
+        <p class="subtitle-2">{{USER.Name}}</p>
+    </div>
+    <div class="investment__user__item">
+        <p class="caption-2">Telefonní číslo</p>
+        <p class="subtitle-2">{{USER.PhoneNumber}}</p>
+    </div>
+    <div class="investment__user__item">
+        <p class="caption-2">Emailová adresa</p>
+        <p class="subtitle-2">{{USER.Email}}</p>
+    </div>
+</section>
+
+<section class="investment__overview">
+    <div class="investment__overview__card">
+        <div class="investment__overview__card__item--1">
+            <div class="investment__overview__card__item__logo">
+                <svg viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M39.0909 32.7273H0.909091C0.407273 32.7273 0 33.1341 0 33.6364V34.5455C0 35.0473 0.407273 35.4546 0.909091 35.4546H39.0909C39.5927 35.4546 40 35.0473 40 34.5455V33.6364C40 33.1341 39.5927 32.7273 39.0909 32.7273Z"
+                          fill="#808080"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M15.9091 29.5455H16.8182C17.32 29.5455 17.7273 29.1382 17.7273 28.6364V13.1818C17.7273 12.6795 17.32 12.2727 16.8182 12.2727H15.9091C15.4073 12.2727 15 12.6795 15 13.1818V28.6364C15 29.1382 15.4073 29.5455 15.9091 29.5455Z"
+                          fill="#808080"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M8.63663 29.5455H9.54572C10.0475 29.5455 10.4548 29.1383 10.4548 28.6364V20.4546C10.4548 19.9524 10.0475 19.5455 9.54572 19.5455H8.63663C8.13481 19.5455 7.72754 19.9524 7.72754 20.4546V28.6364C7.72754 29.1383 8.13481 29.5455 8.63663 29.5455Z"
+                          fill="#808080"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.182 29.5454H24.0911C24.5934 29.5454 25.0002 29.1381 25.0002 28.6363V7.72721C25.0002 7.22493 24.5934 6.81812 24.0911 6.81812H23.182C22.6802 6.81812 22.2729 7.22493 22.2729 7.72721V28.6363C22.2729 29.1381 22.6802 29.5454 23.182 29.5454Z"
+                          fill="#808080"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M30.4545 29.5455H31.3636C31.8654 29.5455 32.2727 29.1382 32.2727 28.6364V0.909091C32.2727 0.406818 31.8654 0 31.3636 0H30.4545C29.9527 0 29.5454 0.406818 29.5454 0.909091V28.6364C29.5454 29.1382 29.9527 29.5455 30.4545 29.5455Z"
+                          fill="#808080"/>
+                </svg>
+            </div>
+            <div>
+                <p class="caption-2">Zůstatek</p>
+                <h3 class="header-3">{{MetaData.Overview[0].Balance}} CZK</h3>
+            </div>
+        </div>
+        <div class="investment__overview__card__item--2">
+            <div>
+                <p class="body-2">Zisk</p>
+                <p class="subtitle-2"
+                   {% if OVERVIEW.Profit < 0 %}
+                style="color: #971214;"
+                {% else %}
+                style="color: #15847b;"
+                {% endif %}
+                >{{MetaData.Overview[0].Profit}} CZK</p>
+            </div>
+            <div>
+                <p class="body-2">Celkový nákup</p>
+                <p class="subtitle-2">{{MetaData.Overview[0].TotalBuy}} CZK</p>
+            </div>
+            <div>
+                <p class="body-2">Celkový prodej</p>
+                <p class="subtitle-2">{{MetaData.Overview[0].TotalSell}} CZK</p>
+            </div>
+        </div>
+    </div>
+    <div class="investment__overview__chart">
+        <canvas id="investmentLineChart" class="line-chart" height="150"></canvas>
+    </div>
+</section>
+
+<section class="investment__chart">
+    <div class="investment__chart__header section-header">
+        <h3 class="header-3">Složení investičního portfolia</h3>
+    </div>
+    <div class="investment__chart__list">
+        <div class="row">
+            <div class="investment__chart__card col-3">
+                <div class="investment__chart__card__header">
+                    <div class="investment__chart__card__header__logo">
+                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z"
+                                  fill="#808080"/>
+                        </svg>
+                    </div>
+                    <p class="caption-1">Partneři</p>
+                </div>
+                <div class="investment__chart__card__body">
+                    <canvas id="partnerPieChart" class="pie-chart" height="230"></canvas>
+                </div>
+            </div>
+            <div class="investment__chart__card col-3">
+                <div class="investment__chart__card__header">
+                    <div class="investment__chart__card__header__logo">
+                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z"
+                                  fill="#808080"/>
+                        </svg>
+                    </div>
+                    <p class="caption-1">Aktiva</p>
+                </div>
+                <div class="investment__chart__card__body">
+                    <canvas id="assetPieChart" class="pie-chart" height="230"></canvas>
+                </div>
+            </div>
+            <div class="investment__chart__card col-3">
+                <div class="investment__chart__card__header">
+                    <div class="investment__chart__card__header__logo">
+                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z"
+                                  fill="#808080"/>
+                        </svg>
+                    </div>
+                    <p class="caption-1">Fondy</p>
+                </div>
+                <div class="investment__chart__card__body">
+                    <canvas id="fundPieChart" class="pie-chart" height="230"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="investment__chart__card col-3">
+                <div class="investment__chart__card__header">
+                    <div class="investment__chart__card__header__logo">
+                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z"
+                                  fill="#808080"/>
+                        </svg>
+                    </div>
+                    <p class="caption-1">Kraj</p>
+                </div>
+                <div class="investment__chart__card__body">
+                    <canvas id="regionPieChart" class="pie-chart" height="230"></canvas>
+                </div>
+            </div>
+            <div class="investment__chart__card col-3">
+                <div class="investment__chart__card__header">
+                    <div class="investment__chart__card__header__logo">
+                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M17.361 16.6804L11.0518 10.3711H20.0002C20.0002 12.8247 18.9899 15.0721 17.361 16.6804ZM14.0415 11.6082L17.2992 14.8659C18.0002 13.8969 18.4744 12.7835 18.66 11.6082H14.0415Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M0 10.3712C0 5.464 3.97938 1.48462 8.8866 1.48462V10.3094L15.1959 16.6186C13.5876 18.2475 11.3402 19.2578 8.8866 19.2578C3.97938 19.2578 0 15.2784 0 10.3712ZM8.90723 18.0206C10.5361 18.0206 12.1031 17.5052 13.4021 16.5567L8.02063 11.1959L7.6495 10.8248V10.3093V2.82477C4.02063 3.42271 1.23712 6.57735 1.25774 10.3712C1.25774 14.598 4.70104 18.0206 8.90723 18.0206Z"
+                                  fill="#808080"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z"
+                                  fill="#808080"/>
+                        </svg>
+                    </div>
+                    <p class="caption-1">Sektor</p>
+                </div>
+                <div class="investment__chart__card__body">
+                    <canvas id="sectorPieChart" class="pie-chart" height="230"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div style="page-break-after: always;"></div>
+
+{% assign currentPageNo = 2 %}
+{% assign currentPageHeight = 1348 %}
+{% assign linkedInvestments = MetaData.LinkedInvestments %}
+
+<header class="investment__header investment__header__margin">
+    <div class="investment__header__logo">
+        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+    </div>
+    <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+</header>
+
+<!--Goal Linked Start-->
+<section class="investment__list">
+    <div class="investment__list__header section-header">
+        <h3 class="header-3">Investice spojené s cíli</h3>
+    </div>
+    {% for linkedInvestment in linkedInvestments %}
+    {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
+    {% if currentPageHeight <= 0 %}
+    {% assign currentPageNo = currentPageNo | Plus: 1 %}
+    {% assign currentPageHeight = 1424 %}
+    <div style="page-break-after: always;"></div>
+
+    <header class="investment__header investment__header__margin investment__header__margin__bottom">
+        <div class="investment__header__logo">
+            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png"
+                 alt="FiLip">
+        </div>
+        <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+    </header>
+    {% endif %}
+    <div class="investment__list__item">
+        <div class="investment__list__item__header">
+            <div class="investment__list__item__header__title">
+                <div class="investment__list__item__header__logo">
+                    <img src="{{linkedInvestment.GoalIconUrl}}">
+                </div>
+                <h1 class="subtitle-2">{{linkedInvestment.Title}}</h1>
+            </div>
+            <div class="investment__list__item__header__label">
+                <p class="caption-2">Celková hodnota</p>
+                <p class="caption-1">{{linkedInvestment.GoalValue}} CZK</p>
+            </div>
+            <div class="investment__list__item__header__label">
+                <p class="caption-2">Současná cena</p>
+                <p class="caption-1">{{linkedInvestment.AccumulatedValue}} CZK</p>
+            </div>
+            <div class="investment__list__item__header__label">
+                <p class="caption-2">Cílové datum</p>
+                <p class="caption-1">{{linkedInvestment.Year}}</p>
+            </div>
+            <div class="investment__list__item__header__label">
+                <p class="caption-2">Cíl dosažen</p>
+                <div class="investment__list__item__header__label__progress">
+                    <p class="caption-1">{{linkedInvestment.GoalAchieved}}%</p>
+                    <div class="progress-bar__container">
+                           <span class="progress-bar"
+                                 style="width: {{linkedInvestment.GoalAchieved}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
+                           ></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for snInvestment in linkedInvestment.SnInvestments %}
+        {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
+        {% if currentPageHeight <= 0 %}
+        {% assign currentPageNo = currentPageNo | Plus: 1 %}
+        {% assign currentPageHeight = 1424 %}
+        <div style="page-break-after: always;"></div>
+
+        <header class="investment__header investment__header__margin investment__header__margin__bottom">
+            <div class="investment__header__logo">
+                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png"
+                     alt="FiLip">
+            </div>
+            <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+        </header>
+        {% endif %}
+        <div class="investment__list__item__sub-item">
+            <div class="investment__list__item__sub-item__header">
+                <div class="investment__list__item__sub-item__header__title">
+                    <div class="investment__list__item__sub-item__header__title__image">
+                        <img src="{{snInvestment.PartnerImageUrl}}" alt="{{snInvestment.Title}}">
+                    </div>
+                    <div class="investment__list__item__sub-item__header__title__text">
+                        <p class="subtitle-2">{{snInvestment.Title}}</p>
+                        <p class="caption-1">ID: {{snInvestment.ContractNo}}</p>
+                    </div>
+                </div>
+                <div class="investment__list__item__sub-item__header__label">
+                    <p class="caption-2">Zůstatek</p>
+                    <p class="caption-1">{{snInvestment.Balance}} CZK</p>
+                </div>
+                <div class="investment__list__item__sub-item__header__label">
+                    <p class="caption-2">Celkový nákup</p>
+                    <p class="caption-1">{{snInvestment.TotalBuy}} CZK</p>
+                </div>
+                <div class="investment__list__item__sub-item__header__label">
+                    <p class="caption-2">Celkový prodej</p>
+                    <p class="caption-1">{{snInvestment.TotalSell}} CZK</p>
+                </div>
+                <div class="investment__list__item__sub-item__header__label">
+                    <p class="caption-2">Fondy</p>
+                    {% if snInvestment.Funds.size > 9 %}
+                    <p class="caption-1">{{snInvestment.Funds.size}}</p>
+                    {% else %}
+                    <p class="caption-1">0{{snInvestment.Funds.size}}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% assign currentPageHeight = currentPageHeight | Minus: 36 %}
+            {% if currentPageHeight <= 0 %}
+            {% assign currentPageNo = currentPageNo | Plus: 1 %}
+            {% assign currentPageHeight = 1424 %}
+            <div style="page-break-after: always;"></div>
+
+            <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                <div class="investment__header__logo">
+                    <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png"
+                         alt="FiLip">
+                </div>
+                <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+            </header>
+            {% endif %}
+            <table class="investment__list__item__sub-item__table investment-table">
+                <col span="1" class="investment-table-fund">
+                <thead>
+                <tr>
+                    <th>Fund Name</th>
+                    <th>Isin</th>
+                    <th>Share</th>
+                    <th>Balance</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for assetFund in snInvestment.Funds %}
+                {% assign currentPageHeight = currentPageHeight | Minus: 56 %}
+                {% if currentPageHeight <= 0 %}
+                {% assign currentPageNo = currentPageNo | Plus: 1 %}
+                {% assign currentPageHeight = 1424 %}
+                <div style="page-break-after: always;"></div>
+
+                <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                    <div class="investment__header__logo">
+                        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png"
+                             alt="FiLip">
+                    </div>
+                    <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+                </header>
+                {% endif %}
+                <tr>
+                    <td>{{assetFund.FundName}}</td>
+                    <td>{{assetFund.IsIn}}</td>
+                    <td>{{assetFund.FundShare}}%</td>
+                    <td>{{assetFund.FundBalance}} CZK</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</section>
+<!--Goal Linked End-->
+
+
+{% assign currentPageNo = currentPageNo | Plus: 1 %}
+{% assign currentPageHeight = 1348 %}
+<div style="page-break-after: always;"></div>
+
+<header class="investment__header investment__header__margin">
+    <div class="investment__header__logo">
+        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+    </div>
+    <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+</header>
+
+
+<!--Goal Unlinked Start-->
+<section class="investment__list">
+    <div class="investment__list__header section-header">
+        <h3 class="header-3">Investice bez odkazů</h3>
+    </div>
+    {% for unLinkedInvestment in MetaData.UnLinkedInvestments %}
+    {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
+    {% if currentPageHeight <= 0 %}
+    {% assign currentPageNo = currentPageNo | Plus: 1 %}
+    {% assign currentPageHeight = 1424 %}
+    <div style="page-break-after: always;"></div>
+
+    <header class="investment__header investment__header__margin investment__header__margin__bottom">
+        <div class="investment__header__logo">
+            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png"
+                 alt="FiLip">
+        </div>
+        <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+    </header>
+    {% endif %}
+    <div class="investment__list__item__sub-item">
+        <div class="investment__list__item__sub-item__header">
+            <div class="investment__list__item__sub-item__header__title">
+                <div class="investment__list__item__sub-item__header__title__image">
+                    <img src="{{unLinkedInvestment.PartnerImageUrl}}" alt="{{unLinkedInvestment.Title}}">
+                </div>
+                <div class="investment__list__item__sub-item__header__title__text">
+                    <p class="subtitle-2">{{unLinkedInvestment.Title}}</p>
+                    <p class="caption-1">ID: {{unLinkedInvestment.ContractNo}}</p>
+                </div>
+            </div>
+            <div class="investment__list__item__sub-item__header__label">
+                <p class="caption-2">Zůstatek</p>
+                <p class="caption-1">{{unLinkedInvestment.Balance}} CZK</p>
+            </div>
+            <div class="investment__list__item__sub-item__header__label">
+                <p class="caption-2">Celkový nákup</p>
+                <p class="caption-1">{{unLinkedInvestment.TotalBuy}} CZK</p>
+            </div>
+            <div class="investment__list__item__sub-item__header__label">
+                <p class="caption-2">Celkový prodej</p>
+                <p class="caption-1">{{unLinkedInvestment.TotalSell}} CZK</p>
+            </div>
+            <div class="investment__list__item__sub-item__header__label">
+                <p class="caption-2">Fondy</p>
+                {% if unLinkedInvestment.Funds.size > 9 %}
+                <p class="caption-1">{{unLinkedInvestment.Funds.size}}</p>
+                {% else %}
+                <p class="caption-1">0{{unLinkedInvestment.Funds.size}}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% assign currentPageHeight = currentPageHeight | Minus: 36 %}
+        {% if currentPageHeight <= 0 %}
+        {% assign currentPageNo = currentPageNo | Plus: 1 %}
+        {% assign currentPageHeight = 1424 %}
+        <div style="page-break-after: always;"></div>
+
+        <header class="investment__header investment__header__margin investment__header__margin__bottom">
+            <div class="investment__header__logo">
+                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png"
+                     alt="FiLip">
+            </div>
+            <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+        </header>
+        {% endif %}
+        <table class="investment__list__item__sub-item__table investment-table">
+            <col span="1" class="investment-table-fund">
+            <thead>
+            <tr>
+                <th>Název fondu</th>
+                <th>Isin</th>
+                <th>Podíl</th>
+                <th>Zůstatek</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for assetFund in unLinkedInvestment.Funds %}
+            {% assign currentPageHeight = currentPageHeight | Minus: 56 %}
+            {% if currentPageHeight <= 0 %}
+            {% assign currentPageNo = currentPageNo | Plus: 1 %}
+            {% assign currentPageHeight = 1424 %}
+            <div style="page-break-after: always;"></div>
+
+            <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                <div class="investment__header__logo">
+                    <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png"
+                         alt="FiLip">
+                </div>
+                <h1 class="investment__header__title header-1">Zpráva o investicích FiLiP</h1>
+            </header>
+            {% endif %}
+            <tr>
+                <td>{{assetFund.FundName}}</td>
+                <td>{{assetFund.IsIn}}</td>
+                <td>{{assetFund.FundShare}}%</td>
+                <td>{{assetFund.FundBalance}} CZK</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</section>
+<!--Goal Unlinked End-->
+
+{% assign currentPageHeight = currentPageHeight | Minus: 240 %}
+{% if currentPageHeight <= 0 %}
+{% assign currentPageNo = currentPageNo | Plus: 1 %}
+{% assign currentPageHeight = 1424 %}
+<div style="page-break-after: always;"></div>
+
+<footer class="investment__footer" style="margin-top: 80px;">
+    <p class="caption-2">Kontakt na poradce</p>
+    <div class="investment__footer__contact">
+        <p class="subtitle-2">{{ADVISOR.Name}}</p>
+        <p class="caption-2">{{ADVISOR.Designation}}</p>
+        <p class="caption-2">{{ADVISOR.Email}}</p>
+        <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+    </div>
+    <p class="investment__footer__text">Sekce „Investice“ v aplikaci Filip by měla obsahovat klientem vybrané investiční
+        nástroje a případné konkrétní investiční nástroje či produkty (např. investiční fondy, dluhopisy apod.) a další
+        údaje a informace s nimi spojené mají pouze informativní charakter. Při poskytování investičního poradenství
+        a/nebo sjednání konkrétního investičního příkazu klientovi Swiss Life Select Slovakia, a.s. s., nebo její
+        společníci, jsou povinni postupovat podle zvláštních vnitřních předpisů a postupů, v souladu se Swiss Life
+        Select Slovakia, a.s. s., dále upozorňuje, že vlivem tržního rizika může dojít ke zvýšení či snížení hodnoty
+        investic do investičních nástrojů a není zaručena návratnost investované částky. Minulá výkonnost není zárukou
+        budoucí výkonnosti.</p>
+</footer>
+{% else %}
+<footer class="investment__footer">
+    <p class="caption-2">Kontakt na poradce</p>
+    <div class="investment__footer__contact">
+        <p class="subtitle-2">{{ADVISOR.Name}}</p>
+        <p class="caption-2">{{ADVISOR.Designation}}</p>
+        <p class="caption-2">{{ADVISOR.Email}}</p>
+        <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+    </div>
+    <p class="investment__footer__text">Sekce „Investice“ v aplikaci Filip by měla obsahovat klientem vybrané investiční
+        nástroje a případné konkrétní investiční nástroje či produkty (např. investiční fondy, dluhopisy apod.) a další
+        údaje a informace s nimi spojené mají pouze informativní charakter. Při poskytování investičního poradenství
+        a/nebo sjednání konkrétního investičního příkazu klientovi Swiss Life Select Slovakia, a.s. s., nebo její
+        společníci, jsou povinni postupovat podle zvláštních vnitřních předpisů a postupů, v souladu se Swiss Life
+        Select Slovakia, a.s. s., dále upozorňuje, že vlivem tržního rizika může dojít ke zvýšení či snížení hodnoty
+        investic do investičních nástrojů a není zaručena návratnost investované částky. Minulá výkonnost není zárukou
+        budoucí výkonnosti.</p>
+</footer>
+{% endif %}
+</body>
+<script>
+    {% assign compositionChartDataPartner = MetaData.PortfolioCompositionChart[0].Partner %}
+    {% assign compositionChartDataAsset = MetaData.PortfolioCompositionChart[0].Asset %}
+    {% assign compositionChartDataFund = MetaData.PortfolioCompositionChart[0].Fund %}
+    {% assign compositionChartDataRegion = MetaData.PortfolioCompositionChart[0].Region %}
+    {% assign compositionChartDataSector = MetaData.PortfolioCompositionChart[0].Sector %}
+
+    var partnerChartDataSets = {
+        labels: [
+            {% for datum in compositionChartDataPartner.Labels %}
+    '{{datum}}'
+    {% unless forloop.last %} , {% endunless %}
+    {% endfor %}
+    ],
+    datasets: [{
+        label: 'Partners',
+        data: [
+            {% for datum in compositionChartDataPartner.Data %}
+        '{{datum}}'
+        {% unless forloop.last %}, {% endunless %}
+    {% endfor %}
+    ],
+    backgroundColor: [
+        {% for datum in compositionChartDataPartner.Colors %}
+    '{{datum}}'
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    hoverOffset: 4
+    }]
+    }
+    ;
+
+    var assetChartDataSets = {
+        labels: [
+            {% for datum in compositionChartDataAsset.Labels %}
+    '{{datum}}'
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    datasets: [{
+        label: 'Partners',
+        data: [
+            {% for datum in compositionChartDataAsset.Data %}
+        '{{datum}}'
+        {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    backgroundColor: [
+        {% for datum in compositionChartDataAsset.Colors %}
+    '{{datum}}'
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    hoverOffset: 4
+    }]
+    }
+    ;
+
+    var sectorChartDataSets = {
+        labels: [
+            {% for datum in compositionChartDataSector.Labels %}
+    '{{datum}}'
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    datasets: [{
+        label: 'Partners',
+        data: [
+            {% for datum in compositionChartDataSector.Data %}
+        '{{datum}}'
+        {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    backgroundColor: [
+        {% for datum in compositionChartDataSector.Colors %}
+    '{{datum}}'
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    hoverOffset: 4
+    }]
+    }
+    ;
+
+    var regionChartDataSets = {
+        labels: [
+            {% for datum in compositionChartDataRegion.Labels %}
+    '{{datum}}'
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    datasets: [{
+        label: 'Partners',
+        data: [
+            {% for datum in compositionChartDataRegion.Data %}
+        '{{datum}}'
+        {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    backgroundColor: [
+        {% for datum in compositionChartDataRegion.Colors %}
+    '{{datum}}'
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    hoverOffset: 4
+    }]
+    }
+    ;
+
+    var fundChartDataSets = {
+        labels: [
+            {% for datum in compositionChartDataFund.Labels %}
+    '{{datum}}'
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    datasets: [{
+        label: 'Partners',
+        data: [
+            {% for datum in compositionChartDataFund.Data %}
+        '{{datum}}'
+        {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    backgroundColor: [
+        {% for datum in compositionChartDataFund.Colors %}
+    '{{datum}}'
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ],
+    hoverOffset: 4
+    }]
+    }
+    ;
+
+    console.log(partnerChartDataSets);
+    console.log(assetChartDataSets);
+    console.log(sectorChartDataSets);
+    console.log(regionChartDataSets);
+    console.log(fundChartDataSets);
+
+    const legendOpts = {
+        legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+                fontFamily: '"FrutigerCE", sans-serif',
+                usePointStyle: true,
+                boxWidth: 50
+            }
+        }
+    };
+    const partnerPieChartConfig = {
+        type: 'doughnut',
+        data: {
+            labels: partnerChartDataSets.labels,
+            datasets: partnerChartDataSets.datasets
+        },
+        options: legendOpts
+    };
+
+    const assetPieChartConfig = {
+        type: 'doughnut',
+        data: {
+            labels: assetChartDataSets.labels,
+            datasets: assetChartDataSets.datasets
+        },
+        options: legendOpts
+    };
+
+    const fundPieChartConfig = {
+        type: 'doughnut',
+        data: {
+            labels: fundChartDataSets.labels,
+            datasets: fundChartDataSets.datasets
+        },
+        options: legendOpts
+    };
+
+    const regionPieChartConfig = {
+        type: 'doughnut',
+        data: {
+            labels: regionChartDataSets.labels,
+            datasets: regionChartDataSets.datasets
+        },
+        options: legendOpts
+    };
+
+    const sectorPieChartConfig = {
+        type: 'doughnut',
+        data: {
+            labels: sectorChartDataSets.labels,
+            datasets: sectorChartDataSets.datasets
+        },
+        options: legendOpts
+    };
+
+    const partnerPieChartCanvas = document.querySelector('#partnerPieChart');
+    const assetPieChartCanvas = document.querySelector('#assetPieChart');
+    const fundPieChartCanvas = document.querySelector('#fundPieChart');
+    const regionPieChartCanvas = document.querySelector('#regionPieChart');
+    const sectorPieChartCanvas = document.querySelector('#sectorPieChart');
+
+    const partnerPieChart = new Chart(partnerPieChartCanvas, partnerPieChartConfig);
+    const assetPieChart = new Chart(assetPieChartCanvas, assetPieChartConfig);
+    const fundPieChart = new Chart(fundPieChartCanvas, fundPieChartConfig);
+    const regionPieChart = new Chart(regionPieChartCanvas, regionPieChartConfig);
+    const sectorPieChart = new Chart(sectorPieChartCanvas, sectorPieChartConfig);
+
+    {% assign portfolioPerformanceChartDataBalance = MetaData.PortfolioPerformanceChart[0].Data %}
+    {% assign portfolioPerformanceChartDataBuySell = MetaData.PortfolioPerformanceChart[1].Data %}
+
+    var investmentLineChartDataBalance = [
+        {% for datum in portfolioPerformanceChartDataBalance %}
+    {
+        x: '{{datum.X}}',
+            y: '{{datum.Y}}'
+    }
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ]
+    ;
+    var investmentLineChartDataBuySell = [
+        {% for datum in portfolioPerformanceChartDataBuySell %}
+    {
+        x: '{{datum.X}}',
+            y:'{{datum.Y}}'
+    }
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ]
+    ;
+
+    var lineChartRangeMap = {
+        '3m': 3,
+        '1y': 4,
+        '3y': 6,
+        '5y': 10,
+        'all': 25
+    };
+    var lineChartRangeMapKey = '{{MetaData.Overview[0].Date}}';
+    var lineChartRange = lineChartRangeMap[lineChartRangeMapKey];
+    const finalDateTickRange = moment(investmentLineChartDataBalance[0].x).toISOString();
+
+    function currencyFormatter(value) {
+        const formattedValue = value.toString();
+        const splittedValue = formattedValue.split('.');
+        const solidPart = splittedValue[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        const decimalPart = splittedValue[1] ? `,${splittedValue[1].slice(0, 2)}` : ``;
+        return `${solidPart}${decimalPart}`;
+    }
+
+    const investmentLineChartConfig = {
+        type: 'line',
+        data: {
+            labels: ['Zůstatek', 'Celkový nákup – celkový prodej'],
+            datasets: [
+                {
+                    data: investmentLineChartDataBalance,
+                    "label": "Zůstatek",
+                    "fill": true,
+                    "lineTension": 0,
+                    "borderWidth": 2.5,
+                    "pointBorderWidth": 0.1,
+                    "pointRadius": 1,
+                    "pointHoverRadius": 8,
+                    "pointHoverBorderColor": "#FFFFFF",
+                    "pointHoverBorderWidth": 4,
+                    "hidden": false,
+
+                    "borderColor": "#15847B",
+                    "backgroundColor": "rgba(21, 132, 123, 0.1)",
+                    "borderWidth": 2,
+                    "pointBackgroundColor": "#15847B"
+
+                },
+                {
+                    "data": investmentLineChartDataBuySell,
+                    "label": "Celkový nákup - celkový prodej",
+                    "fill": true,
+                    "lineTension": 0,
+                    "borderWidth": 2.5,
+                    "pointBorderWidth": 0.1,
+                    "pointRadius": 1,
+                    "pointHoverRadius": 8,
+                    "pointHoverBorderColor": "#FFFFFF",
+                    "pointHoverBorderWidth": 4,
+                    "hidden": true,
+                    "steppedLine": true,
+                    "borderColor": "#b4b4b4",
+                    "backgroundColor": "rgba(180, 180, 180, 0.1)",
+                    "borderWidth": 2,
+                    "pointBackgroundColor": "#b4b4b4"
+                }
+            ]
+        },
+        options:
+            {
+                "responsive": true,
+                "maintainAspectRatio": false,
+                "layout": {
+                    "padding": {
+                        "left": 0,
+                        "right": 0,
+                        "top": 0,
+                        "bottom": 0
+                    }
+                },
+                "legend": {
+                    "display": true,
+                    "position": "bottom",
+                    "align": "center",
+                    "labels": {
+                        "usePointStyle": true,
+                        "fontFamily": '"FrutigerCE", sans-serif'
+                    }
+                },
+                "scales": {
+                    "xAxes": [
+                        {
+                            "type": "time",
+                            "time": {
+                                "unit": "day",
+                                "displayFormats": {
+                                    "day": "MM.YYYY",
+                                    "month": "MMM YYYY"
+                                }
+                            },
+                            "display": true,
+                            "gridLines": {
+                                "display": true,
+                                "color": "#f0f0f0"
+                            },
+                            "ticks": {
+                                "fontFamily": '"FrutigerCE", sans-serif',
+                                "fontSize": 12,
+                                "fontColor": "#B4B4B4",
+                                "source": "auto",
+                                "autoSkip": false,
+                                callback: (value, index, values) => {
+                                    let length = values.length;
+                                    let tickCount = lineChartRange;
+                                    let gap = Math.round(length / (tickCount - 1));
+                                    if (
+                                        index % gap == 0 ||
+                                        index == 0 ||
+                                        (index == values.length - 1 && tickCount < 20)
+                                    ) {
+                                        return value;
+                                    }
+                                },
+                                min: finalDateTickRange,
+                                maxTicksLimit: 100000
+                            }
+                        }
+                    ],
+                    "yAxes": [
+                        {
+                            "display": true,
+                            "gridLines": {
+                                "display": true,
+                                "color": "#f0f0f0"
+                            },
+                            "ticks": {
+                                "fontFamily": '"FrutigerCE", sans-serif',
+                                "fontSize": 12,
+                                "fontColor": "#B4B4B4",
+                                callback: (value) => currencyFormatter(value)
+                            }
+                        }
+                    ]
+                },
+                "elements": {
+                    "point": {
+                        "radius": 0,
+                        "hoverRadius": 4,
+                        "hoverBorderWidth": 2,
+                        "hitRadius": 8
+                    },
+                    "line": {
+                        "tension": 0,
+                        "fill": "bottom",
+                        "borderWidth": 2
+                    }
+                }
+            },
+    };
+
+    const investmentLineChartCanvas = document.querySelector('#investmentLineChart');
+    const investmentLineChart = new Chart(investmentLineChartCanvas, investmentLineChartConfig);
+    const dateTimeSpan = document.querySelector('#setDateTime');
+    const dateNow = moment(new Date(Date.now())).format('D.M.YYYY');
+    dateTimeSpan.innerHTML = dateNow;
+</script>
+</html>

@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node-sass ./src/styles/index.scss ./src//index.css -w",
     "build": "node-sass ./src/styles/index.scss ./src/index.css",
-    "dist": "del -rf dist && mkdir -p dist && cp src/index.html dist/330afe5f-8b9c-40a5-8312-9c4ea752b503.html",
-    "dist:sk": "rm -rf dist && mkdir -p dist && cp src/index-sk.html dist/012b9f4c-4fcf-4b16-ba1a-3a21b8223a32.html",
+    "dist": "del -rf dist && mkdir -p dist && cp src/index.html src/FCSK/330afe5f-8b9c-40a5-8312-9c4ea752b503.html",
+    "dist:sk": "rm -rf dist && mkdir -p dist && cp src/index-sk.html src/FCSK/012b9f4c-4fcf-4b16-ba1a-3a21b8223a32.html",
     "build:prod": "webpack --config webpack.config.js --progress",
     "prettier:lint": "prettier --config ./.prettierrc --list-different \"src/**/*{.js,.scss}\"",
     "prettier:fix": "prettier --config ./.prettierrc --write \"src/**/*{.js,.scss}\""
