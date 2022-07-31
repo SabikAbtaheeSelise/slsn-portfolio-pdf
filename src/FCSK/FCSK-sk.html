@@ -682,24 +682,25 @@ h3 {
                     <h1 class="subtitle-2">{{linkedInvestment.Title}}</h1>
                 </div>
                 <div class="investment__list__item__header__label">
-                    <p class="caption-2">Total Value</p>
+                    <p class="caption-2">Hodnota cieľa</p>
                     <p class="caption-1">{{linkedInvestment.GoalValue}} EUR</p>
                 </div>
                 <div class="investment__list__item__header__label">
-                    <p class="caption-2">Current Value</p>
+                    <p class="caption-2">Súčasná hodnota</p>
                     <p class="caption-1">{{linkedInvestment.AccumulatedValue}} EUR</p>
                 </div>
                 <div class="investment__list__item__header__label">
-                    <p class="caption-2">Target Date</p>
+                    <p class="caption-2">Cieľový dátum</p>
                     <p class="caption-1">{{linkedInvestment.Year}}</p>
                 </div>
                 <div class="investment__list__item__header__label">
-                    <p class="caption-2">Goal Achieved</p>
+                    <p class="caption-2">Plnenie cieľa</p>
                     <div class="investment__list__item__header__label__progress">
                         <p class="caption-1">{{linkedInvestment.GoalAchieved}}%</p>
                         <div class="progress-bar__container">
+                            {% assign goalPercentage= linkedInvestment.GoalAchieved | Replace: ",","." | Plus: 0 %}
                            <span class="progress-bar" 
-                           style="width: {{linkedInvestment.GoalAchieved}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
+                           style="width: {{goalPercentage}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
                            ></span>
                         </div>
                     </div>
@@ -727,7 +728,7 @@ h3 {
                         </div>
                         <div class="investment__list__item__sub-item__header__title__text">
                             <p class="subtitle-2">{{snInvestment.Title}}</p>
-                            <p class="caption-1">Zmluva č: {{snInvestment.ContractNo}}</p>
+
                         </div>
                     </div>
                     <div class="investment__list__item__sub-item__header__label">
@@ -843,7 +844,7 @@ h3 {
                     </div>
                     <div class="investment__list__item__sub-item__header__title__text">
                         <p class="subtitle-2">{{unLinkedInvestment.Title}}</p>
-                        <p class="caption-1">Zmluva č: {{unLinkedInvestment.ContractNo}}</p>
+
                     </div>
                 </div>
                 <div class="investment__list__item__sub-item__header__label">

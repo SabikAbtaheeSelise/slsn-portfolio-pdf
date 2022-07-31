@@ -480,7 +480,7 @@ h3 {
   border-radius: inherit;
   display: block; }
     </style>
-    <title>Správa o investíciách FiLiP</title>
+    <title>FiLiP Investment Report</title>
 </head>
 <body class="investment">
     {% assign OVERVIEW = MetaData.Overview[0] %}
@@ -699,8 +699,9 @@ h3 {
                     <div class="investment__list__item__header__label__progress">
                         <p class="caption-1">{{linkedInvestment.GoalAchieved}}%</p>
                         <div class="progress-bar__container">
-                           <span class="progress-bar" 
-                           style="width: {{linkedInvestment.GoalAchieved}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
+                            {% assign goalPercentage= linkedInvestment.GoalAchieved | Replace: ",","." | Plus: 0 %}
+                            <span class="progress-bar" 
+                           style="width: {{goalPercentage}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
                            ></span>
                         </div>
                     </div>
@@ -728,7 +729,7 @@ h3 {
                         </div>
                         <div class="investment__list__item__sub-item__header__title__text">
                             <p class="subtitle-2">{{snInvestment.Title}}</p>
-                            <p class="caption-1">ID: {{snInvestment.ContractNo}}</p>
+
                         </div>
                     </div>
                     <div class="investment__list__item__sub-item__header__label">
@@ -770,7 +771,7 @@ h3 {
                     <thead>
                         <tr>
                             <th>Fund Name</th>
-                            <th>Isin</th>
+                            <th>IsIn</th>
                             <th>Share</th>
                             <th>Balance</th>
                         </tr>
@@ -820,7 +821,7 @@ h3 {
     <!--Goal Unlinked Start-->
     <section class="investment__list">
         <div class="investment__list__header section-header">
-            <h3 class="header-3">Goal Unlikned Investments</h3>
+            <h3 class="header-3">Goal Unlinked Investments</h3>
         </div>
         {% for unLinkedInvestment in MetaData.UnLinkedInvestments %}
             {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
@@ -844,7 +845,7 @@ h3 {
                     </div>
                     <div class="investment__list__item__sub-item__header__title__text">
                         <p class="subtitle-2">{{unLinkedInvestment.Title}}</p>
-                        <p class="caption-1">ID: {{unLinkedInvestment.ContractNo}}</p>
+
                     </div>
                 </div>
                 <div class="investment__list__item__sub-item__header__label">
@@ -886,7 +887,7 @@ h3 {
                 <thead>
                     <tr>
                         <th>Fund Name</th>
-                        <th>Isin</th>
+                        <th>IsIn</th>
                         <th>Share</th>
                         <th>Balance</th>
                     </tr>
