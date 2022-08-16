@@ -389,16 +389,18 @@ h3 {
             background-color: #ffffff;
             border: 0.5px solid rgba(0, 0, 0, 0.1);
             height: 48px;
-            min-width: 72px;
-            width: 72px;
+            min-width: 100px;
+            width: 100px;
             display: flex;
             justify-content: center;
             align-items: center; }
             .investment__list__item__sub-item__header__title__image img {
-              height: 48px;
+              /* height: 48px;
               min-width: 72px;
-              width: 72px;
-              object-fit: cover; }
+              width: 72px; */
+              height: 100%;
+		width: 100%;
+              object-fit: contain; }
         .investment__list__item__sub-item__header__label .caption-2 {
           color: #808080;
           text-transform: uppercase; }
@@ -544,7 +546,7 @@ h3 {
                     <p class="subtitle-2">{{MetaData.Overview[0].TotalBuy}} EUR</p>
                 </div>
                 <div>
-                    <p class="body-2">Výberyl</p>
+                    <p class="body-2">Výbery</p>
                     <p class="subtitle-2">{{MetaData.Overview[0].TotalSell}} EUR</p>
                 </div>
             </div>
@@ -740,7 +742,7 @@ h3 {
                         <p class="caption-1">{{snInvestment.TotalBuy}} EUR</p>
                     </div>
                     <div class="investment__list__item__sub-item__header__label">
-                        <p class="caption-2">Výberyl</p>
+                        <p class="caption-2">Výbery</p>
                         <p class="caption-1">{{snInvestment.TotalSell}} EUR</p>
                     </div>
                     <div class="investment__list__item__sub-item__header__label">
@@ -856,7 +858,7 @@ h3 {
                     <p class="caption-1">{{unLinkedInvestment.TotalBuy}} EUR</p>
                 </div>
                 <div class="investment__list__item__sub-item__header__label">
-                    <p class="caption-2">Výberyl</p>
+                    <p class="caption-2">Výbery</p>
                     <p class="caption-1">{{unLinkedInvestment.TotalSell}} EUR</p>
                 </div>
                 <div class="investment__list__item__sub-item__header__label">
