@@ -645,10 +645,11 @@ h3 {
     </section>
 
     <div style="page-break-after: always;"></div>
+    {% assign linkedInvestments = MetaData.LinkedInvestments %}
 
+    {% if linkedInvestments.size> 0 %}
     {% assign currentPageNo = 2 %}
     {% assign currentPageHeight = 1348 %}
-    {% assign linkedInvestments = MetaData.LinkedInvestments %}
 
     <header class="investment__header investment__header__margin">
         <div class="investment__header__logo">
@@ -808,7 +809,12 @@ h3 {
         {% endfor %}
     </section>
     <!--Goal Linked End-->
+    {% endif %}
 
+    {% if linkedInvestments.size== 0 %}
+    {% assign currentPageNo = 1 %}
+    {% endif %}
+    
         {% assign currentPageNo = currentPageNo | Plus: 1 %}
         {% assign currentPageHeight = 1348 %}
         <div style="page-break-after: always;"></div>
