@@ -336,6 +336,7 @@ h3 {
     margin-top: 20px;
     margin-bottom: 20px; }
     .investment__list__item__sub-item__table {
+        margin-bottom:32px;
       width: 100%; }
       .investment__list__item__header {
         display: flex;
@@ -794,12 +795,12 @@ h3 {
                                     <h1 class="investment__header__title header-1">Správa o investíciách FiLiP</h1>
                                 </header>
                             {% endif %}
-                        <tr>
-                            <td>{{assetFund.FundName}}</td>
-                            <td>{{assetFund.IsIn}}</td>
-                            <td>{{assetFund.FundShare}}%</td>
-                            <td>{{assetFund.FundBalance}} EUR</td>
-                        </tr>
+                            <tr>
+                                <td>{{assetFund.FundName}}</td>
+                                <td>{{assetFund.IsIn}}</td>
+                                <td>{{assetFund.FundShare}}%</td>
+                                <td>{{assetFund.FundBalance}} EUR</td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -816,16 +817,21 @@ h3 {
     {% endif %}
 
 
+    
+    <div style="page-break-after: always;"></div>
+
+    {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
+
+    {% if unlinkedInvestments.size> 0 %}
     {% assign currentPageNo = currentPageNo | Plus:1 %}
     {% assign currentPageHeight = 1348 %}
-        <div style="page-break-after: always;"></div>
 
-        <header class="investment__header investment__header__margin">
-            <div class="investment__header__logo">
-                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
-            </div>          
-            <h1 class="investment__header__title header-1">Správa o investíciách FiLiP</h1>
-        </header>
+    <header class="investment__header investment__header__margin">
+        <div class="investment__header__logo">
+            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+        </div>          
+        <h1 class="investment__header__title header-1">Správa o investíciách FiLiP</h1>
+    </header>
 
     <!--Goal Unlinked Start-->
     <section class="investment__list">
@@ -929,6 +935,11 @@ h3 {
         {% endfor %}
     </section>
     <!--Goal Unlinked End-->
+    {% endif %}
+
+    {% if unlinkedInvestments.size== 0 %}
+    {% assign currentPageNo = 1 %}
+    {% endif %}
 
     {% assign currentPageHeight = currentPageHeight | Minus: 240 %}
     {% if currentPageHeight <= 0 %}

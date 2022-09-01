@@ -336,6 +336,7 @@ h3 {
     margin-top: 20px;
     margin-bottom: 20px; }
     .investment__list__item__sub-item__table {
+        margin-bottom: 32px;
       width: 100%; }
     
       .investment__list__item__header {
@@ -817,14 +818,18 @@ h3 {
     
         {% assign currentPageNo = currentPageNo | Plus: 1 %}
         {% assign currentPageHeight = 1348 %}
-        <div style="page-break-after: always;"></div>
+    <div style="page-break-after: always;"></div>
+    {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
 
-        <header class="investment__header investment__header__margin">
-            <div class="investment__header__logo">
-                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
-            </div>          
-            <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
-        </header>
+    {% if unlinkedInvestments.size> 0 %}
+    {% assign currentPageNo = currentPageNo | Plus: 1 %}
+    {% assign currentPageHeight = 1348 %}
+    <header class="investment__header investment__header__margin">
+        <div class="investment__header__logo">
+            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+        </div>          
+        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+    </header>
 
     <!--Goal Unlinked Start-->
     <section class="investment__list">
@@ -928,6 +933,12 @@ h3 {
         {% endfor %}
     </section>
     <!--Goal Unlinked End-->
+    {% endif %}
+
+    {% if linkedInvestments.size== 0 %}
+    {% assign currentPageNo = 1 %}
+    {% endif %}
+
 
     {% assign currentPageHeight = currentPageHeight | Minus: 240 %}
     {% if currentPageHeight <= 0 %}
@@ -946,7 +957,7 @@ h3 {
             <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
         </footer>
     {% else %}
-        <footer class="investment__footer">
+        <footer class="investment__footer" >
             <p class="caption-2">Advisor Contact</p>
             <div class="investment__footer__contact">
                 <p class="subtitle-2">{{ADVISOR.Name}}</p>
