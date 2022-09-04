@@ -485,6 +485,8 @@ h3 {
     <title>Správa o investíciách FiLiP</title>
 </head>
 <body class="investment">
+
+    <!-- Page 1 Start-->
     {% assign OVERVIEW = MetaData.Overview[0] %}
     {% assign USER = MetaData.User[0] %}
     {% assign ADVISOR = MetaData.Advisor[0] %}
@@ -644,10 +646,12 @@ h3 {
         </div>
     </section>
 
+    <!-- Page 1 End-->
+
     <div style="page-break-after: always;"></div>
 
+    <!-- Page 2 Start -->
     {% assign linkedInvestments = MetaData.LinkedInvestments %}
-
     {% if linkedInvestments.size> 0 %}
     {% assign currentPageNo = 2 %}
     {% assign currentPageHeight = 1348 %}
@@ -816,12 +820,14 @@ h3 {
     {% assign currentPageNo = 1 %}
     {% endif %}
 
+    <!-- Page 2-... End  -->
 
     
     <div style="page-break-after: always;"></div>
 
-    {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
 
+    <!-- Page After Goal Linked Start -->
+    {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
     {% if unlinkedInvestments.size> 0 %}
     {% assign currentPageNo = currentPageNo | Plus:1 %}
     {% assign currentPageHeight = 1348 %}
@@ -943,41 +949,43 @@ h3 {
 
     {% assign currentPageHeight = currentPageHeight | Minus: 240 %}
     {% if currentPageHeight <= 0 %}
-        {% assign currentPageNo = currentPageNo | Plus: 1 %}
-        {% assign currentPageHeight = 1424 %}
-        <div style="page-break-after: always;"></div>
+    {% assign currentPageNo = currentPageNo | Plus: 1 %}
+    {% assign currentPageHeight = 1424 %}
 
-        <footer class="investment__footer" style="margin-top: 80px;">
-            <p class="caption-2">Kontakt na poradcu</p>
-            <div class="investment__footer__contact">
-                <p class="subtitle-2">{{ADVISOR.Name}}</p>
-                <p class="caption-2">{{ADVISOR.Designation}}</p>
-                <p class="caption-2">{{ADVISOR.Email}}</p>
-                <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
-            </div>
-            <p class="investment__footer__text">Sekcia „Investície“ v aplikácii Filip by mala obsahovať klientom zvolené investičné nástroje, prípadne konkrétne investičné nástroje alebo produkty (napr. investičné fondy, dlhopisy a pod.) a ďalšie údaje a informácie s nimi spojené majú len informatívny charakter. Pri poskytovaní služieb investičného poradenstva a/alebo sprostredkovaní konkrétneho investičného príkazu klientovi Swiss Life Select Slovakia, a. s., alebo jej spoločníci, sú povinní postupovať podľa osobitných interných predpisov a postupov, v súlade so Swiss Life Select Slovakia, a. s., ďalej upozorňuje, že vplyvom trhového rizika môže dôjsť k zvýšeniu alebo zníženiu hodnoty investícií do investičných nástrojov a nie je zaručená návratnosť investovanej sumy. Minulá výkonnosť nie je zárukou budúcej výkonnosti.</p>
-        </footer>
+    <!-- Page After Goal Linked End -->
+
+    <div style="page-break-after: always;"></div>
+
+    <!-- Advisor Section Start -->
+
+    <footer class="investment__footer" style="margin-top: 80px;">
+        <p class="caption-2">Kontakt na poradcu</p>
+        <div class="investment__footer__contact">
+            <p class="subtitle-2">{{ADVISOR.Name}}</p>
+            <p class="caption-2">{{ADVISOR.Designation}}</p>
+            <p class="caption-2">{{ADVISOR.Email}}</p>
+            <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+        </div>
+        <p class="investment__footer__text">Sekcia „Investície“ v aplikácii Filip by mala obsahovať klientom zvolené investičné nástroje, prípadne konkrétne investičné nástroje alebo produkty (napr. investičné fondy, dlhopisy a pod.) a ďalšie údaje a informácie s nimi spojené majú len informatívny charakter. Pri poskytovaní služieb investičného poradenstva a/alebo sprostredkovaní konkrétneho investičného príkazu klientovi Swiss Life Select Slovakia, a. s., alebo jej spoločníci, sú povinní postupovať podľa osobitných interných predpisov a postupov, v súlade so Swiss Life Select Slovakia, a. s., ďalej upozorňuje, že vplyvom trhového rizika môže dôjsť k zvýšeniu alebo zníženiu hodnoty investícií do investičných nástrojov a nie je zaručená návratnosť investovanej sumy. Minulá výkonnosť nie je zárukou budúcej výkonnosti.</p>
+    </footer>
     {% else %}
-        <footer class="investment__footer">
-            <p class="caption-2">Kontakt na poradcu</p>
-            <div class="investment__footer__contact">
-                <p class="subtitle-2">{{ADVISOR.Name}}</p>
-                <p class="caption-2">{{ADVISOR.Designation}}</p>
-                <p class="caption-2">{{ADVISOR.Email}}</p>
-                <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
-            </div>
-            <p class="investment__footer__text">Sekcia „Investície“ v aplikácii Filip by mala obsahovať klientom zvolené investičné nástroje, prípadne konkrétne investičné nástroje alebo produkty (napr. investičné fondy, dlhopisy a pod.) a ďalšie údaje a informácie s nimi spojené majú len informatívny charakter. Pri poskytovaní služieb investičného poradenstva a/alebo sprostredkovaní konkrétneho investičného príkazu klientovi Swiss Life Select Slovakia, a. s., alebo jej spoločníci, sú povinní postupovať podľa osobitných interných predpisov a postupov, v súlade so Swiss Life Select Slovakia, a. s., ďalej upozorňuje, že vplyvom trhového rizika môže dôjsť k zvýšeniu alebo zníženiu hodnoty investícií do investičných nástrojov a nie je zaručená návratnosť investovanej sumy. Minulá výkonnosť nie je zárukou budúcej výkonnosti.</p>
-        </footer>
+    <footer class="investment__footer">
+        <p class="caption-2">Kontakt na poradcu</p>
+        <div class="investment__footer__contact">
+            <p class="subtitle-2">{{ADVISOR.Name}}</p>
+            <p class="caption-2">{{ADVISOR.Designation}}</p>
+            <p class="caption-2">{{ADVISOR.Email}}</p>
+            <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+        </div>
+        <p class="investment__footer__text">Sekcia „Investície“ v aplikácii Filip by mala obsahovať klientom zvolené investičné nástroje, prípadne konkrétne investičné nástroje alebo produkty (napr. investičné fondy, dlhopisy a pod.) a ďalšie údaje a informácie s nimi spojené majú len informatívny charakter. Pri poskytovaní služieb investičného poradenstva a/alebo sprostredkovaní konkrétneho investičného príkazu klientovi Swiss Life Select Slovakia, a. s., alebo jej spoločníci, sú povinní postupovať podľa osobitných interných predpisov a postupov, v súlade so Swiss Life Select Slovakia, a. s., ďalej upozorňuje, že vplyvom trhového rizika môže dôjsť k zvýšeniu alebo zníženiu hodnoty investícií do investičných nástrojov a nie je zaručená návratnosť investovanej sumy. Minulá výkonnosť nie je zárukou budúcej výkonnosti.</p>
+    </footer>
     {% endif %}
+
+    <!-- Advisor Section End -->
+
 </body>
 <script>
-
-const dateTimeSpan = document.querySelector('#setDateTime');
-const dateNow = moment(new Date(Date.now())).format('D.M.YYYY');
-dateTimeSpan.innerHTML = dateNow;
-
-
-    {% assign compositionChartDataPartner = MetaData.PortfolioCompositionChart[0].Partner %}
+{% assign compositionChartDataPartner = MetaData.PortfolioCompositionChart[0].Partner %}
 {% assign compositionChartDataAsset = MetaData.PortfolioCompositionChart[0].Asset %}
 {% assign compositionChartDataFund = MetaData.PortfolioCompositionChart[0].Fund %}
 {% assign compositionChartDataRegion = MetaData.PortfolioCompositionChart[0].Region %}
@@ -1110,11 +1118,6 @@ var fundChartDataSets = {
     }]
 };
 
-console.log(partnerChartDataSets);
-console.log(assetChartDataSets);
-console.log(sectorChartDataSets);
-console.log(regionChartDataSets);
-console.log(fundChartDataSets);
 
 const legendOpts = {
   legend: {
@@ -1363,7 +1366,9 @@ const investmentLineChartConfig = {
 
 const investmentLineChartCanvas = document.querySelector('#investmentLineChart');
 const investmentLineChart = new Chart(investmentLineChartCanvas, investmentLineChartConfig);
-
+const dateTimeSpan = document.querySelector('#setDateTime');
+const dateNow = moment(new Date(Date.now())).format('D.M.YYYY');
+dateTimeSpan.innerHTML = dateNow;
 
 
 </script>

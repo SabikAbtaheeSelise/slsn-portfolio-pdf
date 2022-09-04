@@ -486,6 +486,8 @@ h3 {
     <title>FiLiP Investment Report</title>
 </head>
 <body class="investment">
+
+    <!-- Page 1 Start-->
     {% assign OVERVIEW = MetaData.Overview[0] %}
     {% assign USER = MetaData.User[0] %}
     {% assign ADVISOR = MetaData.Advisor[0] %}
@@ -645,9 +647,12 @@ h3 {
         </div>
     </section>
 
-    <div style="page-break-after: always;"></div>
-    {% assign linkedInvestments = MetaData.LinkedInvestments %}
+    <!-- Page 1 End-->
 
+    <div style="page-break-after: always;"></div>
+
+    <!-- Page 2 Start -->
+    {% assign linkedInvestments = MetaData.LinkedInvestments %}
     {% if linkedInvestments.size> 0 %}
     {% assign currentPageNo = 2 %}
     {% assign currentPageHeight = 1348 %}
@@ -815,12 +820,14 @@ h3 {
     {% if linkedInvestments.size== 0 %}
     {% assign currentPageNo = 1 %}
     {% endif %}
-    
-        {% assign currentPageNo = currentPageNo | Plus: 1 %}
-        {% assign currentPageHeight = 1348 %}
-    <div style="page-break-after: always;"></div>
-    {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
 
+    <!-- Page 2-... End  -->
+
+    <div style="page-break-after: always;"></div>
+
+
+    <!-- Page After Goal Linked Start -->                                                                                                                                                         `
+    {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
     {% if unlinkedInvestments.size> 0 %}
     {% assign currentPageNo = currentPageNo | Plus: 1 %}
     {% assign currentPageHeight = 1348 %}
@@ -942,35 +949,43 @@ h3 {
 
     {% assign currentPageHeight = currentPageHeight | Minus: 240 %}
     {% if currentPageHeight <= 0 %}
-        {% assign currentPageNo = currentPageNo | Plus: 1 %}
-        {% assign currentPageHeight = 1424 %}
-        <div style="page-break-after: always;"></div>
+    {% assign currentPageNo = currentPageNo | Plus: 1 %}
+    {% assign currentPageHeight = 1424 %}
 
-        <footer class="investment__footer" style="margin-top: 80px;">
-            <p class="caption-2">Advisor Contact</p>
-            <div class="investment__footer__contact">
-                <p class="subtitle-2">{{ADVISOR.Name}}</p>
-                <p class="caption-2">{{ADVISOR.Designation}}</p>
-                <p class="caption-2">{{ADVISOR.Email}}</p>
-                <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
-            </div>
-            <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
-        </footer>
+    <!-- Page After Goal Linked End -->
+
+    <div style="page-break-after: always;"></div>
+
+    <!-- Advisor Section Start -->
+
+    <footer class="investment__footer" style="margin-top: 80px;">
+        <p class="caption-2">Advisor Contact</p>
+        <div class="investment__footer__contact">
+            <p class="subtitle-2">{{ADVISOR.Name}}</p>
+            <p class="caption-2">{{ADVISOR.Designation}}</p>
+            <p class="caption-2">{{ADVISOR.Email}}</p>
+            <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+        </div>
+        <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
+    </footer>
     {% else %}
-        <footer class="investment__footer" >
-            <p class="caption-2">Advisor Contact</p>
-            <div class="investment__footer__contact">
-                <p class="subtitle-2">{{ADVISOR.Name}}</p>
-                <p class="caption-2">{{ADVISOR.Designation}}</p>
-                <p class="caption-2">{{ADVISOR.Email}}</p>
-                <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
-            </div>
-            <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
-        </footer>
+    <footer class="investment__footer" >
+        <p class="caption-2">Advisor Contact</p>
+        <div class="investment__footer__contact">
+            <p class="subtitle-2">{{ADVISOR.Name}}</p>
+            <p class="caption-2">{{ADVISOR.Designation}}</p>
+            <p class="caption-2">{{ADVISOR.Email}}</p>
+            <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+        </div>
+        <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
+    </footer>
     {% endif %}
+
+    <!-- Advisor Section End -->
+
 </body>
 <script>
-   {% assign compositionChartDataPartner = MetaData.PortfolioCompositionChart[0].Partner %}
+{% assign compositionChartDataPartner = MetaData.PortfolioCompositionChart[0].Partner %}
 {% assign compositionChartDataAsset = MetaData.PortfolioCompositionChart[0].Asset %}
 {% assign compositionChartDataFund = MetaData.PortfolioCompositionChart[0].Fund %}
 {% assign compositionChartDataRegion = MetaData.PortfolioCompositionChart[0].Region %}
@@ -1101,11 +1116,6 @@ var fundChartDataSets = {
     }]
 };
 
-console.log(partnerChartDataSets);
-console.log(assetChartDataSets);
-console.log(sectorChartDataSets);
-console.log(regionChartDataSets);
-console.log(fundChartDataSets);
 
 const legendOpts = {
   legend: {
