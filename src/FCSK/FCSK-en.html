@@ -486,15 +486,18 @@ h3 {
     <title>FiLiP Investment Report</title>
 </head>
 <body class="investment">
-    {% assign fullPageHeightConst = 1424 %}
-    {% assign Header = 76 %}
-    {% assign GoalLinkedHeader = 76 %}
-    {% assign UnlinkedHeader = 76 %}
-    {% assign GoalCard = 76 %}
-    {% assign SnInvestmentCard = 76 %}
-    {% assign FundCard = 28 %}
-    {% assign Fund = 48 %}
-    {% assign Gap = 24 %}
+    {% assign fullPageHeightConst = 1760 %}
+    {% assign Header = 160 %}
+    {% assign GoalLinkedHeader = 100 %}
+    {% assign UnlinkedHeader = 100 %}
+    {% assign GoalCard = 80 %}
+    {% assign SnInvestmentCard = 80 %}
+    {% assign FundCard = 60 %}  <!-- add gap-->
+    {% assign Fund = 60 %}
+    {% assign Gap = 32 %}
+    {% assign AdvisorGap = 240 %}
+    {% assign FundLimit = 24 %}
+    {% assign FundLimitFloat = 24.0 %}
 
     <!-- Page 1 Start-->
     {% assign OVERVIEW = MetaData.Overview[0] %}
@@ -658,132 +661,320 @@ h3 {
 
     <!-- Page 1 End-->
 
-    <div style="page-break-after: always;"></div>
+    
 
     <!-- Page 2 Start -->
     {% assign linkedInvestments = MetaData.LinkedInvestments %}
     {% if linkedInvestments.size> 0 %}
-    {% assign currentPageNo = 2 %}
-    {% assign currentPageHeight = 1348 %}
+        <!-- After page 1 end -->
+        <div style="page-break-after: always;"></div>
+        {% assign currentPageHeight = fullPageHeightConst %}
 
-    <header class="investment__header investment__header__margin">
-        <div class="investment__header__logo">
-            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
-        </div>          
-        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
-    </header>
+        <header class="investment__header investment__header__margin">
+            <div class="investment__header__logo">
+                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+            </div>          
+            <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+        </header>
+        {% assign currentPageHeight = currentPageHeight | Minus :Header  %} <!-- For header height -->
 
-    <!--Goal Linked Start-->
-    <section class="investment__list">
-        <div class="investment__list__header section-header">
-            <h3 class="header-3">Goal Linked Investments</h3>
-        </div>
-        {% for linkedInvestment in linkedInvestments %}
-            {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
-            {% if currentPageHeight <= 0 %}
-                {% assign currentPageNo = currentPageNo | Plus: 1 %}
-                {% assign currentPageHeight = 1424 %}
-                <div style="page-break-after: always;"></div>
-
-                <header class="investment__header investment__header__margin investment__header__margin__bottom">
-                    <div class="investment__header__logo">
-                        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
-                    </div>          
-                    <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
-                </header>
-            {% endif %}
-        <div class="investment__list__item">
-            <div class="investment__list__item__header">
-                <div class="investment__list__item__header__title">
-                    <div class="investment__list__item__header__logo">
-                        <img src="{{linkedInvestment.GoalIconUrl}}">
-                    </div>
-                    <h1 class="subtitle-2">{{linkedInvestment.Title}}</h1>
-                </div>
-                <div class="investment__list__item__header__label">
-                    <p class="caption-2">Total Value</p>
-                    <p class="caption-1">{{linkedInvestment.GoalValue}} EUR</p>
-                </div>
-                <div class="investment__list__item__header__label">
-                    <p class="caption-2">Current Value</p>
-                    <p class="caption-1">{{linkedInvestment.AccumulatedValue}} EUR</p>
-                </div>
-                <div class="investment__list__item__header__label">
-                    <p class="caption-2">Target Date</p>
-                    <p class="caption-1">{{linkedInvestment.Year}}</p>
-                </div>
-                <div class="investment__list__item__header__label">
-                    <p class="caption-2">Goal Achieved</p>
-                    <div class="investment__list__item__header__label__progress">
-                        <p class="caption-1">{{linkedInvestment.GoalAchieved}}%</p>
-                        <div class="progress-bar__container">
-                            {% assign goalPercentage= linkedInvestment.GoalAchieved | Replace: ",","." | Plus: 0 %}
-                            <span class="progress-bar" 
-                           style="width: {{goalPercentage}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
-                           ></span>
-                        </div>
-                    </div>
-                </div>
+        <!--Goal Linked Start-->
+        <section class="investment__list">
+            <div class="investment__list__header section-header">
+                <h3 class="header-3">Goal Linked Investments</h3>
             </div>
-            {% for snInvestment in linkedInvestment.SnInvestments %}
-                {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
-                {% if currentPageHeight <= 0 %}
-                    {% assign currentPageNo = currentPageNo | Plus: 1 %}
-                    {% assign currentPageHeight = 1424 %}
-                    <div style="page-break-after: always;"></div>
+            {% assign currentPageHeight = currentPageHeight | Minus :GoalLinkedHeader  %}
+            {% for linkedInvestment in linkedInvestments %}
 
+                {% assign totalHeightOfFunds = Fund | Times : linkedInvestment.SnInvestments[0].Funds.size  %}
+                {% assign totalHeight = SnInvestmentCard | Plus : FundCard  %}
+                {% assign totalHeight = totalHeight | Plus: GoalCard %}
+                {% assign totalHeight = totalHeight | Plus: totalHeightOfFunds %}
+
+                {% assign checkHeight = currentPageHeight | Minus: totalHeight %}
+                {% if checkHeight <= 0 %}
+                    {% assign currentPageHeight = fullPageHeightConst %}
+                    <div style="page-break-after: always;"></div>
                     <header class="investment__header investment__header__margin investment__header__margin__bottom">
                         <div class="investment__header__logo">
                             <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
                         </div>          
                         <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
                     </header>
+                    {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+                {% endif %}
+
+                {% if currentPageHeight <= 0 %}
+                    {% assign currentPageHeight = fullPageHeightConst %}
+                    <div style="page-break-after: always;"></div>
+                    <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                        <div class="investment__header__logo">
+                            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                        </div>          
+                        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                    </header>
+                    {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+                {% endif %}
+            <div class="investment__list__item">
+                <div class="investment__list__item__header">
+                    <div class="investment__list__item__header__title">
+                        <div class="investment__list__item__header__logo">
+                            <img src="{{linkedInvestment.GoalIconUrl}}">
+                        </div>
+                        <h1 class="subtitle-2">{{linkedInvestment.Title}}</h1>
+                    </div>
+                    <div class="investment__list__item__header__label">
+                        <p class="caption-2">Total Value</p>
+                        <p class="caption-1">{{linkedInvestment.GoalValue}} EUR</p>
+                    </div>
+                    <div class="investment__list__item__header__label">
+                        <p class="caption-2">Current Value</p>
+                        <p class="caption-1">{{linkedInvestment.AccumulatedValue}} EUR</p>
+                    </div>
+                    <div class="investment__list__item__header__label">
+                        <p class="caption-2">Target Date</p>
+                        <p class="caption-1">{{linkedInvestment.Year}}</p>
+                    </div>
+                    <div class="investment__list__item__header__label">
+                        <p class="caption-2">Goal Achieved</p>
+                        <div class="investment__list__item__header__label__progress">
+                            <p class="caption-1">{{linkedInvestment.GoalAchieved}}%</p>
+                            <div class="progress-bar__container">
+                                {% assign goalPercentage= linkedInvestment.GoalAchieved | Replace: ",","." | Plus: 0 %}
+                                <span class="progress-bar" 
+                            style="width: {{goalPercentage}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
+                            ></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% assign currentPageHeight = currentPageHeight | Minus: GoalCard %}
+                {% for snInvestment in linkedInvestment.SnInvestments %}
+
+                    {% assign totalHeightOfFunds = Fund | Times : snInvestment.Funds.size  %}
+                    {% assign totalHeight = SnInvestmentCard | Plus : FundCard  %}
+                    {% assign totalHeight = totalHeight | Plus: totalHeightOfFunds %}
+
+                    {% assign checkHeight = currentPageHeight | Minus: totalHeight %}
+                    {% if checkHeight <= 0 %}
+                        {% assign currentPageHeight = fullPageHeightConst %}
+                        <div style="page-break-after: always;"></div>
+                        <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                            <div class="investment__header__logo">
+                                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                            </div>          
+                            <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                        </header>
+                        {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+                    {% endif %}
+
+
+                    {% if currentPageHeight <= 0 %}
+                        {% assign currentPageHeight = fullPageHeightConst %}
+                        <div style="page-break-after: always;"></div>
+                        <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                            <div class="investment__header__logo">
+                                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                            </div>          
+                            <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                        </header>
+                        {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+
+                    {% endif %}
+                <div class="investment__list__item__sub-item">
+                    <div class="investment__list__item__sub-item__header">
+                        <div class="investment__list__item__sub-item__header__title">
+                            <div class="investment__list__item__sub-item__header__title__image">
+                                <img src="{{snInvestment.PartnerImageUrl}}" alt="{{snInvestment.Title}}">
+                            </div>
+                            <div class="investment__list__item__sub-item__header__title__text">
+                                <p class="subtitle-2">{{snInvestment.Title}}</p>
+
+                            </div>
+                        </div>
+                        <div class="investment__list__item__sub-item__header__label">
+                            <p class="caption-2">Balance</p>
+                            <p class="caption-1">{{snInvestment.Balance}} EUR</p>
+                        </div>
+                        <div class="investment__list__item__sub-item__header__label">
+                            <p class="caption-2">Total Buy</p>
+                            <p class="caption-1">{{snInvestment.TotalBuy}} EUR</p>
+                        </div>
+                        <div class="investment__list__item__sub-item__header__label">
+                            <p class="caption-2">Total Sell</p>
+                            <p class="caption-1">{{snInvestment.TotalSell}} EUR</p>
+                        </div>
+                        <div class="investment__list__item__sub-item__header__label">
+                            <p class="caption-2">Funds</p>
+                            {% if snInvestment.Funds.size > 9 %}
+                            <p class="caption-1">{{snInvestment.Funds.size}}</p>
+                            {% else %}
+                            <p class="caption-1">0{{snInvestment.Funds.size}}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% assign currentPageHeight = currentPageHeight | Minus: SnInvestmentCard  %}
+                    {% if currentPageHeight <= 0 %}
+                        {% assign currentPageHeight = fullPageHeightConst %}
+                        <div style="page-break-after: always;"></div>
+                        <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                            <div class="investment__header__logo">
+                                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                            </div>          
+                            <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                        </header>
+                        {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+                    {% endif %}
+
+                    
+
+                    <table class="investment__list__item__sub-item__table investment-table">
+                        <col span="1" class="investment-table-fund">
+                        <thead>
+                            <tr>
+                                <th>Fund Name</th>
+                                <th>IsIn</th>
+                                <th>Share</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        {% assign currentPageHeight = currentPageHeight | Minus :FundCard %}
+                        <tbody>
+                            {% for assetFund in snInvestment.Funds limit:FundLimit %}
+                                {% if currentPageHeight <= 0 %}
+                                    {% assign currentPageHeight = fullPageHeightConst %}
+                                    <div style="page-break-after: always;"></div>
+                                    <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                                        <div class="investment__header__logo">
+                                            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                                        </div>          
+                                        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                                    </header>
+                                    {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+                                {% endif %}
+                            <tr>
+                                <td>{{assetFund.FundName}}</td>
+                                <td>{{assetFund.IsIn}}</td>
+                                <td>{{assetFund.FundShare}}%</td>
+                                <td>{{assetFund.FundBalance}} EUR</td>
+                            </tr>
+                            {% assign currentPageHeight = currentPageHeight | Minus: Fund %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </section>
+        <!--Goal Linked End-->
+    {% endif %}
+
+    <!-- Page 2-... End  -->
+
+
+
+    <!-- Page After Goal Linked Start -->                                                                                                                                                         `
+    {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
+    {% if unlinkedInvestments.size> 0 %}
+        <!-- New Unlinked page start -->
+        <div style="page-break-after: always;"></div>
+        
+        {% assign currentPageHeight = fullPageHeightConst %}
+        <header class="investment__header investment__header__margin">
+            <div class="investment__header__logo">
+                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+            </div>          
+            <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+        </header>
+        {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+
+        <!--Goal Unlinked Start-->
+        <section class="investment__list">
+            <div class="investment__list__header section-header">
+                <h3 class="header-3">Goal Unlinked Investments</h3>
+            </div>
+            {% assign currentPageHeight = currentPageHeight | Minus :UnlinkedHeader  %}
+
+            {% for unLinkedInvestment in MetaData.UnLinkedInvestments %}
+                {% assign totalHeightOfFunds = Fund | Times : unLinkedInvestment.Funds.size  %}
+                {% assign totalHeight = SnInvestmentCard | Plus : FundCard  %}
+                {% assign totalHeight = totalHeight | Plus: totalHeightOfFunds %}
+
+                {% assign checkHeight = currentPageHeight | Minus: totalHeight %}
+                {% if checkHeight <= 0 %}
+                    {% assign currentPageHeight = fullPageHeightConst %}
+                    <div style="page-break-after: always;"></div>
+                    <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                        <div class="investment__header__logo">
+                            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                        </div>          
+                        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                    </header>
+                    {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+                {% endif %}
+
+                {% if currentPageHeight <= 0 %}
+                    {% assign currentPageHeight = fullPageHeightConst %}
+                    <div style="page-break-after: always;"></div>
+                    <header class="investment__header investment__header__margin investment__header__margin__bottom">
+                        <div class="investment__header__logo">
+                            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+                        </div>          
+                        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+                    </header>
+                    {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+
                 {% endif %}
             <div class="investment__list__item__sub-item">
                 <div class="investment__list__item__sub-item__header">
                     <div class="investment__list__item__sub-item__header__title">
                         <div class="investment__list__item__sub-item__header__title__image">
-                            <img src="{{snInvestment.PartnerImageUrl}}" alt="{{snInvestment.Title}}">
+                            <img src="{{unLinkedInvestment.PartnerImageUrl}}" alt="{{unLinkedInvestment.Title}}">
                         </div>
                         <div class="investment__list__item__sub-item__header__title__text">
-                            <p class="subtitle-2">{{snInvestment.Title}}</p>
+                            <p class="subtitle-2">{{unLinkedInvestment.Title}}</p>
 
                         </div>
                     </div>
                     <div class="investment__list__item__sub-item__header__label">
                         <p class="caption-2">Balance</p>
-                        <p class="caption-1">{{snInvestment.Balance}} EUR</p>
+                        <p class="caption-1">{{unLinkedInvestment.Balance}} EUR</p>
                     </div>
                     <div class="investment__list__item__sub-item__header__label">
                         <p class="caption-2">Total Buy</p>
-                        <p class="caption-1">{{snInvestment.TotalBuy}} EUR</p>
+                        <p class="caption-1">{{unLinkedInvestment.TotalBuy}} EUR</p>
                     </div>
                     <div class="investment__list__item__sub-item__header__label">
                         <p class="caption-2">Total Sell</p>
-                        <p class="caption-1">{{snInvestment.TotalSell}} EUR</p>
+                        <p class="caption-1">{{unLinkedInvestment.TotalSell}} EUR</p>
                     </div>
                     <div class="investment__list__item__sub-item__header__label">
                         <p class="caption-2">Funds</p>
-                        {% if snInvestment.Funds.size > 9 %}
-                        <p class="caption-1">{{snInvestment.Funds.size}}</p>
+                        {% if unLinkedInvestment.Funds.size > 9 %}
+                        <p class="caption-1">{{unLinkedInvestment.Funds.size}}</p>
                         {% else %}
-                        <p class="caption-1">0{{snInvestment.Funds.size}}</p>
+                        <p class="caption-1">0{{unLinkedInvestment.Funds.size}}</p>
                         {% endif %}
                     </div>
                 </div>
-                {% assign currentPageHeight = currentPageHeight | Minus: 36 %}
+                {% assign currentPageHeight = currentPageHeight | Minus :SnInvestmentCard  %}
                 {% if currentPageHeight <= 0 %}
-                    {% assign currentPageNo = currentPageNo | Plus: 1 %}
-                    {% assign currentPageHeight = 1424 %}
+                    {% assign currentPageHeight = fullPageHeightConst %}
                     <div style="page-break-after: always;"></div>
-
                     <header class="investment__header investment__header__margin investment__header__margin__bottom">
                         <div class="investment__header__logo">
                             <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
                         </div>          
                         <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
                     </header>
+                    {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                 {% endif %}
+
+                {% assign x = unLinkedInvestment.Funds.size %}
+                {% assign a= x | Divided_by : FundLimitFloat  %}
+                {% assign b = a | Ceil %}
+                x{{x}}a{{a}}b{{b}}
                 <table class="investment__list__item__sub-item__table investment-table">
                     <col span="1" class="investment-table-fund">
                     <thead>
@@ -795,199 +986,76 @@ h3 {
                         </tr>
                     </thead>
                     <tbody>
-                        {% for assetFund in snInvestment.Funds %}
-                            {% assign currentPageHeight = currentPageHeight | Minus: 56 %}
+                        {% for assetFund in unLinkedInvestment.Funds limit:FundLimit %}
                             {% if currentPageHeight <= 0 %}
-                                {% assign currentPageNo = currentPageNo | Plus: 1 %}
-                                {% assign currentPageHeight = 1424 %}
+                                {% assign currentPageHeight = fullPageHeightConst %}
                                 <div style="page-break-after: always;"></div>
-
                                 <header class="investment__header investment__header__margin investment__header__margin__bottom">
                                     <div class="investment__header__logo">
                                         <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
                                     </div>          
                                     <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
                                 </header>
+                                {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                             {% endif %}
                         <tr>
                             <td>{{assetFund.FundName}}</td>
                             <td>{{assetFund.IsIn}}</td>
                             <td>{{assetFund.FundShare}}%</td>
                             <td>{{assetFund.FundBalance}} EUR</td>
+                            
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+
+                {% assign currentPageHeight = currentPageHeight | Minus :FundCard  %}
+                {% assign fundcount = unLinkedInvestment.Funds.size  %}
+                {% assign fundheightTotal = Fund | Times : fundcount   %}
+                {% assign currentPageHeight = currentPageHeight | Minus: fundheightTotal %}
             </div>
             {% endfor %}
-        </div>
-        {% endfor %}
-    </section>
-    <!--Goal Linked End-->
-    {% endif %}
-
-    {% if linkedInvestments.size== 0 %}
-    {% assign currentPageNo = 1 %}
-    {% endif %}
-
-    <!-- Page 2-... End  -->
-
-    <div style="page-break-after: always;"></div>
-
-
-    <!-- Page After Goal Linked Start -->                                                                                                                                                         `
-    {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
-    {% if unlinkedInvestments.size> 0 %}
-    {% assign currentPageNo = currentPageNo | Plus: 1 %}
-    {% assign currentPageHeight = 1348 %}
-    <header class="investment__header investment__header__margin">
-        <div class="investment__header__logo">
-            <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
-        </div>          
-        <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
-    </header>
-
-    <!--Goal Unlinked Start-->
-    <section class="investment__list">
-        <div class="investment__list__header section-header">
-            <h3 class="header-3">Goal Unlinked Investments</h3>
-        </div>
-        {% for unLinkedInvestment in MetaData.UnLinkedInvestments %}
-            {% assign currentPageHeight = currentPageHeight | Minus: 76 %}
-            {% if currentPageHeight <= 0 %}
-                {% assign currentPageNo = currentPageNo | Plus: 1 %}
-                {% assign currentPageHeight = 1424 %}
-                <div style="page-break-after: always;"></div>
-
-                <header class="investment__header investment__header__margin investment__header__margin__bottom">
-                    <div class="investment__header__logo">
-                        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
-                    </div>          
-                    <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
-                </header>
-            {% endif %}
-        <div class="investment__list__item__sub-item">
-            <div class="investment__list__item__sub-item__header">
-                <div class="investment__list__item__sub-item__header__title">
-                    <div class="investment__list__item__sub-item__header__title__image">
-                        <img src="{{unLinkedInvestment.PartnerImageUrl}}" alt="{{unLinkedInvestment.Title}}">
-                    </div>
-                    <div class="investment__list__item__sub-item__header__title__text">
-                        <p class="subtitle-2">{{unLinkedInvestment.Title}}</p>
-
-                    </div>
-                </div>
-                <div class="investment__list__item__sub-item__header__label">
-                    <p class="caption-2">Balance</p>
-                    <p class="caption-1">{{unLinkedInvestment.Balance}} EUR</p>
-                </div>
-                <div class="investment__list__item__sub-item__header__label">
-                    <p class="caption-2">Total Buy</p>
-                    <p class="caption-1">{{unLinkedInvestment.TotalBuy}} EUR</p>
-                </div>
-                <div class="investment__list__item__sub-item__header__label">
-                    <p class="caption-2">Total Sell</p>
-                    <p class="caption-1">{{unLinkedInvestment.TotalSell}} EUR</p>
-                </div>
-                <div class="investment__list__item__sub-item__header__label">
-                    <p class="caption-2">Funds</p>
-                    {% if unLinkedInvestment.Funds.size > 9 %}
-                    <p class="caption-1">{{unLinkedInvestment.Funds.size}}</p>
-                    {% else %}
-                    <p class="caption-1">0{{unLinkedInvestment.Funds.size}}</p>
-                    {% endif %}
-                </div>
-            </div>
-            {% assign currentPageHeight = currentPageHeight | Minus: 36 %}
-            {% if currentPageHeight <= 0 %}
-                {% assign currentPageNo = currentPageNo | Plus: 1 %}
-                {% assign currentPageHeight = 1424 %}
-                <div style="page-break-after: always;"></div>
-
-                <header class="investment__header investment__header__margin investment__header__margin__bottom">
-                    <div class="investment__header__logo">
-                        <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
-                    </div>          
-                    <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
-                </header>
-            {% endif %}
-            <table class="investment__list__item__sub-item__table investment-table">
-                <col span="1" class="investment-table-fund">
-                <thead>
-                    <tr>
-                        <th>Fund Name</th>
-                        <th>IsIn</th>
-                        <th>Share</th>
-                        <th>Balance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for assetFund in unLinkedInvestment.Funds %}
-                        {% assign currentPageHeight = currentPageHeight | Minus: 56 %}
-                        {% if currentPageHeight <= 0 %}
-                            {% assign currentPageNo = currentPageNo | Plus: 1 %}
-                            {% assign currentPageHeight = 1424 %}
-                            <div style="page-break-after: always;"></div>
-
-                            <header class="investment__header investment__header__margin investment__header__margin__bottom">
-                                <div class="investment__header__logo">
-                                    <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
-                                </div>          
-                                <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
-                            </header>
-                        {% endif %}
-                    <tr>
-                        <td>{{assetFund.FundName}}</td>
-                        <td>{{assetFund.IsIn}}</td>
-                        <td>{{assetFund.FundShare}}%</td>
-                        <td>{{assetFund.FundBalance}} EUR</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% endfor %}
-    </section>
+        </section>
     <!--Goal Unlinked End-->
     {% endif %}
 
-    {% if linkedInvestments.size== 0 %}
-    {% assign currentPageNo = 1 %}
-    {% endif %}
 
-
-    {% assign currentPageHeight = currentPageHeight | Minus: 240 %}
+    {% assign currentPageHeight = currentPageHeight | Minus: AdvisorGap  %}
     {% if currentPageHeight <= 0 %}
-    {% assign currentPageNo = currentPageNo | Plus: 1 %}
-    {% assign currentPageHeight = 1424 %}
+        {% assign fullPageHeightConst  = fullPageHeightConst  %}
 
-    <!-- Page After Goal Linked End -->
+        <!-- New page for advisor signature -->
+        <div style="page-break-after: always;"></div>
+        <header class="investment__header investment__header__margin investment__header__margin__bottom">
+            <div class="investment__header__logo">
+                <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
+            </div>          
+            <h1 class="investment__header__title header-1">FiLiP Investment Report</h1>
+        </header>
+        {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
+        <!-- Advisor Section Start -->
 
-    <div style="page-break-after: always;"></div>
-
-    <!-- Advisor Section Start -->
-
-    <footer class="investment__footer" style="margin-top: 80px;">
-        <p class="caption-2">Advisor Contact</p>
-        <div class="investment__footer__contact">
-            <p class="subtitle-2">{{ADVISOR.Name}}</p>
-            <p class="caption-2">{{ADVISOR.Designation}}</p>
-            <p class="caption-2">{{ADVISOR.Email}}</p>
-            <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
-        </div>
-        <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
-    </footer>
-    {% else %}
-    <footer class="investment__footer" >
-        <p class="caption-2">Advisor Contact</p>
-        <div class="investment__footer__contact">
-            <p class="subtitle-2">{{ADVISOR.Name}}</p>
-            <p class="caption-2">{{ADVISOR.Designation}}</p>
-            <p class="caption-2">{{ADVISOR.Email}}</p>
-            <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
-        </div>
-        <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
-    </footer>
+        <footer class="investment__footer" style="margin-top: 80px;">
+            <p class="caption-2">Advisor Contact</p>
+            <div class="investment__footer__contact">
+                <p class="subtitle-2">{{ADVISOR.Name}}</p>
+                <p class="caption-2">{{ADVISOR.Designation}}</p>
+                <p class="caption-2">{{ADVISOR.Email}}</p>
+                <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+            </div>
+            <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
+        </footer>
+        {% else %}
+        <footer class="investment__footer" >
+            <p class="caption-2">Advisor Contact</p>
+            <div class="investment__footer__contact">
+                <p class="subtitle-2">{{ADVISOR.Name}}</p>
+                <p class="caption-2">{{ADVISOR.Designation}}</p>
+                <p class="caption-2">{{ADVISOR.Email}}</p>
+                <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
+            </div>
+            <p class="investment__footer__text">The "Investments" section in the Filip application should contain the investment instruments selected by the client, and any specific investment instruments or products (eg investment funds, bonds, etc.), and other data and information associated with them are for information only. When providing investment advisory services and/or arranging a specific investment order to a client Swiss Life Select Slovakia, a. s., or its associates, are obliged to follow special internal regulations and procedures, in accordance with Swiss Life Select Slovakia, a. s., further warns that due to market risk the value of investments in investment instruments may increase or decrease and the return on the invested amount is not guaranteed. Past performance is no guarantee of future performance.</p>
+        </footer>
     {% endif %}
 
     <!-- Advisor Section End -->
