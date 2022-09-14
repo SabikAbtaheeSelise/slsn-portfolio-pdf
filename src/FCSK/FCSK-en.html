@@ -665,7 +665,7 @@ h3 {
 
     <!-- Page 2 Start -->
     {% assign linkedInvestments = MetaData.LinkedInvestments %}
-    {% if linkedInvestments.size> 0 %}
+    {% if linkedInvestments.size> 0 && linkedInvestments[0] %}
         <!-- After page 1 end -->
         {% assign currentPageHeight = fullPageHeightConst %}
         <div style="page-break-after: always;"></div>
@@ -841,7 +841,7 @@ h3 {
 
     <!-- Page After Goal Linked Start -->                                                                                                                                                         `
     {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
-    {% if unlinkedInvestments.size> 0 %}
+    {% if unlinkedInvestments.size> 0 && unlinkedInvestments[0] %}
         <!-- New Unlinked page start -->
         {% assign currentPageHeight = fullPageHeightConst %}
         <div style="page-break-after: always;"></div>
