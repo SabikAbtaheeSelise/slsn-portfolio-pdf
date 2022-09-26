@@ -773,11 +773,7 @@ h3 {
                             </div>
                             <div class="investment__list__item__sub-item__header__label">
                                 <p class="caption-2">Funds</p>
-                                {% if snInvestment.Funds.size > 9 %}
                                 <p class="caption-1">{{snInvestment.Funds.size}}</p>
-                                {% else %}
-                                <p class="caption-1">0{{snInvestment.Funds.size}}</p>
-                                {% endif %}
                             </div>
                         </div>
                     {% assign currentPageHeight = currentPageHeight | Minus: SnInvestmentCard  %}
@@ -898,11 +894,7 @@ h3 {
                         </div>
                         <div class="investment__list__item__sub-item__header__label">
                             <p class="caption-2">Funds</p>
-                            {% if unLinkedInvestment.Funds.size > 9 %}
                             <p class="caption-1">{{unLinkedInvestment.Funds.size}}</p>
-                            {% else %}
-                            <p class="caption-1">0{{unLinkedInvestment.Funds.size}}</p>
-                            {% endif %}
                         </div>
                     </div>
                     {% assign currentPageHeight = currentPageHeight | Minus :SnInvestmentCard  %}
