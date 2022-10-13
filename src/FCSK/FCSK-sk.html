@@ -288,6 +288,10 @@ h3 {
             color: #15847b; }
           .investment__overview__card__item--2 > *:not(:first-child) {
             padding-top: 25px; }
+            .investment__overview__card__item--2 > *:nth-child(5) {
+            padding-top: 8px !important;  }
+            .investment__overview__card__item--2 > *:nth-child(6) {
+            padding-top: 8px !important; }
       .investment__overview__card__item__logo {
         margin-right: 12px;
         width: 48px;
@@ -483,7 +487,7 @@ h3 {
   border-radius: inherit;
   display: block; }
     </style>
-    <title>Report investícií</title>
+    <title>Investment Report</title>
 </head>
 <body class="investment">
     {% assign fullPageHeightConst = 1700 %}
@@ -497,9 +501,46 @@ h3 {
     {% assign Gap = 32 %}
     {% assign AdvisorGap = 240 %}
     {% assign FundLimit = 22 %}
+    {% assign FeeLimit = 3 %}
     {% assign FundLimitFloat = 22.0 %}
 
-    
+
+
+
+    {% assign ReportTitle = "Report investícií" %}
+    {% assign DateTitle = "Dátum Čas" %}
+    {% assign DateText = "Dátum" %}
+    {% assign UserNameText = "Meno klienta" %}
+    {% assign PhoneNumberText = "Telefónne číslo" %}
+    {% assign EmailAddressText = "Emailová adresa" %}
+    {% assign OverviewBalanceText = "Hodnota portfólia" %}
+    {% assign CurrencyText = "EUR" %}
+    {% assign ProfitLossText = "Zisk/Strata" %}
+    {% assign TotalBuyText = "Vklady" %}
+    {% assign TotalSellText = "Výbery" %}
+    {% assign FeesText = "Poplatky" %}
+
+    {% assign PortfolioCompositionText = "Zloženie portfólia" %}
+    {% assign PartnerText = "Partner" %}
+    {% assign AssetsText = "Aktíva" %}
+    {% assign ChartFundsText = "Správca" %}
+    {% assign RegionText = "Región" %}
+    {% assign SectorText = "Sektor" %}
+    {% assign GoalLinkedInvestmentText = "Investície spojené s cieľom" %}
+    {% assign GoalValueText = "Hodnota cieľa" %}
+    {% assign AccumulatedValueText = "Súčasná hodnota" %}
+    {% assign YearText = "Cieľový dátum" %}
+    {% assign GoalAchievedText = "Plnenie cieľa" %}
+    {% assign BalanceText = "Zostatok" %}
+    {% assign FundsText = "Fondy" %}
+    {% assign FundNameText = "Názov fondu" %}
+    {% assign IsInText = "IsIn" %}
+    {% assign ShareText = "Podiel" %}
+    {% assign GoalUnLinkedInvestmentText = "Investície" %}
+    {% assign InvestmentFooterText = "Sekcia „Investície“ v aplikácii Filip by mala obsahovať klientom zvolené investičné nástroje, prípadne konkrétne investičné nástroje alebo produkty (napr. investičné fondy, dlhopisy a pod.) a ďalšie údaje a informácie s nimi spojené majú len informatívny charakter. Pri poskytovaní služieb investičného poradenstva a/alebo sprostredkovaní konkrétneho investičného príkazu klientovi Swiss Life Select Slovakia, a. s., alebo jej spoločníci, sú povinní postupovať podľa osobitných interných predpisov a postupov, v súlade so Swiss Life Select Slovakia, a. s., ďalej upozorňuje, že vplyvom trhového rizika môže dôjsť k zvýšeniu alebo zníženiu hodnoty investícií do investičných nástrojov a nie je zaručená návratnosť investovanej sumy. Minulá výkonnosť nie je zárukou budúcej výkonnosti." %}
+    {% assign AdvisorContactText = "Kontakt na poradcu" %}
+    {% assign showBalance = MetaData.PortfolioPerformanceChart[0].ShowChart %}
+    {% assign showTotalBuySell = MetaData.PortfolioPerformanceChart[1].ShowChart %}
     <!-- Page 1 Start-->
     {% assign OVERVIEW = MetaData.Overview[0] %}
     {% assign USER = MetaData.User[0] %}
@@ -508,24 +549,24 @@ h3 {
         <div class="investment__header__logo">
             <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
         </div>          
-        <h1 class="investment__header__title header-1">Report investícií</h1>
+        <h1 class="investment__header__title header-1">{{ReportTitle}}</h1>
     </header>
 
     <section class="investment__user section-header">
         <div class="investment__user__item">
-            <p class="caption-2">Dátum Čas</p>
-            <p class="subtitle-2">Dátum: <span id="setDateTime"></span></p>
+            <p class="caption-2">{{DateTitle}}</p>
+            <p class="subtitle-2">{{DateText}}: <span id="setDateTime"></span></p>
         </div>
         <div class="investment__user__item">
-            <p class="caption-2">Meno klienta</p>
+            <p class="caption-2">{{UserNameText}}</p>
             <p class="subtitle-2">{{USER.Name}}</p>
         </div>
         <div class="investment__user__item">
-            <p class="caption-2">Telefónne číslo</p>
+            <p class="caption-2">{{PhoneNumberText}}</p>
             <p class="subtitle-2">{{USER.PhoneNumber}}</p>
         </div>
         <div class="investment__user__item">
-            <p class="caption-2">Emailová adresa</p>
+            <p class="caption-2">{{EmailAddressText}}</p>
             <p class="subtitle-2">{{USER.Email}}</p>
         </div>
     </section>
@@ -543,29 +584,46 @@ h3 {
                         </svg>                        
                 </div>
                 <div>
-                    <p class="caption-2">Hodnota portfólia</p>
-                    <h3 class="header-3">{{MetaData.Overview[0].Balance}} EUR</h3>
+                    <p class="caption-2">{{OverviewBalanceText}}</p>
+                    <h3 class="header-3">{{MetaData.Overview[0].Balance}} {{CurrencyText}}</h3>
                 </div>
             </div>
             <div class="investment__overview__card__item--2">
                 <div>
-                    <p class="body-2">Zisk/Strata</p>
+                    <p class="body-2">{{ProfitLossText}}</p>
                     <p class="subtitle-2" 
                     {% if OVERVIEW.Profit < 0 %}
                         style="color: #d82034;"
                     {% else %}
                         style="color: #15847b;"
                     {% endif %}
-                    >{{MetaData.Overview[0].Profit}} EUR</p>
+                    >{{MetaData.Overview[0].Profit}} {{CurrencyText}}</p>
                 </div>
                 <div>
-                    <p class="body-2">Vklady</p>
-                    <p class="subtitle-2">{{MetaData.Overview[0].TotalBuy}} EUR</p>
+                    <p class="body-2">{{TotalBuyText}}</p>
+                    <p class="subtitle-2">{{MetaData.Overview[0].TotalBuy}} {{CurrencyText}}</p>
                 </div>
                 <div>
-                    <p class="body-2">Výbery</p>
-                    <p class="subtitle-2">{{MetaData.Overview[0].TotalSell}} EUR</p>
+                    <p class="body-2">{{TotalSellText}}</p>
+                    <p class="subtitle-2">{{MetaData.Overview[0].TotalSell}} {{CurrencyText}}</p>
                 </div>
+
+                {% assign fees = MetaData.Overview[0].Fees %}
+                {% if fees.size > 0 %}
+                    {% for fee in fees offset:0 limit:FeeLimit %}
+                    <div>
+                        {% if forloop.first == true %}
+                            <p class="body-2">{{FeesText}}</p>
+                        {% endif %}
+                        {% if forloop.first != true %}
+                            <p class="body-2"> </p>
+                        {% endif %}
+                        <p class="subtitle-2">{{fee.Value}} {{fee.Currency}}</p>
+                    </div>
+                    {% endfor %}
+
+                {% endif %}
+
             </div>
         </div>
         <div class="investment__overview__chart">
@@ -575,7 +633,7 @@ h3 {
 
     <section class="investment__chart">
         <div class="investment__chart__header section-header">
-            <h3 class="header-3">Zloženie portfólia</h3>
+            <h3 class="header-3">{{PortfolioCompositionText}}</h3>
         </div>
         <div class="investment__chart__list">
             <div class="row">
@@ -588,7 +646,7 @@ h3 {
                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
                              </svg>
                          </div>
-                         <p class="caption-1">Partner</p>
+                         <p class="caption-1">{{PartnerText}}</p>
                     </div>
                     <div class="investment__chart__card__body">
                          <canvas id="partnerPieChart" class="pie-chart" height="230"></canvas>
@@ -603,7 +661,7 @@ h3 {
                                   <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
                               </svg>
                           </div>
-                          <p class="caption-1">Aktíva</p>
+                          <p class="caption-1">{{AssetsText}}</p>
                      </div>
                      <div class="investment__chart__card__body">
                           <canvas id="assetPieChart" class="pie-chart" height="230"></canvas>
@@ -618,7 +676,7 @@ h3 {
                                   <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
                               </svg>
                           </div>
-                          <p class="caption-1">Správca</p>
+                          <p class="caption-1">{{ChartFundsText}}</p>
                      </div>
                      <div class="investment__chart__card__body">
                           <canvas id="fundPieChart" class="pie-chart" height="230"></canvas>
@@ -635,7 +693,7 @@ h3 {
                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
                              </svg>
                          </div>
-                         <p class="caption-1">Región</p>
+                         <p class="caption-1">{{RegionText}}</p>
                     </div>
                     <div class="investment__chart__card__body">
                          <canvas id="regionPieChart" class="pie-chart" height="230"></canvas>
@@ -650,7 +708,7 @@ h3 {
                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3711 8.8866V0C15.2783 0 19.2577 3.97938 19.2577 8.8866H10.3711ZM17.9175 7.64948C17.3814 4.41236 14.8247 1.87628 11.6082 1.3402V7.64948H17.9175Z" fill="#808080"/>
                              </svg>
                          </div>
-                         <p class="caption-1">Sektor</p>
+                         <p class="caption-1">{{SectorText}}</p>
                     </div>
                     <div class="investment__chart__card__body">
                          <canvas id="sectorPieChart" class="pie-chart" height="230"></canvas>
@@ -674,13 +732,13 @@ h3 {
             <div class="investment__header__logo">
                 <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
             </div>          
-            <h1 class="investment__header__title header-1">Report investícií</h1>
+            <h1 class="investment__header__title header-1">{{ReportTitle}}</h1>
         </header>
         {% assign currentPageHeight = currentPageHeight | Minus :Header  %} <!-- For header height -->
         <!--Goal Linked Start-->
         <section class="investment__list">
             <div class="investment__list__header section-header">
-                <h3 class="header-3">Investície spojené s cieľom</h3>
+                <h3 class="header-3">{{GoalLinkedInvestmentText}}</h3>
             </div>
             {% assign currentPageHeight = currentPageHeight | Minus :GoalLinkedHeader  %}
             {% for linkedInvestment in linkedInvestments %}
@@ -694,7 +752,7 @@ h3 {
                         <div class="investment__header__logo">
                             <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
                         </div>          
-                        <h1 class="investment__header__title header-1">Report investícií</h1>
+                        <h1 class="investment__header__title header-1">{{ReportTitle}}</h1>
                     </header>
                     {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                 {% endif %}
@@ -707,19 +765,19 @@ h3 {
                             <h1 class="subtitle-2">{{linkedInvestment.Title}}</h1>
                         </div>
                         <div class="investment__list__item__header__label">
-                            <p class="caption-2">Hodnota cieľa</p>
-                            <p class="caption-1">{{linkedInvestment.GoalValue}} EUR</p>
+                            <p class="caption-2">{{GoalValueText}}</p>
+                            <p class="caption-1">{{linkedInvestment.GoalValue}} {{CurrencyText}}</p>
                         </div>
                         <div class="investment__list__item__header__label">
-                            <p class="caption-2">Súčasná hodnota</p>
-                            <p class="caption-1">{{linkedInvestment.AccumulatedValue}} EUR</p>
+                            <p class="caption-2">{{AccumulatedValueText}}</p>
+                            <p class="caption-1">{{linkedInvestment.AccumulatedValue}} {{CurrencyText}}</p>
                         </div>
                         <div class="investment__list__item__header__label">
-                            <p class="caption-2">Cieľový dátum</p>
+                            <p class="caption-2">{{YearText}}</p>
                             <p class="caption-1">{{linkedInvestment.Year}}</p>
                         </div>
                         <div class="investment__list__item__header__label">
-                            <p class="caption-2">Plnenie cieľa</p>
+                            <p class="caption-2">{{GoalAchievedText}}</p>
                             <div class="investment__list__item__header__label__progress">
                                 <p class="caption-1">{{linkedInvestment.GoalAchieved}}%</p>
                                 <div class="progress-bar__container">
@@ -744,7 +802,7 @@ h3 {
                                     <div class="investment__header__logo">
                                         <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
                                     </div>          
-                                    <h1 class="investment__header__title header-1">Report investícií</h1>
+                                    <h1 class="investment__header__title header-1">{{ReportTitle}}</h1>
                                 </header>
                                 {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                             {% endif %}
@@ -761,19 +819,19 @@ h3 {
                                 </div>
                             </div>
                             <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">Zostatok</p>
-                                <p class="caption-1">{{snInvestment.Balance}} EUR</p>
+                                <p class="caption-2">{{BalanceText}}</p>
+                                <p class="caption-1">{{snInvestment.Balance}} {{CurrencyText}}</p>
                             </div>
                             <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">Vklady</p>
-                                <p class="caption-1">{{snInvestment.TotalBuy}} EUR</p>
+                                <p class="caption-2">{{TotalBuyText}}</p>
+                                <p class="caption-1">{{snInvestment.TotalBuy}} {{CurrencyText}}</p>
                             </div>
                             <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">Výbery</p>
-                                <p class="caption-1">{{snInvestment.TotalSell}} EUR</p>
+                                <p class="caption-2">{{TotalSellText}}</p>
+                                <p class="caption-1">{{snInvestment.TotalSell}} {{CurrencyText}}</p>
                             </div>
                             <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">Fondy</p>
+                                <p class="caption-2">{{FundsText}}</p>
                                 <p class="caption-1">{{snInvestment.Funds.size}}</p>
                             </div>
                         </div>
@@ -787,7 +845,7 @@ h3 {
                                 <div class="investment__header__logo">
                                     <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
                                 </div>          
-                                <h1 class="investment__header__title header-1">Report investícií</h1>
+                                <h1 class="investment__header__title header-1">{{ReportTitle}}</h1>
                             </header>
                             {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                         {% endif %}
@@ -795,10 +853,10 @@ h3 {
                             <col span="1" class="investment-table-fund">
                             <thead>
                                 <tr>
-                                    <th>Názov fondu</th>
-                                    <th>Isin</th>
-                                    <th>Podiel</th>
-                                    <th>Zostatok</th>
+                                    <th>{{FundNameText}}</th>
+                                    <th>{{IsInText}}</th>
+                                    <th>{{ShareText}}</th>
+                                    <th>{{BalanceText}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -807,7 +865,7 @@ h3 {
                                     <td>{{assetFund.FundName}}</td>
                                     <td>{{assetFund.IsIn}}</td>
                                     <td>{{assetFund.FundShare}}%</td>
-                                    <td>{{assetFund.FundBalance}} EUR</td>
+                                    <td>{{assetFund.FundBalance}} {{CurrencyText}}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -846,13 +904,13 @@ h3 {
             <div class="investment__header__logo">
                 <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
             </div>          
-            <h1 class="investment__header__title header-1">Report investícií</h1>
+            <h1 class="investment__header__title header-1">{{ReportTitle}}</h1>
         </header>
         {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
         <!--Goal Unlinked Start-->
         <section class="investment__list">
             <div class="investment__list__header section-header">
-                <h3 class="header-3">Investície</h3>
+                <h3 class="header-3">{{GoalUnLinkedInvestmentText}}</h3>
             </div>
             {% assign currentPageHeight = currentPageHeight | Minus :UnlinkedHeader  %}
             {% for unLinkedInvestment in MetaData.UnLinkedInvestments %}
@@ -866,7 +924,7 @@ h3 {
                         <div class="investment__header__logo">
                             <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
                         </div>          
-                        <h1 class="investment__header__title header-1">Report investícií</h1>
+                        <h1 class="investment__header__title header-1">{{ReportTitle}}</h1>
                     </header>
                     {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                 {% endif %}
@@ -882,19 +940,19 @@ h3 {
                             </div>
                         </div>
                         <div class="investment__list__item__sub-item__header__label">
-                            <p class="caption-2">Zostatok</p>
-                            <p class="caption-1">{{unLinkedInvestment.Balance}} EUR</p>
+                            <p class="caption-2">{{BalanceText}}</p>
+                            <p class="caption-1">{{unLinkedInvestment.Balance}} {{CurrencyText}}</p>
                         </div>
                         <div class="investment__list__item__sub-item__header__label">
-                            <p class="caption-2">Vklady</p>
-                            <p class="caption-1">{{unLinkedInvestment.TotalBuy}} EUR</p>
+                            <p class="caption-2">{{TotalBuyText}}</p>
+                            <p class="caption-1">{{unLinkedInvestment.TotalBuy}} {{CurrencyText}}</p>
                         </div>
                         <div class="investment__list__item__sub-item__header__label">
-                            <p class="caption-2">Výbery</p>
-                            <p class="caption-1">{{unLinkedInvestment.TotalSell}} EUR</p>
+                            <p class="caption-2">{{TotalSellText}}</p>
+                            <p class="caption-1">{{unLinkedInvestment.TotalSell}} {{CurrencyText}}</p>
                         </div>
                         <div class="investment__list__item__sub-item__header__label">
-                            <p class="caption-2">Fondy</p>
+                            <p class="caption-2">{{FundsText}}</p>
                             <p class="caption-1">{{unLinkedInvestment.Funds.size}}</p>
                         </div>
                     </div>
@@ -908,7 +966,7 @@ h3 {
                                 <div class="investment__header__logo">
                                     <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
                                 </div>          
-                                <h1 class="investment__header__title header-1">Report investícií</h1>
+                                <h1 class="investment__header__title header-1">{{ReportTitle}}</h1>
                             </header>
                             {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                         {% endif %}
@@ -916,10 +974,10 @@ h3 {
                             <col span="1" class="investment-table-fund">
                             <thead>
                                 <tr>
-                                    <th>Názov fondu</th>
-                                    <th>Isin</th>
-                                    <th>Podiel</th>
-                                    <th>Zostatok</th>
+                                    <th>{{FundNameText}}</th>
+                                    <th>{{IsInText}}</th>
+                                    <th>{{ShareText}}</th>
+                                    <th>{{BalanceText}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -928,7 +986,7 @@ h3 {
                                         <td>{{assetFund.FundName}}</td>
                                         <td>{{assetFund.IsIn}}</td>
                                         <td>{{assetFund.FundShare}}%</td>
-                                        <td>{{assetFund.FundBalance}} EUR</td>
+                                        <td>{{assetFund.FundBalance}} {{CurrencyText}}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -960,31 +1018,31 @@ h3 {
             <div class="investment__header__logo">
                 <img src="https://seliseblob.blob.core.windows.net/selisecdn/cdn/slnetwork/assets/filip-alt.png" alt="FiLip">
             </div>          
-            <h1 class="investment__header__title header-1">Report investícií</h1>
+            <h1 class="investment__header__title header-1">{{ReportTitle}}</h1>
         </header>
         {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
         <!-- Advisor Section Start -->
 
         <footer class="investment__footer" style="margin-top: 80px;">
-            <p class="caption-2">Kontakt na poradcu</p>
+            <p class="caption-2">{{AdvisorContactText}}</p>
             <div class="investment__footer__contact">
                 <p class="subtitle-2">{{ADVISOR.Name}}</p>
                 <p class="caption-2">{{ADVISOR.Designation}}</p>
                 <p class="caption-2">{{ADVISOR.Email}}</p>
                 <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
             </div>
-            <p class="investment__footer__text">Sekcia „Investície“ v aplikácii Filip by mala obsahovať klientom zvolené investičné nástroje, prípadne konkrétne investičné nástroje alebo produkty (napr. investičné fondy, dlhopisy a pod.) a ďalšie údaje a informácie s nimi spojené majú len informatívny charakter. Pri poskytovaní služieb investičného poradenstva a/alebo sprostredkovaní konkrétneho investičného príkazu klientovi Swiss Life Select Slovakia, a. s., alebo jej spoločníci, sú povinní postupovať podľa osobitných interných predpisov a postupov, v súlade so Swiss Life Select Slovakia, a. s., ďalej upozorňuje, že vplyvom trhového rizika môže dôjsť k zvýšeniu alebo zníženiu hodnoty investícií do investičných nástrojov a nie je zaručená návratnosť investovanej sumy. Minulá výkonnosť nie je zárukou budúcej výkonnosti.</p>
+            <p class="investment__footer__text">{{InvestmentFooterText}}</p>
         </footer>
         {% else %}
         <footer class="investment__footer" >
-            <p class="caption-2">Kontakt na poradcu</p>
+            <p class="caption-2">{{AdvisorContactText}}</p>
             <div class="investment__footer__contact">
                 <p class="subtitle-2">{{ADVISOR.Name}}</p>
                 <p class="caption-2">{{ADVISOR.Designation}}</p>
                 <p class="caption-2">{{ADVISOR.Email}}</p>
                 <p class="caption-2">{{ADVISOR.PhoneNumber}}</p>
             </div>
-            <p class="investment__footer__text">Sekcia „Investície“ v aplikácii Filip by mala obsahovať klientom zvolené investičné nástroje, prípadne konkrétne investičné nástroje alebo produkty (napr. investičné fondy, dlhopisy a pod.) a ďalšie údaje a informácie s nimi spojené majú len informatívny charakter. Pri poskytovaní služieb investičného poradenstva a/alebo sprostredkovaní konkrétneho investičného príkazu klientovi Swiss Life Select Slovakia, a. s., alebo jej spoločníci, sú povinní postupovať podľa osobitných interných predpisov a postupov, v súlade so Swiss Life Select Slovakia, a. s., ďalej upozorňuje, že vplyvom trhového rizika môže dôjsť k zvýšeniu alebo zníženiu hodnoty investícií do investičných nástrojov a nie je zaručená návratnosť investovanej sumy. Minulá výkonnosť nie je zárukou budúcej výkonnosti.</p>
+            <p class="investment__footer__text">{{InvestmentFooterText}}</p>
         </footer>
     {% endif %}
 
@@ -997,6 +1055,9 @@ h3 {
 {% assign compositionChartDataFund = MetaData.PortfolioCompositionChart[0].Fund %}
 {% assign compositionChartDataRegion = MetaData.PortfolioCompositionChart[0].Region %}
 {% assign compositionChartDataSector = MetaData.PortfolioCompositionChart[0].Sector %}
+
+const balanceText = "Zostatok"
+const totalBuyTotalSellText = "Vklady - Výbery"
 
 var partnerChartDataSets = {
     labels: [
@@ -1194,6 +1255,9 @@ const sectorPieChart = new Chart(sectorPieChartCanvas, sectorPieChartConfig);
 
 {% assign portfolioPerformanceChartDataBalance = MetaData.PortfolioPerformanceChart[0].Data %}
 {% assign portfolioPerformanceChartDataBuySell = MetaData.PortfolioPerformanceChart[1].Data %}
+{% assign showBalance = MetaData.PortfolioPerformanceChart[0].ShowChart %}
+{% assign showTotalBuySell = MetaData.PortfolioPerformanceChart[1].ShowChart %}
+
 
 var investmentLineChartDataBalance = [
     {% for datum in portfolioPerformanceChartDataBalance %}
@@ -1232,15 +1296,17 @@ function currencyFormatter(value) {
     const decimalPart = splittedValue[1] ? `,${splittedValue[1].slice(0, 2)}` : ``;
     return `${solidPart}${decimalPart}`;
 }
+var showBalanceVariable = '{{showBalance}}';
+var showTotalBuySellVariable = '{{showTotalBuySell}}';
 
 const investmentLineChartConfig = {
   type: 'line',
           data: {
-            labels: ['Zostatok', 'Vklady - Výbery'],
+            labels: [balanceText, totalBuyTotalSellText],
             datasets: [
               {
-                  data: investmentLineChartDataBalance,
-                  "label": "Zostatok",
+                  "data": investmentLineChartDataBalance,
+                  "label": balanceText,
                   "fill": true,
                   "lineTension": 0,
                   "borderWidth": 2.5,
@@ -1249,7 +1315,8 @@ const investmentLineChartConfig = {
                   "pointHoverRadius": 8,
                   "pointHoverBorderColor": "#FFFFFF",
                   "pointHoverBorderWidth": 4,
-                  "hidden": false,
+                  "hidden": showBalanceVariable=="true"?false:true,
+                  "steppedLine":showBalanceVariable=="true"?false:true,
                   
                      "borderColor": "#15847B",
                         "backgroundColor": "rgba(21, 132, 123, 0.1)",
@@ -1259,7 +1326,7 @@ const investmentLineChartConfig = {
               },
               {
                   "data": investmentLineChartDataBuySell,
-                  "label": "Vklady - Výbery",
+                  "label": totalBuyTotalSellText,
                   "fill": true,
                   "lineTension": 0,
                   "borderWidth": 2.5,
@@ -1268,8 +1335,8 @@ const investmentLineChartConfig = {
                   "pointHoverRadius": 8,
                   "pointHoverBorderColor": "#FFFFFF",
                   "pointHoverBorderWidth": 4,
-                  "hidden": true,
-                  "steppedLine": true,
+                  "hidden": showTotalBuySellVariable=="true"?false:true,
+                  "steppedLine": showTotalBuySellVariable=="true"?false:true,
                   "borderColor": "#b4b4b4",
                   "backgroundColor": "rgba(180, 180, 180, 0.1)",
                   "borderWidth": 2,
