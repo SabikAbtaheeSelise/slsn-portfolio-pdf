@@ -340,7 +340,8 @@ h3 {
     margin-top: 20px;
     margin-bottom: 20px; }
     .investment__list__item__sub-item__table {
-        margin-bottom: 32px;
+        margin-bottom: 0px;
+        border-bottom: solid 2px #d82034;
       width: 100%; }
     
       .investment__list__item__header {
@@ -349,6 +350,16 @@ h3 {
         align-items: center;
         padding: 14px 15px;
         box-shadow: 0px 1px 0px #e5e5e5; }
+        .investment__list__item__header__content{
+            display:flex;
+            flex-direction: column;
+            gap:16px;
+        }
+        .investment__list__item__header__content_1{
+            display:flex;
+            padding-left:20px;
+            gap:16px;
+        }
         .investment__list__item__header__logo {
           display: flex;
           justify-content: center;
@@ -363,9 +374,12 @@ h3 {
           flex: 0 0 30%;
           display: flex;
           justify-content: flex-start;
-          align-items: center; }
+          align-items: flex-start; }
           .investment__list__item__header__title h1 {
             padding-left: 20px; }
+        .investment__list__item__header__label{
+            width:138px;
+        }
         .investment__list__item__header__label .caption-2 {
           color: #808080;
           text-transform: uppercase; }
@@ -441,7 +455,7 @@ h3 {
   font-size: 1.2rem;
   width: 100%; }
   .investment-table-fund {
-    width: 60%; }
+    width: 40%; }
   .investment-table thead {
     background-color: #fbfbfb; }
   .investment-table thead tr {
@@ -461,15 +475,15 @@ h3 {
     line-height: 2rem;
     font-weight: 300; }
     .investment-table tbody tr td {
-      padding: 18px 15px; }
+      padding: 8px 15px; }
     .investment-table tbody tr:nth-of-type(even) {
       background-color: #fbfbfb; }
   .investment-table td, .investment-table th {
     box-shadow: 0px 1px 0px #E5E5E5, 0px -1px 0px #E5E5E5; }
 
 .progress-bar__container {
-  width: 80%;
-  height: 10px;
+  width: 100px;
+  height: 6px;
   border-radius: 100px;
   position: relative;
   overflow: hidden;
@@ -486,6 +500,10 @@ h3 {
   bottom: 0;
   border-radius: inherit;
   display: block; }
+
+  .investment-table-fund-items{
+    text-align: end;
+  }
     </style>
     <title>Investment Report</title>
 </head>
@@ -494,11 +512,11 @@ h3 {
     {% assign Header = 160 %}
     {% assign GoalLinkedHeader = 100 %}
     {% assign UnlinkedHeader = 100 %}
-    {% assign GoalCard = 80 %}
+    {% assign GoalCard = 120 %}
     {% assign SnInvestmentCard = 80 %}
     {% assign FundCard = 60 %}  <!-- add gap-->
     {% assign Fund = 60 %}
-    {% assign Gap = 32 %}
+    {% assign Gap = 0 %}
     {% assign AdvisorGap = 240 %}
     {% assign FundLimit = 22 %}
     {% assign FeeLimit = 3 %}
@@ -533,12 +551,19 @@ h3 {
     {% assign GoalAchievedText = "Plnenie cieľa" %}
     {% assign BalanceText = "Zostatok" %}
     {% assign FundsText = "Fondy" %}
-    {% assign FundNameText = "Názov fondu" %}
+    {% assign FundNameText = "Názov fondu & ISIN" %}
     {% assign IsInText = "IsIn" %}
     {% assign ShareText = "Podiel" %}
     {% assign GoalUnLinkedInvestmentText = "Investície" %}
     {% assign InvestmentFooterText = "Sekcia „Investície“ v aplikácii Filip by mala obsahovať klientom zvolené investičné nástroje, prípadne konkrétne investičné nástroje alebo produkty (napr. investičné fondy, dlhopisy a pod.) a ďalšie údaje a informácie s nimi spojené majú len informatívny charakter. Pri poskytovaní služieb investičného poradenstva a/alebo sprostredkovaní konkrétneho investičného príkazu klientovi Swiss Life Select Slovakia, a. s., alebo jej spoločníci, sú povinní postupovať podľa osobitných interných predpisov a postupov, v súlade so Swiss Life Select Slovakia, a. s., ďalej upozorňuje, že vplyvom trhového rizika môže dôjsť k zvýšeniu alebo zníženiu hodnoty investícií do investičných nástrojov a nie je zaručená návratnosť investovanej sumy. Minulá výkonnosť nie je zárukou budúcej výkonnosti." %}
     {% assign AdvisorContactText = "Kontakt na poradcu" %}
+    {% assign ContractsText = "Zmluvy" %}
+    {% assign FundPerformanceText = "VÝNOS" %}
+
+
+
+
+
     {% assign showBalance = MetaData.PortfolioPerformanceChart[0].ShowChart %}
     {% assign showTotalBuySell = MetaData.PortfolioPerformanceChart[1].ShowChart %}
     <!-- Page 1 Start-->
@@ -757,37 +782,50 @@ h3 {
                     {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                 {% endif %}
                 <div class="investment__list__item">
+                    
                     <div class="investment__list__item__header">
                         <div class="investment__list__item__header__title">
                             <div class="investment__list__item__header__logo">
                                 <img src="{{linkedInvestment.GoalIconUrl}}">
                             </div>
-                            <h1 class="subtitle-2">{{linkedInvestment.Title}}</h1>
-                        </div>
-                        <div class="investment__list__item__header__label">
-                            <p class="caption-2">{{GoalValueText}}</p>
-                            <p class="caption-1">{{linkedInvestment.GoalValue}} {{CurrencyText}}</p>
-                        </div>
-                        <div class="investment__list__item__header__label">
-                            <p class="caption-2">{{AccumulatedValueText}}</p>
-                            <p class="caption-1">{{linkedInvestment.AccumulatedValue}} {{CurrencyText}}</p>
-                        </div>
-                        <div class="investment__list__item__header__label">
-                            <p class="caption-2">{{YearText}}</p>
-                            <p class="caption-1">{{linkedInvestment.Year}}</p>
-                        </div>
-                        <div class="investment__list__item__header__label">
-                            <p class="caption-2">{{GoalAchievedText}}</p>
-                            <div class="investment__list__item__header__label__progress">
-                                <p class="caption-1">{{linkedInvestment.GoalAchieved}}%</p>
-                                <div class="progress-bar__container">
-                                    {% assign goalPercentage= linkedInvestment.GoalAchieved | Replace: ",","." | Plus: 0 %}
-                                    <span class="progress-bar" 
-                                style="width: {{goalPercentage}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
-                                ></span>
+                            <div class="investment__list__item__header__content">
+                                <div>
+                                    <h1 class="subtitle-2">{{linkedInvestment.Title}}</h1>
+                                </div>
+                                <div class="investment__list__item__header__content_1">
+                                    <div class="investment__list__item__header__label">
+                                        <p class="caption-2">{{ContractsText}}</p>
+                                        <p class="caption-1">{{linkedInvestment.SnInvestments.size}}</p>
+                                    </div>
+                                    <div class="investment__list__item__header__label">
+                                        <p class="caption-2">{{GoalValueText}}</p>
+                                        <p class="caption-1">{{linkedInvestment.GoalValue}} {{CurrencyText}}</p>
+                                    </div>
+                                    <div class="investment__list__item__header__label">
+                                        <p class="caption-2">{{AccumulatedValueText}}</p>
+                                        <p class="caption-1">{{linkedInvestment.AccumulatedValue}} {{CurrencyText}}</p>
+                                    </div>
+                                    <div class="investment__list__item__header__label">
+                                        <p class="caption-2">{{YearText}}</p>
+                                        <p class="caption-1">{{linkedInvestment.Year}}</p>
+                                    </div>
+                                    <div class="investment__list__item__header__label">
+                                        <p class="caption-2">{{GoalAchievedText}}</p>
+                                        <div class="investment__list__item__header__label__progress">
+                                            <p class="caption-1">{{linkedInvestment.GoalAchieved}}%</p>
+                                            <div class="progress-bar__container">
+                                                {% assign goalPercentage= linkedInvestment.GoalAchieved | Replace: ",","." | Plus: 0 %}
+                                                <span class="progress-bar" 
+                                            style="width: {{goalPercentage}}%; background-color: {{linkedInvestment.GoalAchievedColor}};"
+                                            ></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        
+
                     </div>
                     {% assign currentPageHeight = currentPageHeight | Minus: GoalCard %}
                     {% for snInvestment in linkedInvestment.SnInvestments %}
@@ -854,18 +892,24 @@ h3 {
                             <thead>
                                 <tr>
                                     <th>{{FundNameText}}</th>
-                                    <th>{{IsInText}}</th>
-                                    <th>{{ShareText}}</th>
-                                    <th>{{BalanceText}}</th>
+                                    <th class="investment-table-fund-items">{{ShareText}}</th>
+                                    <th class="investment-table-fund-items">{{BalanceText}}</th>
+                                    <th class="investment-table-fund-items">{{ProfitLossText}}</th>
+                                    <th class="investment-table-fund-items">{{FundPerformanceText}}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for assetFund in snInvestment.Funds offset:currentOffset limit:FundLimit %}
                                 <tr>
-                                    <td>{{assetFund.FundName}}</td>
-                                    <td>{{assetFund.IsIn}}</td>
-                                    <td>{{assetFund.FundShare}}%</td>
-                                    <td>{{assetFund.FundBalance}} {{CurrencyText}}</td>
+                                    <td>
+                                        <p>{{assetFund.FundName}}</p>
+                                        <p>{{assetFund.IsIn}}</p>
+
+                                    </td>
+                                    <td class="investment-table-fund-items">{{assetFund.ContractSharePercent}}%</td>
+                                    <td class="investment-table-fund-items">{{assetFund.Balance}} {{CurrencyText}}</td>
+                                    <td class="investment-table-fund-items">{{assetFund.UnrealisedProfitLoss}} {{CurrencyText}}</td>
+                                    <td class="investment-table-fund-items">{{assetFund.Performance}}%</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -975,18 +1019,24 @@ h3 {
                             <thead>
                                 <tr>
                                     <th>{{FundNameText}}</th>
-                                    <th>{{IsInText}}</th>
-                                    <th>{{ShareText}}</th>
-                                    <th>{{BalanceText}}</th>
+                                    <th class="investment-table-fund-items">{{ShareText}}</th>
+                                    <th class="investment-table-fund-items">{{BalanceText}}</th>
+                                    <th class="investment-table-fund-items">{{ProfitLossText}}</th>
+                                    <th class="investment-table-fund-items">{{FundPerformanceText}}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for assetFund in unLinkedInvestment.Funds offset:currentOffset limit:FundLimit %}
                                     <tr>
-                                        <td>{{assetFund.FundName}}</td>
-                                        <td>{{assetFund.IsIn}}</td>
-                                        <td>{{assetFund.FundShare}}%</td>
-                                        <td>{{assetFund.FundBalance}} {{CurrencyText}}</td>
+                                        <td>
+                                            <p>{{assetFund.FundName}}</p>
+                                            <p>{{assetFund.IsIn}}</p>
+                                        </td>
+                                        <td class="investment-table-fund-items">{{assetFund.ContractSharePercent}}%</td>
+                                        <td class="investment-table-fund-items">{{assetFund.Balance}} {{CurrencyText}}</td>
+                                        <td class="investment-table-fund-items">{{assetFund.UnrealisedProfitLoss}} {{CurrencyText}}</td>
+                                        <td class="investment-table-fund-items">{{assetFund.Performance}}%</td>
+
                                     </tr>
                                 {% endfor %}
                             </tbody>
