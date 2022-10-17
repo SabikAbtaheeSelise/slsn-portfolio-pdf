@@ -1450,11 +1450,11 @@ h3 {
 
 </body>
 <script>
-{% assign compositionChartDataPartner = MetaData && MetaData.PortfolioCompositionChart && MetaData.PortfolioCompositionChart[0] && MetaData.PortfolioCompositionChart[0].Partner %}
-{% assign compositionChartDataAsset = MetaData && MetaData.PortfolioCompositionChart && MetaData.PortfolioCompositionChart[0] && MetaData.PortfolioCompositionChart[0].Asset %}
-{% assign compositionChartDataFund = MetaData && MetaData.PortfolioCompositionChart && MetaData.PortfolioCompositionChart[0] && MetaData.PortfolioCompositionChart[0].Fund %}
-{% assign compositionChartDataRegion = MetaData && MetaData.PortfolioCompositionChart && MetaData.PortfolioCompositionChart[0] && MetaData.PortfolioCompositionChart[0].Region %}
-{% assign compositionChartDataSector = MetaData && MetaData.PortfolioCompositionChart && MetaData.PortfolioCompositionChart[0] && MetaData.PortfolioCompositionChart[0].Sector %}
+{% assign compositionChartDataPartner = MetaData.PortfolioCompositionChart[0].Partner %}
+{% assign compositionChartDataAsset = MetaData.PortfolioCompositionChart[0].Asset %}
+{% assign compositionChartDataFund = MetaData.PortfolioCompositionChart[0].Fund %}
+{% assign compositionChartDataRegion = MetaData.PortfolioCompositionChart[0].Region %}
+{% assign compositionChartDataSector = MetaData.PortfolioCompositionChart[0].Sector %}
 
 {% assign language = MetaData.Language %}
 
