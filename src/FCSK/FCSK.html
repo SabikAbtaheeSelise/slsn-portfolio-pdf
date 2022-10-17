@@ -360,7 +360,7 @@ h3 {
     margin-bottom: 20px; }
     .investment__list__item__sub-item__table {
         margin-bottom: 0px;
-        border-bottom: solid 2px #d82034;
+        border-bottom: solid 2px #CCCCCC;
       width: 100%; }
     
       .investment__list__item__header {
@@ -659,12 +659,6 @@ h3 {
 
     
 
-
-
-
-
-    {% assign A = MetaData.PortfolioPerformanceChart[0].ShowChart %}
-    {% assign showTotalBuySell = MetaData.PortfolioPerformanceChart[1].ShowChart %}
     <!-- Page 1 Start-->
     {% assign OVERVIEW = MetaData.Overview[0] %}
     {% assign USER = MetaData.User[0] %}
@@ -1070,6 +1064,7 @@ h3 {
                         <table class="investment__list__item__sub-item__table investment-table">
                             <col span="1" class="investment-table-fund">
                             <thead>
+                                {% if snInvestment.Funds.size > 0 %}
                                 <tr>
                                     <th>{{FundNameText}}</th>
                                     <th class="investment-table-fund-items">{{ShareText}}</th>
@@ -1077,6 +1072,8 @@ h3 {
                                     <th class="investment-table-fund-items">{{ProfitLossText}}</th>
                                     <th class="investment-table-fund-items">{{FundPerformanceText}}</th>
                                 </tr>
+                                {% endif %}
+
                             </thead>
                             <tbody>
                                 {% for assetFund in snInvestment.Funds offset:currentOffset limit:FundLimit %}
@@ -1319,6 +1316,7 @@ h3 {
                         <table class="investment__list__item__sub-item__table investment-table">
                             <col span="1" class="investment-table-fund">
                             <thead>
+                                {% if unLinkedInvestment.Funds.size > 0 %}
                                 <tr>
                                     <th>{{FundNameText}}</th>
                                     <th class="investment-table-fund-items">{{ShareText}}</th>
@@ -1326,6 +1324,8 @@ h3 {
                                     <th class="investment-table-fund-items">{{ProfitLossText}}</th>
                                     <th class="investment-table-fund-items">{{FundPerformanceText}}</th>
                                 </tr>
+                                {% endif %}
+
                             </thead>
                             <tbody>
                                 {% for assetFund in unLinkedInvestment.Funds offset:currentOffset limit:FundLimit %}
