@@ -1653,32 +1653,27 @@ const fundPieChart = new Chart(fundPieChartCanvas, fundPieChartConfig);
 const regionPieChart = new Chart(regionPieChartCanvas, regionPieChartConfig);
 const sectorPieChart = new Chart(sectorPieChartCanvas, sectorPieChartConfig);
 
-{% assign portfolioPerformanceChartDataBalance = MetaData && MetaData.PortfolioPerformanceChart && MetaData.PortfolioPerformanceChart[0] && MetaData.PortfolioPerformanceChart[0].Data %}
-{% assign portfolioPerformanceChartDataBuySell = MetaData && MetaData.PortfolioPerformanceChart && MetaData.PortfolioPerformanceChart[1] && MetaData.PortfolioPerformanceChart[1].Data %}
+{% assign portfolioPerformanceChartDataBalance = MetaData.PortfolioPerformanceChart[0].Data %}
+{% assign portfolioPerformanceChartDataBuySell = MetaData.PortfolioPerformanceChart[1].Data %}
 {% assign showBalance = MetaData.PortfolioPerformanceChart[0].ShowChart %}
 {% assign showTotalBuySell =MetaData.PortfolioPerformanceChart[1].ShowChart %}
 
 
 var investmentLineChartDataBalance = [
     {% for datum in portfolioPerformanceChartDataBalance %}
-        {% if datum %}
         {
             x: '{{datum.X}}',
             y: '{{datum.Y}}'
         }
-        {% endif %}
-
     {% unless forloop.last %},{% endunless %}
     {% endfor %}  
 ];
 var investmentLineChartDataBuySell = [
     {% for datum in portfolioPerformanceChartDataBuySell %}
-         {% if datum %}
         {
             x: '{{datum.X}}',
             y: '{{datum.Y}}'
         }
-        {% endif %}
     {% unless forloop.last %},{% endunless %}
     {% endfor %}  
 ];
