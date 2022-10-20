@@ -1098,11 +1098,7 @@ h3 {
                                         {% endif %}
                                     </td>
                                     <td class="investment-table-fund-items"
-                                            {% if assetFund.UnrealisedProfitLoss < 0 %}
-                                                style="color: #d82034;"
-                                            {% else %}
-                                                style="color: #15847b;"
-                                            {% endif %}
+                                            
                                     >
                                         {% if assetFund.UnrealisedProfitLoss != null  %}
                                             {{assetFund.UnrealisedProfitLoss}} {{CurrencyText}}
@@ -1349,11 +1345,7 @@ h3 {
                                             {% endif %}
                                         </td>
                                         <td class="investment-table-fund-items" 
-                                            {% if assetFund.UnrealisedProfitLoss < 0 %}
-                                                style="color: #d82034;"
-                                            {% else %}
-                                                style="color: #15847b;"
-                                            {% endif %}
+                                            
                                         >
                                             {% if assetFund.UnrealisedProfitLoss != null  %}
                                                 {{assetFund.UnrealisedProfitLoss}} {{CurrencyText}}
