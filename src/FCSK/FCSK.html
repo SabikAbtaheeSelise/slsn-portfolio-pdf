@@ -846,7 +846,7 @@ h3 {
 
     <!-- Page 2 Start -->
     {% assign linkedInvestments = MetaData.LinkedInvestments %}
-    {% if linkedInvestments.size > 0 && linkedInvestments[0] %}
+    {% if linkedInvestments.size > 0 and linkedInvestments[0] %}
         <!-- After page 1 end -->
         {% assign currentPageHeight = fullPageHeightConst %}
         <div style="page-break-after: always;"></div>
@@ -867,7 +867,8 @@ h3 {
                 {% assign totalHeightOfFunds = Fund | Times : linkedInvestment.SnInvestments[0].Funds.size  %}
                 {% assign totalHeight = SnInvestmentCard | Plus : FundCard | Plus: GoalCard | Plus: totalHeightOfFunds %}
                 {% assign checkHeight = currentPageHeight | Minus: totalHeight %}
-                {% if checkHeight <= 0 %} 
+                {% assign isFirst = forloop.first %}
+                {% if checkHeight <= 0 and isFirst == "false" %} 
                     {% assign currentPageHeight = fullPageHeightConst %}
                     <div style="page-break-after: always;"></div>
                     <header class="investment__header investment__header__margin investment__header__margin__bottom">
@@ -878,6 +879,7 @@ h3 {
                     </header>
                     {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                 {% endif %}
+                
                 <div class="investment__list__item">
                     <div class="investment__list__item__header">
                         <div class="investment__list__item__header__title">
@@ -929,7 +931,9 @@ h3 {
                             {% assign totalHeightOfFunds = Fund | Times : snInvestment.Funds.size  %}
                             {% assign totalHeight = SnInvestmentCard | Plus : FundCard | Plus: totalHeightOfFunds %}
                             {% assign checkHeight = currentPageHeight | Minus: totalHeight %}
-                            {% if checkHeight <= 0 %}
+
+                            {% assign isFirst = forloop.first %}
+                            {% if checkHeight <= 0 and isFirst == "false" %} 
                                 {% assign currentPageHeight = fullPageHeightConst %}
                                 <div style="page-break-after: always;"></div>
                                 <header class="investment__header investment__header__margin investment__header__margin__bottom">
@@ -1020,12 +1024,16 @@ h3 {
                                 </div>
                                 <div class="investment__list__item__sub-item__header__label">
                                     <p class="caption-2">{{PerformancePAText}}</p>
-                                    <p class="caption-1" {% if snInvestment.PerformancePA < 0 %} style="color: #d82034;"
-                                        {% else %} style="color: #15847b;" {% endif %}>
+                                    <p class="caption-1" >
                                         {% if snInvestment.PerformancePA != null  %}
-                                        {{snInvestment.PerformancePA}}%
+                                        <span
+                                        {% if snInvestment.PerformancePA < 0 %} style="color: #d82034;"
+                                        {% else %} style="color: #15847b;" {% endif %}
+                                        >
+                                            {{snInvestment.PerformancePA}}%
+                                        </span>
                                         {% else %}
-                                        ?
+                                        <span style="color: #000000;">?</span>
                                         {% endif %}
                                     </p>
                                 </div>
@@ -1106,22 +1114,24 @@ h3 {
                                             -
                                         {% endif %}
                                     </td>
-                                    <td class="investment-table-fund-items"
-                                        {% if assetFund.Performance < 0 %}
-                                            style="color: #d82034;"
-                                        {% else %}
-                                            style="color: #15847b;"
-                                        {% endif %}
-                                    >
+                                    <td class="investment-table-fund-items">
                                     {% if assetFund.Performance != null  %}
-                                        {{assetFund.Performance}}%
+                                        <span 
+                                            {% if assetFund.Performance < 0 %}
+                                                style="color: #d82034;"
+                                            {% else %}
+                                                style="color: #15847b;"
+                                            {% endif %}
+                                        >{{assetFund.Performance}}%</span>
                                     {% else %}
-                                        ?
+                                    <span style="color: #000000;">?</span>
                                     {% endif %}
                                     </td>
                                 </tr>
                                 {% endfor %}
-                                {% if snInvestment.Cash != null %}
+
+                                <!-- {% assign totalFund = snInvestment.Funds.size %}
+                                {% if ( snInvestment.Cash > 0 or snInvestment.Cash < 0 ) and totalFund <= currentOffset %}
                                 <tr>
                                     <td><p>{{FundCashText}}</p></td>
                                     <td class="investment-table-fund-items">-</td>
@@ -1129,7 +1139,7 @@ h3 {
                                     <td class="investment-table-fund-items">-</td>
                                     <td class="investment-table-fund-items">-</td>
                                 </tr>
-                                {% endif %}
+                                {% endif %} -->
                             </tbody>
                         </table>
 
@@ -1137,7 +1147,7 @@ h3 {
                         {% for assetFund in snInvestment.Funds offset:currentOffset limit:FundLimit %}
                             {% assign currentPageHeight = currentPageHeight | Minus: Fund %}
                         {% endfor %}
-                        {% if snInvestment.Cash != null %}
+                        {% if (snInvestment.Cash > 0 or snInvestment.Cash < 0 )  %}
                             {% assign currentPageHeight = currentPageHeight | Minus: Fund %}
                         {% endif %}
                         {% assign currentOffset = currentOffset | Plus : FundLimit %}     
@@ -1146,6 +1156,22 @@ h3 {
                             {% break %}
                         {% endif %}
                     {% endfor %}
+
+                    {% if (snInvestment.Cash > 0 or snInvestment.Cash < 0 ) %}
+                    <table class="investment__list__item__sub-item__table investment-table">
+                        <col span="1" class="investment-table-fund">
+                        <tbody>
+                            <tr>
+                                <td><p>{{FundCashText}}</p></td>
+                                <td class="investment-table-fund-items">-</td>
+                                <td class="investment-table-fund-items">{{snInvestment.Cash}} {{CurrencyText}}</td>
+                                <td class="investment-table-fund-items">-</td>
+                                <td class="investment-table-fund-items">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% endif %}
+
                 </div>
                 {% endfor %}
             </div>
@@ -1160,7 +1186,7 @@ h3 {
 
     <!-- Page After Goal Linked Start -->                                                                                                                                                         `
     {% assign unlinkedInvestments = MetaData.UnLinkedInvestments %}
-    {% if unlinkedInvestments.size > 0  && unlinkedInvestments[0] %}
+    {% if unlinkedInvestments.size > 0  and unlinkedInvestments[0] %}
         <!-- New Unlinked page start -->
         {% assign currentPageHeight = fullPageHeightConst %}
         <div style="page-break-after: always;"></div>
@@ -1181,7 +1207,8 @@ h3 {
                 {% assign totalHeightOfFunds = Fund | Times : unLinkedInvestment.Funds.size  %}
                 {% assign totalHeight = SnInvestmentCard | Plus : FundCard | Plus: totalHeightOfFunds %}
                 {% assign checkHeight = currentPageHeight | Minus: totalHeight %}
-                {% if checkHeight <= 0 %}
+                {% assign isFirst = forloop.first %}
+                {% if checkHeight <= 0 and isFirst == "false" %} 
                     {% assign currentPageHeight = fullPageHeightConst %}
                     <div style="page-break-after: always;"></div>
                     <header class="investment__header investment__header__margin investment__header__margin__bottom">
@@ -1193,8 +1220,6 @@ h3 {
                     {% assign currentPageHeight = currentPageHeight | Minus :Header  %}
                 {% endif %}
                 <div class="investment__list__item__sub-item">
-
-
                     <div class="investment__list__item__sub-item__header">
                         <div>
                             <div class="investment__list__item__sub-item__header__title">
@@ -1277,7 +1302,7 @@ h3 {
                                     {% if unLinkedInvestment.PerformancePA != null  %}
                                     {{unLinkedInvestment.PerformancePA}}%
                                     {% else %}
-                                        ?
+                                    <span style="color: #000000;">?</span>
                                     {% endif %}
                                 </p>
                             </div>
@@ -1321,7 +1346,6 @@ h3 {
                                     <th class="investment-table-fund-items">{{FundPerformanceText}}</th>
                                 </tr>
                                 {% endif %}
-
                             </thead>
                             <tbody>
                                 {% for assetFund in unLinkedInvestment.Funds offset:currentOffset limit:FundLimit %}
@@ -1363,13 +1387,14 @@ h3 {
                                             {% if assetFund.Performance != null  %}
                                                 {{assetFund.Performance}}%
                                             {% else %}
-                                                ?
+                                            <span style="color: #000000;">?</span>
                                             {% endif %}
                                         </td>
 
                                     </tr>
                                 {% endfor %}
-                                {% if unLinkedInvestment.Cash != null %}
+                                <!-- {% assign totalFund = unLinkedInvestment.Funds.size %}
+                                {% if (unLinkedInvestment.Cash > 0 or unLinkedInvestment.Cash < 0 ) and totalFund <= currentOffset %}
                                 <tr>
                                     <td><p>{{FundCashText}}</p></td>
                                     <td class="investment-table-fund-items">-</td>
@@ -1377,14 +1402,14 @@ h3 {
                                     <td class="investment-table-fund-items">-</td>
                                     <td class="investment-table-fund-items">-</td>
                                 </tr>
-                                {% endif %}
+                                {% endif %} -->
                             </tbody>
                         </table>
                         {% assign currentPageHeight = currentPageHeight | Minus: FundCard %}
                         {% for assetFund in unLinkedInvestment.Funds offset:currentOffset limit:FundLimit %}
                             {% assign currentPageHeight = currentPageHeight | Minus: Fund %}
                         {% endfor %}
-                        {% if unLinkedInvestment.Cash != null %}
+                        {% if (unLinkedInvestment.Cash > 0 or unLinkedInvestment.Cash < 0 ) %}
                             {% assign currentPageHeight = currentPageHeight | Minus: Fund %}
                         {% endif %}
                         {% assign currentOffset = currentOffset | Plus : FundLimit %}     
@@ -1393,6 +1418,22 @@ h3 {
                             {% break %}
                         {% endif%}
                     {% endfor %}
+
+                    {% if (unLinkedInvestment.Cash > 0 or unLinkedInvestment.Cash < 0 ) %}
+                    <table class="investment__list__item__sub-item__table investment-table">
+                        <col span="1" class="investment-table-fund">
+                        <tbody>
+                            <tr>
+                                <td><p>{{FundCashText}}</p></td>
+                                <td class="investment-table-fund-items">-</td>
+                                <td class="investment-table-fund-items">{{unLinkedInvestment.Cash}} {{CurrencyText}}</td>
+                                <td class="investment-table-fund-items">-</td>
+                                <td class="investment-table-fund-items">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% endif %}
+
             </div>
             {% endfor %}
         </section>
