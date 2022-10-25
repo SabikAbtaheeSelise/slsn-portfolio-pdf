@@ -382,7 +382,11 @@ h3 {
         .sn__investment__list__item__content{
             display:flex;
             gap:16px;
-
+        }
+        .sn__investment__list__item__content_1{
+            display:flex;
+            flex-direction: column;
+            gap:24px;
         }
         .investment__list__item__header__logo {
           display: flex;
@@ -452,7 +456,7 @@ h3 {
           color: #808080;
           text-transform: uppercase; }
         .investment__list__item__sub-item__header__label{
-            width: 120px;
+            width: 240px;
         }
         .investment__list__item__sub-item__fund__label{
             width: 110px;
@@ -547,19 +551,19 @@ h3 {
 </head>
 <body class="investment">
 
-    {% assign fullPageHeightConst = 1700 %}
+    {% assign fullPageHeightConst = 1820 %}
     {% assign Header = 160 %}
     {% assign GoalLinkedHeader = 100 %}
     {% assign UnlinkedHeader = 100 %}
     {% assign GoalCard = 120 %}
-    {% assign SnInvestmentCard = 140 %}
+    {% assign SnInvestmentCard = 260 %}
     {% assign FundCard = 60 %} 
     {% assign Fund = 60 %}
     {% assign Gap = 0 %}
     {% assign AdvisorGap = 240 %}
-    {% assign FundLimit = 22 %}
+    {% assign FundLimit = 20 %}
     {% assign FeeLimit = 3 %}
-    {% assign FundLimitFloat = 22.0 %}
+    {% assign FundLimitFloat = 20.0 %}
 
 
     {% assign Language = MetaData.Language %}
@@ -969,85 +973,94 @@ h3 {
                                     <p class="subtitle-2 text-align-center">{{snInvestment.Funds.size}}</p>
                                     <p class="caption-2 text-align-center">{{FundsText}}</p>
                                 </div>
-                                <div class="investment__list__item__sub-item__header__label">
-                                    <p class="caption-2">{{BalanceText}}</p>
-                                    <p class="caption-1">
-                                        {% if snInvestment.Balance != null  %}
-                                        {{snInvestment.Balance}} {{CurrencyText}}
-                                        {% else %}
-                                        -
-                                        {% endif %}
-                                    </p>
-                                </div>
-                                <div class="investment__list__item__sub-item__header__label">
-                                    <p class="caption-2">{{ProfitLossText}}</p>
-                                    <p class="caption-1" {% if snInvestment.TotalProfitLoss < 0 %}
-                                        style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
-                                        {% if snInvestment.TotalProfitLoss != null  %}
-                                        {{snInvestment.TotalProfitLoss}} {{CurrencyText}}
-                                        {% else %}
-                                        -
-                                        {% endif %}
-                                    </p>
-                                </div>
-                                <div class="investment__list__item__sub-item__header__label">
-                                    <p class="caption-2">{{TotalBuyText}}</p>
-                                    <p class="caption-1">
-                                        {% if snInvestment.TotalBuy != null  %}
-                                        {{snInvestment.TotalBuy}} {{CurrencyText}}
-                                        {% else %}
-                                        -
-                                        {% endif %}
+                                <div class="sn__investment__list__item__content_1">
+                                    <div class="sn__investment__list__item__content">
+                                        <div class="investment__list__item__sub-item__header__label">
+                                            <p class="caption-2">{{BalanceText}}</p>
+                                            <p class="caption-1">
+                                                {% if snInvestment.Balance != null  %}
+                                                {{snInvestment.Balance}} {{CurrencyText}}
+                                                {% else %}
+                                                -
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <div class="investment__list__item__sub-item__header__label">
+                                            <p class="caption-2">{{ProfitLossText}}</p>
+                                            <p class="caption-1" {% if snInvestment.TotalProfitLoss < 0 %}
+                                                style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
+                                                {% if snInvestment.TotalProfitLoss != null  %}
+                                                {{snInvestment.TotalProfitLoss}} {{CurrencyText}}
+                                                {% else %}
+                                                -
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <div class="investment__list__item__sub-item__header__label">
+                                            <p class="caption-2">{{TotalBuyText}}</p>
+                                            <p class="caption-1">
+                                                {% if snInvestment.TotalBuy != null  %}
+                                                {{snInvestment.TotalBuy}} {{CurrencyText}}
+                                                {% else %}
+                                                -
+                                                {% endif %}
 
-                                    </p>
+                                            </p>
+                                        </div>
+                                        <div class="investment__list__item__sub-item__header__label">
+                                            <p class="caption-2">{{TotalSellText}}</p>
+                                            <p class="caption-1">
+                                                {% if snInvestment.TotalSell != null  %}
+                                                {{snInvestment.TotalSell}} {{CurrencyText}}
+                                                {% else %}
+                                                -
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="sn__investment__list__item__content">
+                                        <div class="investment__list__item__sub-item__header__label">
+                                            <p class="caption-2">{{PerformanceText}}</p>
+                                            <p class="caption-1" {% if snInvestment.Performance < 0 %} style="color: #d82034;"
+                                                {% else %} style="color: #15847b;" {% endif %}>
+                                                {% if snInvestment.Performance != null  %}
+                                                {{snInvestment.Performance}}%
+                                                {% else %}
+                                                -
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <div class="investment__list__item__sub-item__header__label">
+                                            <p class="caption-2">{{PerformancePAText}}</p>
+                                            <p class="caption-1" >
+                                                {% if snInvestment.PerformancePA != null  %}
+                                                <span
+                                                {% if snInvestment.PerformancePA < 0 %} style="color: #d82034;"
+                                                {% else %} style="color: #15847b;" {% endif %}
+                                                >
+                                                    {{snInvestment.PerformancePA}}%
+                                                </span>
+                                                {% else %}
+                                                <span style="color: #000000;">?</span>
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <div class="investment__list__item__sub-item__header__label">
+                                            <p class="caption-2">{{CurrentYearPerformanceText}}</p>
+                                            <p class="caption-1" {% if snInvestment.PerformanceCurrentYear < 0 %}
+                                                style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
+                                                {% if snInvestment.PerformanceCurrentYear != null  %}
+                                                {{snInvestment.PerformanceCurrentYear}}%
+                                                {% else %}
+                                                -
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="investment__list__item__sub-item__header__label">
-                                    <p class="caption-2">{{TotalSellText}}</p>
-                                    <p class="caption-1">
-                                        {% if snInvestment.TotalSell != null  %}
-                                        {{snInvestment.TotalSell}} {{CurrencyText}}
-                                        {% else %}
-                                        -
-                                        {% endif %}
-                                    </p>
-                                </div>
-                                <div class="investment__list__item__sub-item__header__label">
-                                    <p class="caption-2">{{PerformanceText}}</p>
-                                    <p class="caption-1" {% if snInvestment.Performance < 0 %} style="color: #d82034;"
-                                        {% else %} style="color: #15847b;" {% endif %}>
-                                        {% if snInvestment.Performance != null  %}
-                                        {{snInvestment.Performance}}%
-                                        {% else %}
-                                        -
-                                        {% endif %}
-                                    </p>
-                                </div>
-                                <div class="investment__list__item__sub-item__header__label">
-                                    <p class="caption-2">{{PerformancePAText}}</p>
-                                    <p class="caption-1" >
-                                        {% if snInvestment.PerformancePA != null  %}
-                                        <span
-                                        {% if snInvestment.PerformancePA < 0 %} style="color: #d82034;"
-                                        {% else %} style="color: #15847b;" {% endif %}
-                                        >
-                                            {{snInvestment.PerformancePA}}%
-                                        </span>
-                                        {% else %}
-                                        <span style="color: #000000;">?</span>
-                                        {% endif %}
-                                    </p>
-                                </div>
-                                <div class="investment__list__item__sub-item__header__label">
-                                    <p class="caption-2">{{CurrentYearPerformanceText}}</p>
-                                    <p class="caption-1" {% if snInvestment.PerformanceCurrentYear < 0 %}
-                                        style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
-                                        {% if snInvestment.PerformanceCurrentYear != null  %}
-                                        {{snInvestment.PerformanceCurrentYear}}%
-                                        {% else %}
-                                        -
-                                        {% endif %}
-                                    </p>
-                                </div>
+
+
+
                             </div>
                         </div>
 
@@ -1072,7 +1085,7 @@ h3 {
                         <table class="investment__list__item__sub-item__table investment-table">
                             <col span="1" class="investment-table-fund">
                             <thead>
-                                {% if snInvestment.Funds.size > 0 %}
+                                
                                 <tr>
                                     <th>{{FundNameText}}</th>
                                     <th class="investment-table-fund-items">{{ShareText}}</th>
@@ -1080,8 +1093,6 @@ h3 {
                                     <th class="investment-table-fund-items">{{ProfitLossText}}</th>
                                     <th class="investment-table-fund-items">{{FundPerformanceText}}</th>
                                 </tr>
-                                {% endif %}
-
                             </thead>
                             <tbody>
                                 {% for assetFund in snInvestment.Funds offset:currentOffset limit:FundLimit %}
@@ -1242,81 +1253,88 @@ h3 {
                                 <p class="subtitle-2 text-align-center">{{unLinkedInvestment.Funds.size}}</p>
                                 <p class="caption-2 text-align-center">{{FundsText}}</p>
                             </div>
-                            <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">{{BalanceText}}</p>
-                                <p class="caption-1">
-                                    {% if unLinkedInvestment.Balance != null  %}
-                                    {{unLinkedInvestment.Balance}} {{CurrencyText}}
-                                    {% else %}
-                                    -
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">{{ProfitLossText}}</p>
-                                <p class="caption-1" {% if unLinkedInvestment.TotalProfitLoss < 0 %}
-                                    style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
-                                    {% if unLinkedInvestment.TotalProfitLoss != null  %}
-                                    {{unLinkedInvestment.TotalProfitLoss}} {{CurrencyText}}
-                                    {% else %}
-                                    -
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">{{TotalBuyText}}</p>
-                                <p class="caption-1">
-                                    {% if unLinkedInvestment.TotalBuy != null  %}
-                                    {{unLinkedInvestment.TotalBuy}} {{CurrencyText}}
-                                    {% else %}
-                                    -
-                                    {% endif %}
+                            <div class="sn__investment__list__item__content_1">
+                                <div class="sn__investment__list__item__content">
+                                    <div class="investment__list__item__sub-item__header__label">
+                                        <p class="caption-2">{{BalanceText}}</p>
+                                        <p class="caption-1">
+                                            {% if unLinkedInvestment.Balance != null  %}
+                                            {{unLinkedInvestment.Balance}} {{CurrencyText}}
+                                            {% else %}
+                                            -
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="investment__list__item__sub-item__header__label">
+                                        <p class="caption-2">{{ProfitLossText}}</p>
+                                        <p class="caption-1" {% if unLinkedInvestment.TotalProfitLoss < 0 %}
+                                            style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
+                                            {% if unLinkedInvestment.TotalProfitLoss != null  %}
+                                            {{unLinkedInvestment.TotalProfitLoss}} {{CurrencyText}}
+                                            {% else %}
+                                            -
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="investment__list__item__sub-item__header__label">
+                                        <p class="caption-2">{{TotalBuyText}}</p>
+                                        <p class="caption-1">
+                                            {% if unLinkedInvestment.TotalBuy != null  %}
+                                            {{unLinkedInvestment.TotalBuy}} {{CurrencyText}}
+                                            {% else %}
+                                            -
+                                            {% endif %}
 
-                                </p>
+                                        </p>
+                                    </div>
+                                    <div class="investment__list__item__sub-item__header__label">
+                                        <p class="caption-2">{{TotalSellText}}</p>
+                                        <p class="caption-1">
+                                            {% if unLinkedInvestment.TotalSell != null  %}
+                                            {{unLinkedInvestment.TotalSell}} {{CurrencyText}}
+                                            {% else %}
+                                            -
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="sn__investment__list__item__content">
+                                    <div class="investment__list__item__sub-item__header__label">
+                                        <p class="caption-2">{{PerformanceText}}</p>
+                                        <p class="caption-1" {% if unLinkedInvestment.Performance < 0 %} style="color: #d82034;"
+                                            {% else %} style="color: #15847b;" {% endif %}>
+                                            {% if unLinkedInvestment.Performance != null  %}
+                                            {{unLinkedInvestment.Performance}}%
+                                            {% else %}
+                                            -
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="investment__list__item__sub-item__header__label">
+                                        <p class="caption-2">{{PerformancePAText}}</p>
+                                        <p class="caption-1" {% if unLinkedInvestment.PerformancePA < 0 %}
+                                            style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
+                                            {% if unLinkedInvestment.PerformancePA != null  %}
+                                            {{unLinkedInvestment.PerformancePA}}%
+                                            {% else %}
+                                            <span style="color: #000000;">?</span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="investment__list__item__sub-item__header__label">
+                                        <p class="caption-2">{{CurrentYearPerformanceText}}</p>
+                                        <p class="caption-1" {% if unLinkedInvestment.PerformanceCurrentYear < 0 %}
+                                            style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
+                                            {% if unLinkedInvestment.PerformanceCurrentYear != null  %}
+                                            {{unLinkedInvestment.PerformanceCurrentYear}}%
+                                            {% else %}
+                                            -
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">{{TotalSellText}}</p>
-                                <p class="caption-1">
-                                    {% if unLinkedInvestment.TotalSell != null  %}
-                                    {{unLinkedInvestment.TotalSell}} {{CurrencyText}}
-                                    {% else %}
-                                    -
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">{{PerformanceText}}</p>
-                                <p class="caption-1" {% if unLinkedInvestment.Performance < 0 %} style="color: #d82034;"
-                                    {% else %} style="color: #15847b;" {% endif %}>
-                                    {% if unLinkedInvestment.Performance != null  %}
-                                    {{unLinkedInvestment.Performance}}%
-                                    {% else %}
-                                    -
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">{{PerformancePAText}}</p>
-                                <p class="caption-1" {% if unLinkedInvestment.PerformancePA < 0 %}
-                                    style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
-                                    {% if unLinkedInvestment.PerformancePA != null  %}
-                                    {{unLinkedInvestment.PerformancePA}}%
-                                    {% else %}
-                                    <span style="color: #000000;">?</span>
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <div class="investment__list__item__sub-item__header__label">
-                                <p class="caption-2">{{CurrentYearPerformanceText}}</p>
-                                <p class="caption-1" {% if unLinkedInvestment.PerformanceCurrentYear < 0 %}
-                                    style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
-                                    {% if unLinkedInvestment.PerformanceCurrentYear != null  %}
-                                     {{unLinkedInvestment.PerformanceCurrentYear}}%
-                                    {% else %}
-                                    -
-                                    {% endif %}
-                                </p>
-                            </div>
+
                         </div>
                     </div>
 
@@ -1337,7 +1355,6 @@ h3 {
                         <table class="investment__list__item__sub-item__table investment-table">
                             <col span="1" class="investment-table-fund">
                             <thead>
-                                {% if unLinkedInvestment.Funds.size > 0 %}
                                 <tr>
                                     <th>{{FundNameText}}</th>
                                     <th class="investment-table-fund-items">{{ShareText}}</th>
@@ -1345,7 +1362,6 @@ h3 {
                                     <th class="investment-table-fund-items">{{ProfitLossText}}</th>
                                     <th class="investment-table-fund-items">{{FundPerformanceText}}</th>
                                 </tr>
-                                {% endif %}
                             </thead>
                             <tbody>
                                 {% for assetFund in unLinkedInvestment.Funds offset:currentOffset limit:FundLimit %}
