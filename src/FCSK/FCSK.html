@@ -359,7 +359,13 @@ h3 {
     margin-top: 20px;
     margin-bottom: 20px; }
     .investment__list__item__sub-item__table {
-        margin-bottom: 0px;
+        margin-bottom: 32px;
+        border-bottom: solid 2px #CCCCCC;
+      width: 100%; }
+
+      .investment__list__item__sub-item__table_cash {
+        margin-top:-32px;
+        margin-bottom: 32px;
         border-bottom: solid 2px #CCCCCC;
       width: 100%; }
     
@@ -559,7 +565,7 @@ h3 {
     {% assign SnInvestmentCard = 260 %}
     {% assign FundCard = 60 %} 
     {% assign Fund = 60 %}
-    {% assign Gap = 0 %}
+    {% assign Gap = 32  %}
     {% assign AdvisorGap = 240 %}
     {% assign FundLimit = 20 %}
     {% assign FeeLimit = 3 %}
@@ -1085,7 +1091,7 @@ h3 {
                         <table class="investment__list__item__sub-item__table investment-table">
                             <col span="1" class="investment-table-fund">
                             <thead>
-                                
+                                {% if snInvestment.Funds.size > 0 %}
                                 <tr>
                                     <th>{{FundNameText}}</th>
                                     <th class="investment-table-fund-items">{{ShareText}}</th>
@@ -1093,6 +1099,7 @@ h3 {
                                     <th class="investment-table-fund-items">{{ProfitLossText}}</th>
                                     <th class="investment-table-fund-items">{{FundPerformanceText}}</th>
                                 </tr>
+                                {% endif %}
                             </thead>
                             <tbody>
                                 {% for assetFund in snInvestment.Funds offset:currentOffset limit:FundLimit %}
@@ -1169,7 +1176,7 @@ h3 {
                     {% endfor %}
 
                     {% if (snInvestment.Cash > 0 or snInvestment.Cash < 0 ) %}
-                    <table class="investment__list__item__sub-item__table investment-table">
+                    <table class="investment__list__item__sub-item__table_cash investment-table">
                         <col span="1" class="investment-table-fund">
                         <tbody>
                             <tr>
@@ -1355,6 +1362,7 @@ h3 {
                         <table class="investment__list__item__sub-item__table investment-table">
                             <col span="1" class="investment-table-fund">
                             <thead>
+                                {% if unLinkedInvestment.Funds.size > 0 %}
                                 <tr>
                                     <th>{{FundNameText}}</th>
                                     <th class="investment-table-fund-items">{{ShareText}}</th>
@@ -1362,6 +1370,7 @@ h3 {
                                     <th class="investment-table-fund-items">{{ProfitLossText}}</th>
                                     <th class="investment-table-fund-items">{{FundPerformanceText}}</th>
                                 </tr>
+                                {% endif %}
                             </thead>
                             <tbody>
                                 {% for assetFund in unLinkedInvestment.Funds offset:currentOffset limit:FundLimit %}
@@ -1436,7 +1445,7 @@ h3 {
                     {% endfor %}
 
                     {% if (unLinkedInvestment.Cash > 0 or unLinkedInvestment.Cash < 0 ) %}
-                    <table class="investment__list__item__sub-item__table investment-table">
+                    <table class="investment__list__item__sub-item__table_cash investment-table">
                         <col span="1" class="investment-table-fund">
                         <tbody>
                             <tr>
