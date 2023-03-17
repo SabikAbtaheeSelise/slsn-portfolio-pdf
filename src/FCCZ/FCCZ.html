@@ -224,7 +224,7 @@ h3 {
     align-items: center;
     min-height: 80px;
     padding: 16px;
-    background: #971214; }
+    background: #d82034; }
     .investment__header__logo {
       display: flex;
       justify-content: center;
@@ -468,7 +468,7 @@ h3 {
       color: #666666;
       font-weight: 400; }
       .investment__footer .caption-2:first-child {
-        color: #971214;
+        color: #d82034;
         text-transform: uppercase; }
     .investment__footer__contact {
       padding: 12px 0 20px 0; }
@@ -715,7 +715,7 @@ h3 {
                     {% endif %}
                     <p class="subtitle-2" 
                     {% if OVERVIEW.Profit < 0 %}
-                        style="color: #971214;"
+                        style="color: #d82034;"
                     {% else %}
                         style="color: #15847b;"
                     {% endif %}
@@ -984,7 +984,7 @@ h3 {
                                         <!-- <div class="investment__list__item__sub-item__header__label">
                                             <p class="caption-2">{{ProfitLossText}}</p>
                                             <p class="caption-1" {% if snInvestment.TotalProfitLoss < 0 %}
-                                                style="color: #971214;" {% else %} style="color: #15847b;" {% endif %}>
+                                                style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
                                                 {% if snInvestment.TotalProfitLoss != null  %}
                                                 {{snInvestment.TotalProfitLoss}} {{CurrencyText}}
                                                 {% else %}
@@ -1017,7 +1017,7 @@ h3 {
                                     <!-- <div class="sn__investment__list__item__content">
                                         <div class="investment__list__item__sub-item__header__label">
                                             <p class="caption-2">{{PerformanceText}}</p>
-                                            <p class="caption-1" {% if snInvestment.Performance < 0 %} style="color: #971214;"
+                                            <p class="caption-1" {% if snInvestment.Performance < 0 %} style="color: #d82034;"
                                                 {% else %} style="color: #15847b;" {% endif %}>
                                                 {% if snInvestment.Performance != null  %}
                                                 {{snInvestment.Performance}}%
@@ -1031,7 +1031,7 @@ h3 {
                                             <p class="caption-1" >
                                                 {% if snInvestment.PerformancePA != null  %}
                                                 <span
-                                                {% if snInvestment.PerformancePA < 0 %} style="color: #971214;"
+                                                {% if snInvestment.PerformancePA < 0 %} style="color: #d82034;"
                                                 {% else %} style="color: #15847b;" {% endif %}
                                                 >
                                                     {{snInvestment.PerformancePA}}%
@@ -1044,7 +1044,7 @@ h3 {
                                         <div class="investment__list__item__sub-item__header__label">
                                             <p class="caption-2">{{CurrentYearPerformanceText}}</p>
                                             <p class="caption-1" {% if snInvestment.PerformanceCurrentYear < 0 %}
-                                                style="color: #971214;" {% else %} style="color: #15847b;" {% endif %}>
+                                                style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
                                                 {% if snInvestment.PerformanceCurrentYear != null  %}
                                                 {{snInvestment.PerformanceCurrentYear}}%
                                                 {% else %}
@@ -1126,7 +1126,7 @@ h3 {
                                     {% if assetFund.Performance != null  %}
                                         <span 
                                             {% if assetFund.Performance < 0 %}
-                                                style="color: #971214;"
+                                                style="color: #d82034;"
                                             {% else %}
                                                 style="color: #15847b;"
                                             {% endif %}
@@ -1265,7 +1265,7 @@ h3 {
                                     <!-- <div class="investment__list__item__sub-item__header__label">
                                         <p class="caption-2">{{ProfitLossText}}</p>
                                         <p class="caption-1" {% if unLinkedInvestment.TotalProfitLoss < 0 %}
-                                            style="color: #971214;" {% else %} style="color: #15847b;" {% endif %}>
+                                            style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
                                             {% if unLinkedInvestment.TotalProfitLoss != null  %}
                                             {{unLinkedInvestment.TotalProfitLoss}} {{CurrencyText}}
                                             {% else %}
@@ -1298,7 +1298,7 @@ h3 {
                                 <!-- <div class="sn__investment__list__item__content">
                                     <div class="investment__list__item__sub-item__header__label">
                                         <p class="caption-2">{{PerformanceText}}</p>
-                                        <p class="caption-1" {% if unLinkedInvestment.Performance < 0 %} style="color: #971214;"
+                                        <p class="caption-1" {% if unLinkedInvestment.Performance < 0 %} style="color: #d82034;"
                                             {% else %} style="color: #15847b;" {% endif %}>
                                             {% if unLinkedInvestment.Performance != null  %}
                                             {{unLinkedInvestment.Performance}}%
@@ -1310,7 +1310,7 @@ h3 {
                                     <div class="investment__list__item__sub-item__header__label">
                                         <p class="caption-2">{{PerformancePAText}}</p>
                                         <p class="caption-1" {% if unLinkedInvestment.PerformancePA < 0 %}
-                                            style="color: #971214;" {% else %} style="color: #15847b;" {% endif %}>
+                                            style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
                                             {% if unLinkedInvestment.PerformancePA != null  %}
                                             {{unLinkedInvestment.PerformancePA}}%
                                             {% else %}
@@ -1321,7 +1321,7 @@ h3 {
                                     <div class="investment__list__item__sub-item__header__label">
                                         <p class="caption-2">{{CurrentYearPerformanceText}}</p>
                                         <p class="caption-1" {% if unLinkedInvestment.PerformanceCurrentYear < 0 %}
-                                            style="color: #971214;" {% else %} style="color: #15847b;" {% endif %}>
+                                            style="color: #d82034;" {% else %} style="color: #15847b;" {% endif %}>
                                             {% if unLinkedInvestment.PerformanceCurrentYear != null  %}
                                             {{unLinkedInvestment.PerformanceCurrentYear}}%
                                             {% else %}
@@ -1394,7 +1394,7 @@ h3 {
                                         </td>
                                         <td class="investment-table-fund-items"
                                             {% if assetFund.Performance < 0 %}
-                                                style="color: #971214;"
+                                                style="color: #d82034;"
                                             {% else %}
                                                 style="color: #15847b;"
                                             {% endif %}
